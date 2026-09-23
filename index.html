@@ -140,6 +140,8 @@ section{padding:120px 0}
 
 .back-to-menu{display:inline-flex;align-items:center;gap:8px;color:var(--cream-dim);background:none;border:0;font-family:inherit;font-size:0.92rem;font-weight:600;cursor:pointer;margin-bottom:36px;padding:0}
 .back-to-menu:hover{color:var(--cream)}
+.back-to-categories{display:none;align-items:center;gap:8px;color:var(--cream-dim);background:none;border:0;font-family:inherit;font-size:0.92rem;font-weight:600;cursor:pointer;margin-bottom:28px;padding:0}
+.back-to-categories:hover{color:var(--cream)}
 
 /* ---- DOVE SIAMO ---- */
 .contact-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:28px;align-items:start}
@@ -171,6 +173,8 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
   .tab-btn::after{content:'›';color:var(--cream-faint);font-size:1.4rem;margin-left:12px}
   .cantina-grid{grid-template-columns:1fr}
   #menuMain.collapsed .menu-panel{display:none!important}
+  #menuMain:not(.collapsed) .tabs{display:none}
+  #menuMain:not(.collapsed) .back-to-categories{display:flex}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -272,6 +276,8 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
         <button class="tab-btn active" data-main="bere" role="tab" aria-selected="true">Da Bere</button>
         <button class="tab-btn" data-main="mangiare" role="tab" aria-selected="false">Da Mangiare</button>
       </div>
+
+      <button class="back-to-categories" id="backToCategories">← </button>
 
       <div class="menu-panel active" data-main="bere" id="main-bere">
         <div class="level2-tabs" role="tablist" aria-label="Sottocategoria da bere">
@@ -565,6 +571,12 @@ if (window.matchMedia('(max-width:840px)').matches) {
   menuMain.classList.add('collapsed');
   level1Btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
 }
+
+document.getElementById('backToCategories').addEventListener('click', () => {
+  menuMain.classList.add('collapsed');
+  level1Btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+  document.getElementById('menu').scrollIntoView({ block: 'start' });
+});
 
 /* ---- MENU: livello 2 (sottocategorie), una per ogni categoria principale ---- */
 mainPanels.forEach(panel => {
