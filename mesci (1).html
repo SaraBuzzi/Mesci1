@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MESCI — Enoteca &amp; Cucina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#142621;
+  --bg-soft:#1b332c;
+  --line:rgba(242,234,216,0.14);
+  --cream:#f2ead8;
+  --cream-dim:rgba(242,234,216,0.68);
+  --cream-faint:rgba(242,234,216,0.4);
+  --wine:#690000;
+  --wine-bright:#8f1414;
+  --radius:2px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{
+  background:var(--bg);color:var(--cream);
+  font-family:'Manrope',sans-serif;
+  -webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);
+  overflow-x:hidden;
+}
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.08;letter-spacing:-0.01em}
+em{font-style:italic;color:var(--cream)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+img,svg{max-width:100%}
+
+/* ---- NAV ---- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding-top:env(safe-area-inset-top,0px);
+  transition:background .35s ease,border-color .35s ease;
+  border-bottom:1px solid transparent;
+}
+header.scrolled{background:rgba(20,38,33,0.92);backdrop-filter:blur(10px);border-color:var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 32px;max-width:1180px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px}
+.brand svg{height:26px;width:auto;color:var(--cream)}
+.brand span{font-family:'Fraunces',serif;font-size:1.25rem;letter-spacing:0.06em}
+.navlinks{display:flex;gap:38px;font-size:0.92rem}
+.navlinks a{position:relative;padding-bottom:6px;color:var(--cream-dim);transition:color .25s}
+.navlinks a:hover{color:var(--cream)}
+.navlinks a.active{color:var(--cream)}
+.navlinks a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--wine-bright)}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:4px}
+.burger span{width:22px;height:2px;background:var(--cream)}
+.mobile-menu{display:none;flex-direction:column;gap:0;background:var(--bg-soft);border-top:1px solid var(--line)}
+.mobile-menu a{padding:16px 32px;border-bottom:1px solid var(--line);font-size:0.95rem}
+.mobile-menu.open{display:flex}
+
+/* ---- HERO ---- */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;position:relative;padding:140px 24px 80px;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 20%, rgba(105,0,0,0.35), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(105,0,0,0.18), transparent 70%),
+    var(--bg);
+}
+.hero .eyebrow{color:var(--cream-faint);font-size:0.85rem;letter-spacing:0.08em;margin-bottom:28px}
+.hero .eyebrow::before,.hero .eyebrow::after{content:'—';margin:0 12px;color:var(--wine-bright)}
+.logo-mark{width:min(560px,80vw);color:var(--cream);opacity:0;animation:riseIn 1.1s ease forwards .15s}
+.pour-line{width:1px;height:0;background:var(--wine-bright);margin:0 auto;animation:pour 1.4s ease forwards .4s}
+@keyframes riseIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pour{to{height:46px}}
+.hero p.tag{max-width:560px;margin:34px auto 0;font-size:1.12rem;line-height:1.6;color:var(--cream-dim)}
+.hero p.tag em{color:var(--cream)}
+.hero-ctas{display:flex;gap:16px;margin-top:42px;flex-wrap:wrap;justify-content:center}
+.btn{
+  padding:15px 32px;border-radius:var(--radius);font-size:0.95rem;font-weight:600;
+  cursor:pointer;transition:transform .2s,background .2s,border-color .2s;
+  display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-filled{background:var(--wine);color:var(--cream)}
+.btn-filled:hover{background:var(--wine-bright)}
+.btn-outline{border-color:var(--line);color:var(--cream)}
+.btn-outline:hover{border-color:var(--cream-faint)}
+.scroll-cue{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);color:var(--cream-faint);animation:bob 2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,6px)}}
+
+/* ---- SECTION GENERIC ---- */
+section{padding:120px 0}
+.section-head{max-width:640px;margin-bottom:64px}
+.section-head .eyebrow{color:var(--wine-bright);font-size:0.85rem;letter-spacing:0.04em;margin-bottom:14px;font-weight:600}
+.section-head h2{font-size:clamp(2rem,4vw,2.7rem)}
+.section-head p{color:var(--cream-dim);margin-top:18px;font-size:1.05rem;line-height:1.6}
+
+/* ---- CHI SIAMO ---- */
+.about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:72px;align-items:start}
+.about-text p{color:var(--cream-dim);line-height:1.75;margin-bottom:20px;font-size:1.02rem}
+.pour-art{position:relative;aspect-ratio:4/5;border:1px solid var(--line);border-radius:var(--radius);
+  background:linear-gradient(160deg,var(--bg-soft),var(--bg));display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pour-art svg{width:46%;color:var(--wine-bright);opacity:.9}
+.pour-art::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(105,0,0,0.28),transparent 60%)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:56px}
+.stat{border-top:1px solid var(--line);padding-top:18px}
+.stat .num{font-family:'Fraunces',serif;font-size:2.1rem;color:var(--cream)}
+.stat .lbl{color:var(--cream-faint);font-size:0.85rem;margin-top:6px}
+
+/* ---- MENU ---- */
+.tabs{display:inline-flex;background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;padding:5px;margin-bottom:56px}
+.tab-btn{padding:12px 26px;border-radius:999px;border:0;background:none;color:var(--cream-dim);font-family:inherit;font-size:0.92rem;font-weight:600;cursor:pointer;transition:background .25s,color .25s}
+.tab-btn.active{background:var(--wine);color:var(--cream)}
+.menu-panel{display:none}
+.menu-panel.active{display:block}
+.menu-cols{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+.menu-cat h3{font-size:1.5rem;margin-bottom:4px}
+.menu-cat .cat-note{color:var(--cream-faint);font-size:0.82rem;margin-bottom:28px}
+.dish{padding:20px 0;border-bottom:1px solid var(--line)}
+.dish:first-of-type{padding-top:0}
+.dish-top{display:flex;justify-content:space-between;gap:16px;align-items:baseline}
+.dish-top h4{font-family:'Fraunces',serif;font-weight:500;font-size:1.15rem}
+.dish-top .price{color:var(--wine-bright);font-family:'Fraunces',serif;font-size:1.1rem;white-space:nowrap}
+.dish p{color:var(--cream-dim);font-size:0.92rem;margin-top:6px;line-height:1.55}
+.tag-chip{display:inline-block;margin-top:10px;margin-right:8px;font-size:0.72rem;letter-spacing:0.04em;color:var(--cream-dim);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
+
+/* ---- DOVE SIAMO ---- */
+.contact-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:28px;align-items:start}
+.info-stack{display:flex;flex-direction:column;gap:20px}
+.info-card{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.info-card h3{font-size:1.15rem;margin-bottom:12px}
+.info-card p,.info-card .row{color:var(--cream-dim);font-size:0.94rem;line-height:1.6}
+.info-card .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)}
+.info-card .row:last-child{border-bottom:0}
+.info-card .row .closed{color:var(--wine-bright)}
+.map-box{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);min-height:100%;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;color:var(--cream-faint);text-align:center;padding:40px}
+.map-box svg{width:34px;color:var(--wine-bright)}
+.map-box strong{color:var(--cream-dim);font-weight:600;font-size:0.95rem}
+
+footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--cream-faint);font-size:0.85rem}
+
+@media (max-width:840px){
+  .navlinks{display:none}
+  .burger{display:flex}
+  .about-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .menu-cols{grid-template-columns:1fr;gap:44px}
+  section{padding:80px 0}
+  .wrap{padding:0 22px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav>
+    <div class="brand">
+      <svg viewBox="0 0 1173.86 720.1" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+        <path d="M803.99,224.7c-1.55-27.49-26.13-41.85-50.7-52.51l-45.63-19.8c-7.72-3.35-14.66-7.65-20.78-13.19-12.34-11.17-13.45-30.12-1.42-41.74,6.43-6.21,14.78-9.75,23.61-11.3,31.81-5.56,61.44,8.32,80.28,35.89.36-10.3-2.32-19.14-3.6-28.94-21.83-9.48-45.2-13.91-68.92-12.48-27.51,1.66-53.09,16.17-54.87,44.02-1.78,27.78,20.93,42.56,45.34,53.08l38.39,16.54c22.19,9.56,45.13,23.98,41.77,48.51-3.58,26.16-34.22,35.47-60.65,32.54-18.78-2.08-35.65-10.07-50.34-21.83l-20.43-16.35c-2.62-1.79-5.34-3.23-8.1-4.32,3.41,15.09,5.09,22.5,7.95,32.32,19.69,9.26,40.39,13.53,62.11,15.22,24.09,1.87,50.65-.69,69.15-16.19,11.87-9.94,17.7-24.04,16.83-39.48Z"/>
+        <path d="M629.44,201.49c-7.94,33.76-24.98,56.64-61.57,57.76-40.06,1.22-68.55-13.53-82.07-51.3.24-7.02,5.44-13.26,11.67-16.73,44.31-24.67,89.72-45.68,137.05-64.81-23.99-41.64-77.68-55.94-120.31-39.45-27.83,10.76-48.13,35.02-56.22,60.42-10.29,32.3-4.03,64.03,14.68,89.69,14.36,19.69,34.62,31.92,57.9,37.32,10.14,2.35,16.93,10.76,16.96,21.03l.09,30.14c.02,6.45-4.16,11.94-10.55,12.6l-21.1,2.16c-.72.07-2.86.5-2.54,1.07l1.17,2.06,71.42.1c1.88-.28,3.84-1.54,3.66-2.85l-23.11-2.39c-6.26-.65-10.95-5.8-10.94-12.21l.03-31.22c.01-9.78,7.02-17.91,16.24-20.81,22.66-7.11,33-12.63,41.86-20.52s20.55-17.93,29.61-42.13c-1.37-1.54-13.54-9.5-13.94-9.93ZM480.78,193.33c-6.22-26.5-2.58-53.99,11.72-76.7,11.82-18.77,31.01-31.21,53.55-31,23.78.22,45.38,15.01,54.44,36.56,2.22,5.29.56,11.33-4.94,14.07l-114.76,57.06Z"/>
+        <path d="M319.23,276.73l-38.81.19,4.94-5.81c1.98-4.65,2.92-10.54,2.92-16.21v-105.81c0-21.64-7.11-43.72-25.98-54.27-11.29-6.31-23.89-5.73-36.05-1.51-18.15,7.66-31.24,23.48-36.03,42.95l.07,124.19c0,6.8,2.81,11.28,7.44,16.5l-39.41-.07c3.64-4.06,6.47-6.26,7.19-10.19.85-4.65,1.45-8.95,1.45-13.84V113.14c0-5.65-.52-10.57-.93-15.99-1.46-4.55-3.28-6.61-7.69-11.13l31.76-.29.25,34.55c11.2-21.63,31.13-36.96,55.62-39.49,18.69-1.93,36.65,4.38,49.22,17.99,8.82,9.55,12.82,21.27,15.19,34.59,4.34-10.8,9.02-20.59,16.24-29.7,21.78-27.5,62.29-31.43,88.15-7.34,12.33,11.48,18,31.29,18.01,48.71l.08,109.86c0,5.92.98,12.05,3.13,16.78l4.49,5.27-38.65-.09c5.23-5.61,7.65-10.1,7.66-16.92l.08-112.24c0-11.78-2.09-22.72-7.05-33.07-7.22-15.05-21.5-25.2-38.55-24.42-14.49.66-27.26,8.24-35.76,20.15-8.99,12.61-16.42,27.87-16.48,43.91l-.33,101.66c-.03,7.94,1.21,14.8,7.84,20.82Z"/>
+        <path d="M858.73,237.65c22,30.84,60.06,42.22,95.23,29.03,22.21-8.33,39.36-25.19,50.65-45.79,1.22.42,3.47,1.11,3.34,1.84s-.69,2.29-1.13,3.16c-15.31,29.96-43.47,49.98-77.08,53.84-22.75,2.61-45.27-1.14-65.27-12.12-38.49-21.14-57.81-64.52-49.25-107.31s43.4-75.35,87.95-79.39c28.9-2.62,57.55,4.46,82.54,19.27l5.68,34.91c-8.66-9.97-14.49-19-23.44-27.08-16.27-14.7-36.74-23.83-58.89-22.79-25.4,1.19-46.85,15-58.89,37-19.43,35.5-15.29,82,8.55,115.43Z"/>
+        <circle cx="1039.6" cy="51.22" r="14.45"/>
+        <path d="M1028.13,260.32l.12-148.16-1.25-14.99c-1.81-3.54-3.78-5.41-7.89-8.98l32.14-4.91.15,177.75c0,6.6,2.77,10.41,7.71,15.83l-38.91.13c4.48-5.16,7.93-9.1,7.93-16.66Z"/>
+        <path d="M595.54,136.27l-114.76,57.06c-6.22-26.5-2.58-53.99,11.72-76.7,11.82-18.77,31.01-31.21,53.55-31,23.78.22,45.38,15.01,54.44,36.56,2.22,5.29.56,11.33-4.94,14.07Z"/>
+      </svg>
+    </div>
+    <div class="navlinks" id="navlinks">
+      <a href="#home" class="active">Home</a>
+      <a href="#chi-siamo">Chi Siamo</a>
+      <a href="#menu">Menù</a>
+      <a href="#dove-siamo">Dove Siamo</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home">Home</a>
+    <a href="#chi-siamo">Chi Siamo</a>
+    <a href="#menu">Menù</a>
+    <a href="#dove-siamo">Dove Siamo</a>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="eyebrow">Dal 2018 · nel cuore della città</div>
+  <div class="logo-mark">
+    <svg viewBox="0 0 1173.86 720.1" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+      <path d="M803.99,224.7c-1.55-27.49-26.13-41.85-50.7-52.51l-45.63-19.8c-7.72-3.35-14.66-7.65-20.78-13.19-12.34-11.17-13.45-30.12-1.42-41.74,6.43-6.21,14.78-9.75,23.61-11.3,31.81-5.56,61.44,8.32,80.28,35.89.36-10.3-2.32-19.14-3.6-28.94-21.83-9.48-45.2-13.91-68.92-12.48-27.51,1.66-53.09,16.17-54.87,44.02-1.78,27.78,20.93,42.56,45.34,53.08l38.39,16.54c22.19,9.56,45.13,23.98,41.77,48.51-3.58,26.16-34.22,35.47-60.65,32.54-18.78-2.08-35.65-10.07-50.34-21.83l-20.43-16.35c-2.62-1.79-5.34-3.23-8.1-4.32,3.41,15.09,5.09,22.5,7.95,32.32,19.69,9.26,40.39,13.53,62.11,15.22,24.09,1.87,50.65-.69,69.15-16.19,11.87-9.94,17.7-24.04,16.83-39.48Z"/>
+      <path d="M629.44,201.49c-7.94,33.76-24.98,56.64-61.57,57.76-40.06,1.22-68.55-13.53-82.07-51.3.24-7.02,5.44-13.26,11.67-16.73,44.31-24.67,89.72-45.68,137.05-64.81-23.99-41.64-77.68-55.94-120.31-39.45-27.83,10.76-48.13,35.02-56.22,60.42-10.29,32.3-4.03,64.03,14.68,89.69,14.36,19.69,34.62,31.92,57.9,37.32,10.14,2.35,16.93,10.76,16.96,21.03l.09,30.14c.02,6.45-4.16,11.94-10.55,12.6l-21.1,2.16c-.72.07-2.86.5-2.54,1.07l1.17,2.06,71.42.1c1.88-.28,3.84-1.54,3.66-2.85l-23.11-2.39c-6.26-.65-10.95-5.8-10.94-12.21l.03-31.22c.01-9.78,7.02-17.91,16.24-20.81,22.66-7.11,33-12.63,41.86-20.52s20.55-17.93,29.61-42.13c-1.37-1.54-13.54-9.5-13.94-9.93ZM480.78,193.33c-6.22-26.5-2.58-53.99,11.72-76.7,11.82-18.77,31.01-31.21,53.55-31,23.78.22,45.38,15.01,54.44,36.56,2.22,5.29.56,11.33-4.94,14.07l-114.76,57.06Z"/>
+      <path d="M319.23,276.73l-38.81.19,4.94-5.81c1.98-4.65,2.92-10.54,2.92-16.21v-105.81c0-21.64-7.11-43.72-25.98-54.27-11.29-6.31-23.89-5.73-36.05-1.51-18.15,7.66-31.24,23.48-36.03,42.95l.07,124.19c0,6.8,2.81,11.28,7.44,16.5l-39.41-.07c3.64-4.06,6.47-6.26,7.19-10.19.85-4.65,1.45-8.95,1.45-13.84V113.14c0-5.65-.52-10.57-.93-15.99-1.46-4.55-3.28-6.61-7.69-11.13l31.76-.29.25,34.55c11.2-21.63,31.13-36.96,55.62-39.49,18.69-1.93,36.65,4.38,49.22,17.99,8.82,9.55,12.82,21.27,15.19,34.59,4.34-10.8,9.02-20.59,16.24-29.7,21.78-27.5,62.29-31.43,88.15-7.34,12.33,11.48,18,31.29,18.01,48.71l.08,109.86c0,5.92.98,12.05,3.13,16.78l4.49,5.27-38.65-.09c5.23-5.61,7.65-10.1,7.66-16.92l.08-112.24c0-11.78-2.09-22.72-7.05-33.07-7.22-15.05-21.5-25.2-38.55-24.42-14.49.66-27.26,8.24-35.76,20.15-8.99,12.61-16.42,27.87-16.48,43.91l-.33,101.66c-.03,7.94,1.21,14.8,7.84,20.82Z"/>
+      <path d="M858.73,237.65c22,30.84,60.06,42.22,95.23,29.03,22.21-8.33,39.36-25.19,50.65-45.79,1.22.42,3.47,1.11,3.34,1.84s-.69,2.29-1.13,3.16c-15.31,29.96-43.47,49.98-77.08,53.84-22.75,2.61-45.27-1.14-65.27-12.12-38.49-21.14-57.81-64.52-49.25-107.31s43.4-75.35,87.95-79.39c28.9-2.62,57.55,4.46,82.54,19.27l5.68,34.91c-8.66-9.97-14.49-19-23.44-27.08-16.27-14.7-36.74-23.83-58.89-22.79-25.4,1.19-46.85,15-58.89,37-19.43,35.5-15.29,82,8.55,115.43Z"/>
+      <circle cx="1039.6" cy="51.22" r="14.45"/>
+      <path d="M1028.13,260.32l.12-148.16-1.25-14.99c-1.81-3.54-3.78-5.41-7.89-8.98l32.14-4.91.15,177.75c0,6.6,2.77,10.41,7.71,15.83l-38.91.13c4.48-5.16,7.93-9.1,7.93-16.66Z"/>
+      <path d="M595.54,136.27l-114.76,57.06c-6.22-26.5-2.58-53.99,11.72-76.7,11.82-18.77,31.01-31.21,53.55-31,23.78.22,45.38,15.01,54.44,36.56,2.22,5.29.56,11.33-4.94,14.07Z"/>
+    </svg>
+  </div>
+  <div class="pour-line"></div>
+  <p class="tag">Versa. Racconta. <em>Resta.</em> Un'enoteca dove ogni calice inizia una conversazione e ogni piatto la accompagna.</p>
+  <div class="hero-ctas">
+    <a href="#menu" class="btn btn-filled">Scopri il Menù</a>
+    <a href="#dove-siamo" class="btn btn-outline">Dove Siamo</a>
+  </div>
+  <div class="scroll-cue">↓</div>
+</section>
+
+<section id="chi-siamo">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <div class="section-head" style="margin-bottom:28px">
+          <div class="eyebrow">La nostra storia</div>
+          <h2>Un rito, versato <em>ogni sera</em></h2>
+        </div>
+        <div class="about-text">
+          <p>MESCI nasce da un verbo antico — <em>mescere</em>, versare il vino — e da un'idea semplice: il bicchiere giusto, offerto al momento giusto, cambia una serata.</p>
+          <p>La nostra carta cambia con le stagioni e con le annate. Al bancone lavoriamo fianco a fianco con chi viene ogni settimana e con chi entra per la prima volta, cercando sempre l'abbinamento che non si aspettava.</p>
+          <p>La cucina segue lo stesso principio: piatti pensati per stare dietro al calice, non per distrarre da esso.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="num">180+</div><div class="lbl">Etichette in carta</div></div>
+          <div class="stat"><div class="num">34</div><div class="lbl">Posti al bancone</div></div>
+          <div class="stat"><div class="num">7</div><div class="lbl">Anni di mescita</div></div>
+          <div class="stat"><div class="num">Ogni sera</div><div class="lbl">Aperti dal martedì</div></div>
+        </div>
+      </div>
+      <div class="pour-art">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4">
+          <path d="M30 12h40l-4 34a16 16 0 0 1-32 0z"/>
+          <path d="M50 62v22M38 90h24"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="menu" style="background:var(--bg-soft)">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Il Menù</div>
+      <h2>Scelto goccia a <em>goccia</em></h2>
+      <p>Ogni versamento è pensato per il prossimo. Chiedi al banco l'abbinamento della sera.</p>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="bere">Da Bere</button>
+      <button class="tab-btn" data-tab="mangiare">Da Mangiare</button>
+    </div>
+
+    <div class="menu-panel active" id="panel-bere">
+      <div class="menu-cols">
+        <div class="menu-cat">
+          <h3>Vini</h3>
+          <div class="cat-note">Al calice · 10cl</div>
+
+          <div class="dish">
+            <div class="dish-top"><h4>Barbera d'Asti, Il Falchetto</h4><span class="price">€9</span></div>
+            <p>Piemonte, 2022. Frutto rosso vivo, tannino gentile.</p>
+            <span class="tag-chip">Biologico</span>
+          </div>
+          <div class="dish">
+            <div class="dish-top"><h4>Etna Rosso, Terra Costantino</h4><span class="price">€12</span></div>
+            <p>Sicilia, 2021. Vulcanico, speziato, finale lungo.</p>
+            <span class="tag-chip">Vulcanico</span>
+          </div>
+          <div class="dish">
+            <div class="dish-top"><h4>Franciacorta Brut, Ca' del Bosco</h4><span class="price">€11</span></div>
+            <p>Lombardia. Bollicine fini, crosta di pane.</p>
+            <span class="tag-chip">Bollicine</span>
+          </div>
+          <div class="dish">
+            <div class="dish-top"><h4>Amarone della Valpolicella</h4><span class="price">€18</span></div>
+            <p>Veneto, 2019. Denso, uvetta, cioccolato amaro.</p>
+            <span class="tag-chip">Riserva</span>
+          </div>
+        </div>
+
+        <div class="menu-cat">
+          <h3>Cocktail</h3>
+          <div class="cat-note">Preparati al momento</div>
+
+          <div class="dish">
+            <div class="dish-top"><h4>Negroni Mesci</h4><span class="price">€10</span></div>
+            <p>Gin, Campari, vermouth rosso fatto in casa.</p>
+            <span class="tag-chip">Firma</span>
+          </div>
+          <div class="dish">
+            <div class="dish-top"><h4>Spritz al Bergamotto</h4><span class="price">€9</span></div>
+            <p>Prosecco, bitter al bergamotto, soda tonica.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-top"><h4>Old Fashioned</h4><span class="price">€11</span></div>
+            <p>Bourbon, angostura, zucchero, scorza d'arancia.</p>
+            <span class="tag-chip">Classico</span>
+          </div>
+          <div class="dish">
+            <div class="dish-top"><h4>Americano Milano-Torino</h4><span class="price">€9</span></div>
+            <p>Campari, vermouth, soda. Amaro e diretto.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-panel" id="panel-mangiare">
+      <div class="menu-cols">
+        <div class="menu-cat">
+          <h3>Da Condividere</h3>
+          <div class="cat-note">Per il bancone</div>
+
+          <div class="dish">
+            <div class="dish-top"><h4>Tagliere Salumi e Formaggi</h4><span class="price">€16</span></div>
+            <p>Selezione di stagione, confetture, miele.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-top"><h4>Focaccia al Rosmarino</h4><span class="price">€6</span></div>
+            <p>Impasto lievitato 24 ore, sale grosso.</p>
+          </div>
+        </div>
+        <div class="menu-cat">
+          <h3>Dal Piatto</h3>
+          <div class="cat-note">Pensati per il calice</div>
+
+          <div class="dish">
+            <div class="dish-top"><h4>Tartare di Fassona</h4><span class="price">€14</span></div>
+            <p>Battuta a coltello, capperi, tuorlo, crostini.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-top"><h4>Crostini alla Milanese</h4><span class="price">€10</span></div>
+            <p>Burro d'alpeggio, acciughe, midollo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="dove-siamo">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Dove Siamo</div>
+      <h2>Vieni a versarne <em>uno</em> con noi</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="info-stack">
+        <div class="info-card">
+          <h3>Posizione</h3>
+          <p>Via da Modificare, 12<br>Zona Centro<br>20100 Milano</p>
+        </div>
+        <div class="info-card">
+          <h3>Contatti</h3>
+          <p>Telefono: +39 02 0000 000<br>Email: ciao@mesci.it</p>
+        </div>
+        <div class="info-card">
+          <h3>Orari</h3>
+          <div class="row"><span>Lunedì</span><span class="closed">Chiuso</span></div>
+          <div class="row"><span>Martedì – Mercoledì</span><span>18:00 – 24:00</span></div>
+          <div class="row"><span>Giovedì</span><span>18:00 – 01:00</span></div>
+          <div class="row"><span>Venerdì – Sabato</span><span>18:00 – 02:00</span></div>
+          <div class="row"><span>Domenica</span><span>18:00 – 23:00</span></div>
+        </div>
+      </div>
+      <div class="map-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s7-7.4 7-12.6A7 7 0 0 0 5 9.4C5 14.6 12 22 12 22z"/><circle cx="12" cy="9" r="2.6"/></svg>
+        <strong>Via da Modificare, 12 — Milano</strong>
+        <span>Sostituisci con la mappa reale (Google Maps embed o immagine)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 MESCI — Tutti i diritti riservati
+</footer>
+
+<script>
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
+burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+const sections = ['home','chi-siamo','menu','dove-siamo'].map(id => document.getElementById(id));
+const navLinks = document.querySelectorAll('.navlinks a');
+const setActive = (id) => {
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+};
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) setActive(entry.target.id);
+  });
+}, { rootMargin: '-45% 0px -50% 0px' });
+sections.forEach(s => observer.observe(s));
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
