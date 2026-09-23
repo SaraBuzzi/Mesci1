@@ -31,7 +31,6 @@ body{
 h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.08;letter-spacing:-0.01em}
 em{font-style:italic;color:var(--cream)}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
 img,svg{max-width:100%}
 
 /* ---- NAV ---- */
@@ -89,7 +88,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:20px 3
 @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,6px)}}
 
 /* ---- SECTION GENERIC ---- */
-section{padding:120px 0}
+section{padding:100px 0}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;width:100%}
 .section-head{max-width:640px;margin-bottom:64px}
 .section-head .eyebrow{color:var(--wine-bright);font-size:0.85rem;letter-spacing:0.04em;margin-bottom:14px;font-weight:600}
 .section-head h2{font-size:clamp(2rem,4vw,2.7rem)}
@@ -165,7 +165,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
   .about-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
   .stats{grid-template-columns:repeat(2,1fr)}
   .menu-cols{grid-template-columns:1fr;gap:44px}
-  section{padding:80px 0}
+  section{padding:64px 0}
   .wrap{padding:0 22px}
   .tabs{flex-direction:column;background:none;border:0;padding:0;gap:14px;width:100%}
   .tab-btn{width:100%;text-align:left;background:var(--bg-soft);border:1px solid var(--line);padding:20px 24px;border-radius:var(--radius);font-size:1.05rem;display:flex;justify-content:space-between;align-items:center}
@@ -277,7 +277,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
         <button class="tab-btn" data-main="mangiare" role="tab" aria-selected="false">Da Mangiare</button>
       </div>
 
-      <button class="back-to-categories" id="backToCategories">← </button>
+      <button class="back-to-categories" id="backToCategories">← Torna alle categorie</button>
 
       <div class="menu-panel active" data-main="bere" id="main-bere">
         <div class="level2-tabs" role="tablist" aria-label="Sottocategoria da bere">
