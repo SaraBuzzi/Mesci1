@@ -15,8 +15,8 @@
   --cream:#f2ead8;
   --cream-dim:rgba(242,234,216,0.68);
   --cream-faint:rgba(242,234,216,0.4);
-  --wine:#5F0000;
-  --wine-bright:#690000;
+  --wine:#690000;
+  --wine-bright:#8f1414;
   --radius:2px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -107,13 +107,22 @@ section{padding:120px 0}
 .stat .num{font-family:'Fraunces',serif;font-size:2.1rem;color:var(--cream)}
 .stat .lbl{color:var(--cream-faint);font-size:0.85rem;margin-top:6px}
 
-/* ---- MENU ---- */
-.tabs{display:inline-flex;background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;padding:5px;margin-bottom:56px}
-.tab-btn{padding:12px 26px;border-radius:999px;border:0;background:none;color:var(--cream-dim);font-family:inherit;font-size:0.92rem;font-weight:600;cursor:pointer;transition:background .25s,color .25s}
+/* ---- MENU: livello 1 (Da Bere / Da Mangiare) ---- */
+.tabs{display:inline-flex;background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;padding:5px;margin-bottom:40px;gap:2px}
+.tab-btn{padding:14px 30px;border-radius:999px;border:0;background:none;color:var(--cream-dim);font-family:inherit;font-size:0.98rem;font-weight:600;cursor:pointer;transition:background .25s,color .25s;white-space:nowrap}
 .tab-btn.active{background:var(--wine);color:var(--cream)}
-.menu-panel{display:none}
-.menu-panel.active{display:block}
-.menu-cols{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+
+/* ---- MENU: livello 2 (sottocategorie), discreto e sticky ---- */
+.level2-tabs{display:flex;gap:26px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:88px;z-index:20;background:var(--bg-soft);padding:16px 0 14px;margin-bottom:36px;border-bottom:1px solid var(--line)}
+.level2-tabs::-webkit-scrollbar{display:none}
+.level2-btn{flex:0 0 auto;border:0;background:none;color:var(--cream-faint);font-family:inherit;font-size:0.85rem;font-weight:600;letter-spacing:0.02em;padding:2px 0 12px;cursor:pointer;position:relative;transition:color .25s;white-space:nowrap}
+.level2-btn.active{color:var(--cream)}
+.level2-btn.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--wine-bright)}
+
+.menu-panel,.sub-panel,.cantina-panel{display:none}
+.menu-panel.active,.sub-panel.active,.cantina-panel.active{display:block}
+
+.menu-cols,.cantina-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px}
 .menu-cat h3{font-size:1.5rem;margin-bottom:4px}
 .menu-cat .cat-note{color:var(--cream-faint);font-size:0.82rem;margin-bottom:28px}
 .dish{padding:20px 0;border-bottom:1px solid var(--line)}
@@ -123,6 +132,14 @@ section{padding:120px 0}
 .dish-top .price{color:var(--wine-bright);font-family:'Fraunces',serif;font-size:1.1rem;white-space:nowrap}
 .dish p{color:var(--cream-dim);font-size:0.92rem;margin-top:6px;line-height:1.55}
 .tag-chip{display:inline-block;margin-top:10px;margin-right:8px;font-size:0.72rem;letter-spacing:0.04em;color:var(--cream-dim);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
+
+.cantina-cta{display:block;width:100%;text-align:left;margin-top:36px;padding:26px 28px;background:linear-gradient(135deg,var(--wine),#3d0000);border:1px solid var(--wine-bright);border-radius:var(--radius);cursor:pointer;transition:transform .2s}
+.cantina-cta:hover{transform:translateY(-2px)}
+.cantina-cta-title{display:block;font-family:'Fraunces',serif;font-size:1.3rem;color:var(--cream)}
+.cantina-cta-sub{display:block;color:rgba(242,234,216,0.75);font-size:0.9rem;margin-top:6px}
+
+.back-to-menu{display:inline-flex;align-items:center;gap:8px;color:var(--cream-dim);background:none;border:0;font-family:inherit;font-size:0.92rem;font-weight:600;cursor:pointer;margin-bottom:36px;padding:0}
+.back-to-menu:hover{color:var(--cream)}
 
 /* ---- DOVE SIAMO ---- */
 .contact-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:28px;align-items:start}
@@ -148,6 +165,12 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
   .menu-cols{grid-template-columns:1fr;gap:44px}
   section{padding:80px 0}
   .wrap{padding:0 22px}
+  .tabs{flex-direction:column;background:none;border:0;padding:0;gap:14px;width:100%}
+  .tab-btn{width:100%;text-align:left;background:var(--bg-soft);border:1px solid var(--line);padding:20px 24px;border-radius:var(--radius);font-size:1.05rem;display:flex;justify-content:space-between;align-items:center}
+  .tab-btn.active{background:var(--wine);border-color:var(--wine)}
+  .tab-btn::after{content:'›';color:var(--cream-faint);font-size:1.4rem;margin-left:12px}
+  .cantina-grid{grid-template-columns:1fr}
+  #menuMain.collapsed .menu-panel{display:none!important}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -220,6 +243,12 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
           <p>La nostra carta cambia con le stagioni e con le annate. Al bancone lavoriamo fianco a fianco con chi viene ogni settimana e con chi entra per la prima volta, cercando sempre l'abbinamento che non si aspettava.</p>
           <p>La cucina segue lo stesso principio: piatti pensati per stare dietro al calice, non per distrarre da esso.</p>
         </div>
+        <div class="stats">
+          <div class="stat"><div class="num">180+</div><div class="lbl">Etichette in carta</div></div>
+          <div class="stat"><div class="num">34</div><div class="lbl">Posti al bancone</div></div>
+          <div class="stat"><div class="num">7</div><div class="lbl">Anni di mescita</div></div>
+          <div class="stat"><div class="num">Ogni sera</div><div class="lbl">Aperti dal martedì</div></div>
+        </div>
       </div>
       <div class="pour-art">
         <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4">
@@ -238,92 +267,216 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
       <h2>Scelto goccia a <em>goccia</em></h2>
       <p>Ogni versamento è pensato per il prossimo. Chiedi al banco l'abbinamento della sera.</p>
     </div>
-    <div class="tabs">
-      <button class="tab-btn active" data-tab="bere">Da Bere</button>
-      <button class="tab-btn" data-tab="mangiare">Da Mangiare</button>
-    </div>
+    <div id="menuMain">
+      <div class="tabs" role="tablist" aria-label="Categoria principale">
+        <button class="tab-btn active" data-main="bere" role="tab" aria-selected="true">Da Bere</button>
+        <button class="tab-btn" data-main="mangiare" role="tab" aria-selected="false">Da Mangiare</button>
+      </div>
 
-    <div class="menu-panel active" id="panel-bere">
-      <div class="menu-cols">
-        <div class="menu-cat">
-          <h3>Vini</h3>
-          <div class="cat-note">Al calice · 10cl</div>
+      <div class="menu-panel active" data-main="bere" id="main-bere">
+        <div class="level2-tabs" role="tablist" aria-label="Sottocategoria da bere">
+          <button class="level2-btn active" data-sub="vini" role="tab" aria-selected="true">Vini al calice</button>
+          <button class="level2-btn" data-sub="cocktail" role="tab" aria-selected="false">Cocktail e birre</button>
+          <button class="level2-btn" data-sub="analcolici" role="tab" aria-selected="false">Per chi guida</button>
+        </div>
 
-          <div class="dish">
-            <div class="dish-top"><h4>Barbera d'Asti, Il Falchetto</h4><span class="price">€9</span></div>
-            <p>Piemonte, 2022. Frutto rosso vivo, tannino gentile.</p>
-            <span class="tag-chip">Biologico</span>
+        <div class="sub-panel active" id="sub-vini">
+          <div class="menu-cat">
+            <h3>Vini al calice</h3>
+            <div class="cat-note">Al calice · 10cl</div>
+
+            <div class="dish">
+              <div class="dish-top"><h4>Barbera d'Asti, Il Falchetto</h4><span class="price">€9</span></div>
+              <p>Piemonte, 2022. Frutto rosso vivo, tannino gentile.</p>
+              <span class="tag-chip">Biologico</span>
+            </div>
+            <div class="dish">
+              <div class="dish-top"><h4>Etna Rosso, Terra Costantino</h4><span class="price">€12</span></div>
+              <p>Sicilia, 2021. Vulcanico, speziato, finale lungo.</p>
+              <span class="tag-chip">Vulcanico</span>
+            </div>
+            <div class="dish">
+              <div class="dish-top"><h4>Franciacorta Brut, Ca' del Bosco</h4><span class="price">€11</span></div>
+              <p>Lombardia. Bollicine fini, crosta di pane.</p>
+              <span class="tag-chip">Bollicine</span>
+            </div>
+            <div class="dish">
+              <div class="dish-top"><h4>Amarone della Valpolicella</h4><span class="price">€18</span></div>
+              <p>Veneto, 2019. Denso, uvetta, cioccolato amaro.</p>
+              <span class="tag-chip">Riserva</span>
+            </div>
           </div>
-          <div class="dish">
-            <div class="dish-top"><h4>Etna Rosso, Terra Costantino</h4><span class="price">€12</span></div>
-            <p>Sicilia, 2021. Vulcanico, speziato, finale lungo.</p>
-            <span class="tag-chip">Vulcanico</span>
-          </div>
-          <div class="dish">
-            <div class="dish-top"><h4>Franciacorta Brut, Ca' del Bosco</h4><span class="price">€11</span></div>
-            <p>Lombardia. Bollicine fini, crosta di pane.</p>
-            <span class="tag-chip">Bollicine</span>
-          </div>
-          <div class="dish">
-            <div class="dish-top"><h4>Amarone della Valpolicella</h4><span class="price">€18</span></div>
-            <p>Veneto, 2019. Denso, uvetta, cioccolato amaro.</p>
-            <span class="tag-chip">Riserva</span>
+
+          <button class="cantina-cta" id="openCantina">
+            <span class="cantina-cta-title">Scopri la Cantina</span>
+            <span class="cantina-cta-sub">Tutti i nostri vini in bottiglia →</span>
+          </button>
+        </div>
+
+        <div class="sub-panel" id="sub-cocktail">
+          <div class="menu-cols">
+            <div class="menu-cat">
+              <h3>Cocktail</h3>
+              <div class="cat-note">Preparati al momento</div>
+
+              <div class="dish">
+                <div class="dish-top"><h4>Negroni Mesci</h4><span class="price">€10</span></div>
+                <p>Gin, Campari, vermouth rosso fatto in casa.</p>
+                <span class="tag-chip">Firma</span>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Spritz al Bergamotto</h4><span class="price">€9</span></div>
+                <p>Prosecco, bitter al bergamotto, soda tonica.</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Old Fashioned</h4><span class="price">€11</span></div>
+                <p>Bourbon, angostura, zucchero, scorza d'arancia.</p>
+                <span class="tag-chip">Classico</span>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Americano Milano-Torino</h4><span class="price">€9</span></div>
+                <p>Campari, vermouth, soda. Amaro e diretto.</p>
+              </div>
+            </div>
+
+            <div class="menu-cat">
+              <h3>Birre</h3>
+              <div class="cat-note">Da inserire</div>
+
+              <div class="dish">
+                <div class="dish-top"><h4>Birra artigianale — nome da inserire</h4><span class="price">€__</span></div>
+                <p>Descrizione e stile da inserire.</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Birra in bottiglia — nome da inserire</h4><span class="price">€__</span></div>
+                <p>Descrizione e provenienza da inserire.</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="menu-cat">
-          <h3>Cocktail</h3>
-          <div class="cat-note">Preparati al momento</div>
+        <div class="sub-panel" id="sub-analcolici">
+          <div class="menu-cat">
+            <h3>Per chi guida</h3>
+            <div class="cat-note">Analcolici</div>
 
-          <div class="dish">
-            <div class="dish-top"><h4>Negroni Mesci</h4><span class="price">€10</span></div>
-            <p>Gin, Campari, vermouth rosso fatto in casa.</p>
-            <span class="tag-chip">Firma</span>
+            <div class="dish">
+              <div class="dish-top"><h4>Mocktail della casa — nome da inserire</h4><span class="price">€__</span></div>
+              <p>Descrizione da inserire.</p>
+            </div>
+            <div class="dish">
+              <div class="dish-top"><h4>Succo o spremuta di stagione</h4><span class="price">€__</span></div>
+              <p>Descrizione da inserire.</p>
+            </div>
           </div>
-          <div class="dish">
-            <div class="dish-top"><h4>Spritz al Bergamotto</h4><span class="price">€9</span></div>
-            <p>Prosecco, bitter al bergamotto, soda tonica.</p>
+        </div>
+      </div>
+
+      <div class="menu-panel" data-main="mangiare" id="main-mangiare">
+        <div class="level2-tabs" role="tablist" aria-label="Sottocategoria da mangiare">
+          <button class="level2-btn active" data-sub="caldi" role="tab" aria-selected="true">Piatti caldi</button>
+          <button class="level2-btn" data-sub="freddi" role="tab" aria-selected="false">Piatti freddi</button>
+          <button class="level2-btn" data-sub="dolci-cibo" role="tab" aria-selected="false">Dolci</button>
+        </div>
+
+        <div class="sub-panel active" id="sub-caldi">
+          <div class="menu-cat">
+            <h3>Piatti caldi</h3>
+            <div class="cat-note">Dalla cucina</div>
+
+            <div class="dish">
+              <div class="dish-top"><h4>Crostini alla Milanese</h4><span class="price">€10</span></div>
+              <p>Burro d'alpeggio, acciughe, midollo.</p>
+            </div>
+            <div class="dish">
+              <div class="dish-top"><h4>Piatto caldo — nome da inserire</h4><span class="price">€__</span></div>
+              <p>Descrizione da inserire.</p>
+            </div>
           </div>
-          <div class="dish">
-            <div class="dish-top"><h4>Old Fashioned</h4><span class="price">€11</span></div>
-            <p>Bourbon, angostura, zucchero, scorza d'arancia.</p>
-            <span class="tag-chip">Classico</span>
+        </div>
+
+        <div class="sub-panel" id="sub-freddi">
+          <div class="menu-cat">
+            <h3>Piatti freddi</h3>
+            <div class="cat-note">Da condividere</div>
+
+            <div class="dish">
+              <div class="dish-top"><h4>Tartare di Fassona</h4><span class="price">€14</span></div>
+              <p>Battuta a coltello, capperi, tuorlo, crostini.</p>
+            </div>
+            <div class="dish">
+              <div class="dish-top"><h4>Tagliere Salumi e Formaggi</h4><span class="price">€16</span></div>
+              <p>Selezione di stagione, confetture, miele.</p>
+            </div>
+            <div class="dish">
+              <div class="dish-top"><h4>Focaccia al Rosmarino</h4><span class="price">€6</span></div>
+              <p>Impasto lievitato 24 ore, sale grosso.</p>
+            </div>
           </div>
-          <div class="dish">
-            <div class="dish-top"><h4>Americano Milano-Torino</h4><span class="price">€9</span></div>
-            <p>Campari, vermouth, soda. Amaro e diretto.</p>
+        </div>
+
+        <div class="sub-panel" id="sub-dolci-cibo">
+          <div class="menu-cat">
+            <h3>Dolci</h3>
+            <div class="cat-note">Fatti in casa</div>
+
+            <div class="dish">
+              <div class="dish-top"><h4>Tiramisù della casa</h4><span class="price">€__</span></div>
+              <p>Descrizione da inserire.</p>
+            </div>
+            <div class="dish">
+              <div class="dish-top"><h4>Dolce del giorno — nome da inserire</h4><span class="price">€__</span></div>
+              <p>Descrizione da inserire.</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="menu-panel" id="panel-mangiare">
-      <div class="menu-cols">
-        <div class="menu-cat">
-          <h3>Da Condividere</h3>
-          <div class="cat-note">Per il bancone</div>
+    <div id="cantinaView" hidden>
+      <button class="back-to-menu" id="closeCantina">← Torna al Menu</button>
+      <div class="section-head" style="margin-bottom:36px">
+        <div class="eyebrow">La Cantina</div>
+        <h2>Tutta la nostra <em>selezione</em></h2>
+        <p>Oltre 180 etichette in bottiglia, catalogate per tipo. Chiedi consiglio al banco.</p>
+      </div>
 
-          <div class="dish">
-            <div class="dish-top"><h4>Tagliere Salumi e Formaggi</h4><span class="price">€16</span></div>
-            <p>Selezione di stagione, confetture, miele.</p>
-          </div>
-          <div class="dish">
-            <div class="dish-top"><h4>Focaccia al Rosmarino</h4><span class="price">€6</span></div>
-            <p>Impasto lievitato 24 ore, sale grosso.</p>
-          </div>
+      <div class="level2-tabs" role="tablist" aria-label="Categoria cantina">
+        <button class="level2-btn active" data-cantina="bollicine" role="tab" aria-selected="true">Bollicine</button>
+        <button class="level2-btn" data-cantina="bianchi" role="tab" aria-selected="false">Bianchi</button>
+        <button class="level2-btn" data-cantina="rossi" role="tab" aria-selected="false">Rossi</button>
+        <button class="level2-btn" data-cantina="rosati" role="tab" aria-selected="false">Rosati</button>
+        <button class="level2-btn" data-cantina="dolci-vino" role="tab" aria-selected="false">Dolci</button>
+      </div>
+
+      <div class="cantina-panel active" id="cantina-bollicine">
+        <div class="cantina-grid">
+          <div class="dish"><div class="dish-top"><h4>Bollicina — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
+          <div class="dish"><div class="dish-top"><h4>Bollicina — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
         </div>
-        <div class="menu-cat">
-          <h3>Dal Piatto</h3>
-          <div class="cat-note">Pensati per il calice</div>
-
-          <div class="dish">
-            <div class="dish-top"><h4>Tartare di Fassona</h4><span class="price">€14</span></div>
-            <p>Battuta a coltello, capperi, tuorlo, crostini.</p>
-          </div>
-          <div class="dish">
-            <div class="dish-top"><h4>Crostini alla Milanese</h4><span class="price">€10</span></div>
-            <p>Burro d'alpeggio, acciughe, midollo.</p>
-          </div>
+      </div>
+      <div class="cantina-panel" id="cantina-bianchi">
+        <div class="cantina-grid">
+          <div class="dish"><div class="dish-top"><h4>Bianco — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
+          <div class="dish"><div class="dish-top"><h4>Bianco — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
+        </div>
+      </div>
+      <div class="cantina-panel" id="cantina-rossi">
+        <div class="cantina-grid">
+          <div class="dish"><div class="dish-top"><h4>Rosso — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
+          <div class="dish"><div class="dish-top"><h4>Rosso — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
+        </div>
+      </div>
+      <div class="cantina-panel" id="cantina-rosati">
+        <div class="cantina-grid">
+          <div class="dish"><div class="dish-top"><h4>Rosato — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
+          <div class="dish"><div class="dish-top"><h4>Rosato — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
+        </div>
+      </div>
+      <div class="cantina-panel" id="cantina-dolci-vino">
+        <div class="cantina-grid">
+          <div class="dish"><div class="dish-top"><h4>Passito — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
+          <div class="dish"><div class="dish-top"><h4>Vin Santo — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
         </div>
       </div>
     </div>
@@ -391,14 +544,56 @@ const observer = new IntersectionObserver((entries) => {
 }, { rootMargin: '-45% 0px -50% 0px' });
 sections.forEach(s => observer.observe(s));
 
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+/* ---- MENU: livello 1 (Da Bere / Da Mangiare) ---- */
+const menuMain = document.getElementById('menuMain');
+const level1Btns = document.querySelectorAll('.tab-btn[data-main]');
+const mainPanels = document.querySelectorAll('.menu-panel[data-main]');
+
+function selectMain(key){
+  level1Btns.forEach(b => {
+    const active = b.dataset.main === key;
+    b.classList.toggle('active', active);
+    b.setAttribute('aria-selected', active);
   });
+  mainPanels.forEach(p => p.classList.toggle('active', p.dataset.main === key));
+  menuMain.classList.remove('collapsed');
+}
+level1Btns.forEach(btn => btn.addEventListener('click', () => selectMain(btn.dataset.main)));
+
+/* su mobile, all'arrivo, nessuna categoria è aperta: solo i due pulsanti */
+if (window.matchMedia('(max-width:840px)').matches) {
+  menuMain.classList.add('collapsed');
+  level1Btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+}
+
+/* ---- MENU: livello 2 (sottocategorie), una per ogni categoria principale ---- */
+mainPanels.forEach(panel => {
+  const subBtns = panel.querySelectorAll('.level2-btn');
+  const subPanels = panel.querySelectorAll('.sub-panel');
+  subBtns.forEach(btn => btn.addEventListener('click', () => {
+    subBtns.forEach(b => { b.classList.toggle('active', b === btn); b.setAttribute('aria-selected', b === btn); });
+    subPanels.forEach(p => p.classList.toggle('active', p.id === 'sub-' + btn.dataset.sub));
+  }));
 });
+
+/* ---- CANTINA: vista separata, con navigazione propria ---- */
+const cantinaView = document.getElementById('cantinaView');
+document.getElementById('openCantina').addEventListener('click', () => {
+  menuMain.hidden = true;
+  cantinaView.hidden = false;
+  document.getElementById('menu').scrollIntoView({ block: 'start' });
+});
+document.getElementById('closeCantina').addEventListener('click', () => {
+  cantinaView.hidden = true;
+  menuMain.hidden = false;
+  document.getElementById('menu').scrollIntoView({ block: 'start' });
+});
+const cantinaBtns = document.querySelectorAll('.level2-btn[data-cantina]');
+const cantinaPanels = document.querySelectorAll('.cantina-panel');
+cantinaBtns.forEach(btn => btn.addEventListener('click', () => {
+  cantinaBtns.forEach(b => { b.classList.toggle('active', b === btn); b.setAttribute('aria-selected', b === btn); });
+  cantinaPanels.forEach(p => p.classList.toggle('active', p.id === 'cantina-' + btn.dataset.cantina));
+}));
 </script>
 </body>
 </html>
