@@ -12,11 +12,11 @@
   --bg:#142621;
   --bg-soft:#1b332c;
   --line:rgba(242,234,216,0.14);
-  --cream:#f2ead8;
+  --cream:#FAF3DD;
   --cream-dim:rgba(242,234,216,0.68);
   --cream-faint:rgba(242,234,216,0.4);
-  --wine:#690000;
-  --wine-bright:#8f1414;
+  --wine:#53131E;
+  --wine-bright:#641723;
   --radius:2px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -108,7 +108,7 @@ section{padding:100px 0}
 .stat .lbl{color:var(--cream-faint);font-size:0.85rem;margin-top:6px}
 
 /* ---- MENU: livello 1 (Da Bere / Da Mangiare) ---- */
-.tabs{display:inline-flex;background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;padding:5px;margin-bottom:40px;gap:2px}
+.tabs{display:flex;width:max-content;background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;padding:5px;margin:0 auto 40px;gap:2px}
 .tab-btn{padding:14px 30px;border-radius:999px;border:0;background:none;color:var(--cream-dim);font-family:inherit;font-size:0.98rem;font-weight:600;cursor:pointer;transition:background .25s,color .25s;white-space:nowrap}
 .tab-btn.active{background:var(--wine);color:var(--cream)}
 
@@ -287,7 +287,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
         </div>
 
         <div class="sub-panel active" id="sub-vini">
-          <div class="menu-cat">
+          <!-- <div class="menu-cat">
             <h3>Vini al calice</h3>
             <div class="cat-note">Al calice · 10cl</div>
 
@@ -311,7 +311,80 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
               <p>Veneto, 2019. Denso, uvetta, cioccolato amaro.</p>
               <span class="tag-chip">Riserva</span>
             </div>
-          </div>
+          </div> -->
+          <div class="menu-cat">
+                <h3>Vini al calice</h3>
+             <div class="cat-note">Al calice · 10cl</div>
+  
+  <div class="dish">
+    <div class="dish-top">
+      <h4>Valdobbiadene DOCG Spumante Extra Dry</h4>
+      <span class="price">€6</span>
+    </div>
+    <p>Vettori</p>
+    <span class="tag-chip">Bollicine</span>
+  </div>
+  
+  <div class="dish">
+    <div class="dish-top">
+      <h4>Franciacorta Extra Brut Millesimato</h4>
+      
+      <span class="price">€9</span>
+    </div>
+    <p>2019 · Massussi</p>
+    <span class="tag-chip">Bollicine</span>
+  </div>
+  
+  <div class="dish">
+    <div class="dish-top">
+      <h4>Crémant de Limoux Blanc Brut</h4>
+      
+      <span class="price">€8</span>
+    </div>
+    <p>Altugnac · Collovray &amp; Terrier</p>
+    <span class="tag-chip">Bollicine</span>
+  </div>
+  
+  <div class="dish">
+    <div class="dish-top">
+      <h4>Collio Bianco</h4>
+      
+      <span class="price">€7</span>
+    </div>
+    <p>2024 · Tenuta Stella</p>
+    <span class="tag-chip">Bianco</span>
+  </div>
+  
+  <div class="dish">
+    <div class="dish-top">
+      <h4>Les Turitelles Chardonnay</h4>
+      
+      <span class="price">€7</span>
+    </div>
+    <p>2025 · Altugnac</p>
+    <span class="tag-chip">Bianco</span>
+  </div>
+  
+  <div class="dish">
+    <div class="dish-top">
+      <h4>Langhe Nebbiolo DOC Simane</h4>
+      
+      <span class="price">€6</span>
+    </div>
+    <p>2023 · Reverdito</p>
+    <span class="tag-chip">Rosso</span>
+  </div>
+  
+  <div class="dish">
+    <div class="dish-top">
+      <h4>Rosso Manolibera</h4>
+  
+      <span class="price">€6</span>
+    </div>
+    <p>2022 · Muralia</p>
+    <span class="tag-chip">Rosso</span>
+  </div>
+  </div>
 
           <button class="cantina-cta" id="openCantina">
             <span class="cantina-cta-title">Scopri la Cantina</span>
@@ -382,10 +455,10 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
         <div class="level2-tabs" role="tablist" aria-label="Sottocategoria da mangiare">
           <button class="level2-btn active" data-sub="caldi" role="tab" aria-selected="true">Piatti caldi</button>
           <button class="level2-btn" data-sub="freddi" role="tab" aria-selected="false">Piatti freddi</button>
-          <button class="level2-btn" data-sub="dolci-cibo" role="tab" aria-selected="false">Dolci</button>
+          <!-- <button class="level2-btn" data-sub="dolci-cibo" role="tab" aria-selected="false">Dolci</button> -->
         </div>
 
-        <div class="sub-panel active" id="sub-caldi">
+        <!-- <div class="sub-panel active" id="sub-caldi">
           <div class="menu-cat">
             <h3>Piatti caldi</h3>
             <div class="cat-note">Dalla cucina</div>
@@ -419,7 +492,120 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
               <p>Impasto lievitato 24 ore, sale grosso.</p>
             </div>
           </div>
-        </div>
+        </div> -->
+
+        <div class="sub-panel active" id="sub-caldi">
+  <div class="menu-cat">
+    <h3>Piatti caldi</h3>
+    <div class="cat-note">Dalla cucina</div>
+
+    <div class="dish">
+      <div class="dish-top">
+        <h4>Patatas Bravas</h4>
+        <span class="price">€__</span>
+      </div>
+      <p>Con salsa brava e aioli</p>
+    </div>
+
+    <div class="dish">
+      <div class="dish-top">
+        <h4>Serranito</h4>
+        <span class="price">€__</span>
+      </div>
+      <p>Panino con lonza di maiale, jamón e friggitelli</p>
+    </div>
+
+    <div class="dish">
+      <div class="dish-top">
+        <h4>Pulpo a la Gallega</h4>
+        <span class="price">€__</span>
+      </div>
+      <p>Polpo, patate, cristalli di sale e paprika affumicata</p>
+    </div>
+
+    <div class="dish">
+      <div class="dish-top">
+        <h4>Polpette al Sugo</h4>
+        <span class="price">€__</span>
+      </div>
+      <p>Accompagnate da pane rustico</p>
+    </div>
+
+    <div class="dish">
+      <div class="dish-top">
+        <h4>Scagliozze di Polenta</h4>
+        <span class="price">€__</span>
+      </div>
+      <p>Polenta fritta con stracciatella</p>
+    </div>
+
+    <div class="dish">
+      <div class="dish-top">
+        <h4>Verdure dell'Orto</h4>
+        <span class="price">€__</span>
+      </div>
+      <p>Dall'orto di Corbari, con cotture e preparazioni variabili in base alla disponibilità</p>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="sub-panel" id="sub-freddi">
+  <div class="menu-cat">
+    <h3>Piatti freddi</h3>
+    <div class="cat-note">Da condividere</div>
+
+    <div class="dish">
+      <div class="dish-top">
+        <h4>Crostone Cantabrico</h4>
+        <span class="price">€__</span>
+      </div>
+      <p>Pane tostato, burro e acciughe del Cantabrico, zest di limone</p>
+    </div>
+
+    <div class="dish">
+      <div class="dish-top">
+        <h4>Bruschetta Stagionale</h4>
+        <span class="price">€__</span>
+      </div>
+      <p>Ingredienti variabili secondo stagionalità</p>
+    </div>
+
+    <div class="dish">
+      <div class="dish-top">
+        <h4>Tartare di Manzo</h4>
+        <span class="price">€__</span>
+      </div>
+      <p>Con nocciole tostate, senape in grani e timo</p>
+    </div>
+
+    <div class="dish">
+      <div class="dish-top">
+        <h4>Selezione di Salumi e Formaggi</h4>
+        <span class="price">€__</span>
+      </div>
+      <p>Selezione di prodotti locali</p>
+    </div>
+
+    <div class="dish">
+      <div class="dish-top">
+        <h4>Carpaccio di Pomodori</h4>
+        <span class="price">€__</span>
+      </div>
+      <p>Con burrata e olive taggiasche</p>
+    </div>
+
+    <div class="dish">
+      <div class="dish-top">
+        <h4>Babaganoush</h4>
+        <span class="price">€__</span>
+      </div>
+      <p>Con pane libanese</p>
+    </div>
+
+  </div>
+</div>
 
         <div class="sub-panel" id="sub-dolci-cibo">
           <div class="menu-cat">
@@ -499,18 +685,20 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
       <div class="info-stack">
         <div class="info-card">
           <h3>Posizione</h3>
-          <p>Via da Modificare, 12<br>Zona Centro<br>20100 Milano</p>
+          <p>Via Milano, 24<br>Pioltello<br>20096 · MI</p>
         </div>
         <div class="info-card">
           <h3>Contatti</h3>
-          <p>Telefono: +39 02 0000 000<br>Email: ciao@mesci.it</p>
+          <p>Telefono: +39 02 0000 000<br>Email: mescienoteca@gmail.com</p>
         </div>
         <div class="info-card">
           <h3>Orari</h3>
           <div class="row"><span>Lunedì</span><span class="closed">Chiuso</span></div>
-          <div class="row"><span>Martedì – Mercoledì</span><span>18:00 – 24:00</span></div>
+          <div class="row"><span>Martedì</span><span>18:00 – 24:00</span></div>
+          <div class="row"><span>Mercoledì</span><span>18:00 – 24:00</span></div>
           <div class="row"><span>Giovedì</span><span>18:00 – 01:00</span></div>
-          <div class="row"><span>Venerdì – Sabato</span><span>18:00 – 02:00</span></div>
+          <div class="row"><span>Venerdì</span><span>18:00 – 02:00</span></div>
+          <div class="row"><span>Sabato</span><span>18:00 – 02:00</span></div>
           <div class="row"><span>Domenica</span><span>18:00 – 23:00</span></div>
         </div>
       </div>
@@ -524,7 +712,9 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
 </section>
 
 <footer>
-  © 2026 MESCI — Tutti i diritti riservati
+
+     © 2026 MESCI — Tutti i diritti riservati
+ 
 </footer>
 
 <script>
