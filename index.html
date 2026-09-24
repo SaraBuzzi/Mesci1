@@ -20,7 +20,7 @@
   --radius:2px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:88px}
+html{scroll-behavior:smooth;scroll-padding-top:40px}
 body{
   background:var(--bg);color:var(--cream);
   font-family:'Manrope',sans-serif;
@@ -113,7 +113,7 @@ section{padding:100px 0}
 .tab-btn.active{background:var(--wine);color:var(--cream)}
 
 /* ---- MENU: livello 2 (sottocategorie), discreto e sticky ---- */
-.level2-tabs{display:flex;gap:26px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:88px;z-index:20;background:var(--bg-soft);padding:16px 0 14px;margin-bottom:36px;border-bottom:1px solid var(--line)}
+.level2-tabs{display:flex;gap:26px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:40px;z-index:20;background:var(--bg-soft);padding:16px 0 14px;margin-bottom:36px;border-bottom:1px solid var(--line)}
 .level2-tabs::-webkit-scrollbar{display:none}
 .level2-btn{flex:0 0 auto;border:0;background:none;color:var(--cream-faint);font-family:inherit;font-size:0.85rem;font-weight:600;letter-spacing:0.02em;padding:2px 0 12px;cursor:pointer;position:relative;transition:color .25s;white-space:nowrap}
 .level2-btn.active{color:var(--cream)}
@@ -140,7 +140,7 @@ section{padding:100px 0}
 
 .back-to-menu{display:inline-flex;align-items:center;gap:8px;color:var(--cream-dim);background:none;border:0;font-family:inherit;font-size:0.92rem;font-weight:600;cursor:pointer;margin-bottom:36px;padding:0}
 .back-to-menu:hover{color:var(--cream)}
-.back-to-categories{display:none;align-items:center;gap:8px;color:var(--cream-dim);background:none;border:0;font-family:inherit;font-size:0.92rem;font-weight:600;cursor:pointer;margin-bottom:28px;padding:0}
+.back-to-categories{display:none;align-items:center;gap:8px;color:var(--cream-dim);background:none;border:0;font-family:inherit;font-size:0.92rem;font-weight:600;cursor:pointer;margin-bottom:6px;padding:0}
 .back-to-categories:hover{color:var(--cream)}
 
 /* ---- DOVE SIAMO ---- */
@@ -287,31 +287,6 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
         </div>
 
         <div class="sub-panel active" id="sub-vini">
-          <!-- <div class="menu-cat">
-            <h3>Vini al calice</h3>
-            <div class="cat-note">Al calice · 10cl</div>
-
-            <div class="dish">
-              <div class="dish-top"><h4>Barbera d'Asti, Il Falchetto</h4><span class="price">€9</span></div>
-              <p>Piemonte, 2022. Frutto rosso vivo, tannino gentile.</p>
-              <span class="tag-chip">Biologico</span>
-            </div>
-            <div class="dish">
-              <div class="dish-top"><h4>Etna Rosso, Terra Costantino</h4><span class="price">€12</span></div>
-              <p>Sicilia, 2021. Vulcanico, speziato, finale lungo.</p>
-              <span class="tag-chip">Vulcanico</span>
-            </div>
-            <div class="dish">
-              <div class="dish-top"><h4>Franciacorta Brut, Ca' del Bosco</h4><span class="price">€11</span></div>
-              <p>Lombardia. Bollicine fini, crosta di pane.</p>
-              <span class="tag-chip">Bollicine</span>
-            </div>
-            <div class="dish">
-              <div class="dish-top"><h4>Amarone della Valpolicella</h4><span class="price">€18</span></div>
-              <p>Veneto, 2019. Denso, uvetta, cioccolato amaro.</p>
-              <span class="tag-chip">Riserva</span>
-            </div>
-          </div> -->
           <div class="menu-cat">
                 <h3>Vini al calice</h3>
              <div class="cat-note">Al calice · 10cl</div>
@@ -455,44 +430,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
         <div class="level2-tabs" role="tablist" aria-label="Sottocategoria da mangiare">
           <button class="level2-btn active" data-sub="caldi" role="tab" aria-selected="true">Piatti caldi</button>
           <button class="level2-btn" data-sub="freddi" role="tab" aria-selected="false">Piatti freddi</button>
-          <!-- <button class="level2-btn" data-sub="dolci-cibo" role="tab" aria-selected="false">Dolci</button> -->
         </div>
-
-        <!-- <div class="sub-panel active" id="sub-caldi">
-          <div class="menu-cat">
-            <h3>Piatti caldi</h3>
-            <div class="cat-note">Dalla cucina</div>
-
-            <div class="dish">
-              <div class="dish-top"><h4>Crostini alla Milanese</h4><span class="price">€10</span></div>
-              <p>Burro d'alpeggio, acciughe, midollo.</p>
-            </div>
-            <div class="dish">
-              <div class="dish-top"><h4>Piatto caldo — nome da inserire</h4><span class="price">€__</span></div>
-              <p>Descrizione da inserire.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="sub-panel" id="sub-freddi">
-          <div class="menu-cat">
-            <h3>Piatti freddi</h3>
-            <div class="cat-note">Da condividere</div>
-
-            <div class="dish">
-              <div class="dish-top"><h4>Tartare di Fassona</h4><span class="price">€14</span></div>
-              <p>Battuta a coltello, capperi, tuorlo, crostini.</p>
-            </div>
-            <div class="dish">
-              <div class="dish-top"><h4>Tagliere Salumi e Formaggi</h4><span class="price">€16</span></div>
-              <p>Selezione di stagione, confetture, miele.</p>
-            </div>
-            <div class="dish">
-              <div class="dish-top"><h4>Focaccia al Rosmarino</h4><span class="price">€6</span></div>
-              <p>Impasto lievitato 24 ore, sale grosso.</p>
-            </div>
-          </div>
-        </div> -->
 
         <div class="sub-panel active" id="sub-caldi">
   <div class="menu-cat">
@@ -753,6 +691,10 @@ function selectMain(key){
   });
   mainPanels.forEach(p => p.classList.toggle('active', p.dataset.main === key));
   menuMain.classList.remove('collapsed');
+
+  if (window.matchMedia('(max-width:840px)').matches) {
+    document.getElementById('backToCategories').scrollIntoView({ block: 'start' });
+  }
 }
 level1Btns.forEach(btn => btn.addEventListener('click', () => selectMain(btn.dataset.main)));
 
