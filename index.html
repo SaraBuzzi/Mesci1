@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>MESCI — Enoteca &amp; Cucina</title>
+<title>MESCI — Wine Bar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -156,8 +156,90 @@ section{padding:100px 0}
   display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;color:var(--cream-faint);text-align:center;padding:40px}
 .map-box svg{width:34px;color:var(--wine-bright)}
 .map-box strong{color:var(--cream-dim);font-weight:600;font-size:0.95rem}
-
+.map-box iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+}
 footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--cream-faint);font-size:0.85rem}
+
+
+
+ .allergen-list {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.allergen-icon {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cream-dim);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  flex-shrink: 0;
+  cursor: help;
+}
+
+
+.allergen-icon svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+
+/* Tooltip */
+.allergen-icon::after {
+  content: attr(data-allergen);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%) translateY(4px);
+
+  background: var(--soft);
+  color: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+
+  padding: 5px 8px;
+  font-size: 0.68rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 20;
+}
+
+ .allergen-icon:hover {
+    color: var(--cream);
+    border-color: var(--cream-dim);
+  }
+
+   .tag-chip:hover {
+    color: var(--cream);
+    border-color: var(--cream-dim);
+  }
+
+.allergen-icon:hover::after,
+.allergen-icon:focus::after,
+.allergen-icon:active::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+
 
 @media (max-width:840px){
   .navlinks{display:none}
@@ -185,7 +267,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
 
 <header id="siteHeader">
   <nav>
-    <div class="brand">
+    <div onclick="window.location='#home'" class="brand">
       <svg viewBox="0 0 1173.86 350" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
         <path d="M803.99,224.7c-1.55-27.49-26.13-41.85-50.7-52.51l-45.63-19.8c-7.72-3.35-14.66-7.65-20.78-13.19-12.34-11.17-13.45-30.12-1.42-41.74,6.43-6.21,14.78-9.75,23.61-11.3,31.81-5.56,61.44,8.32,80.28,35.89.36-10.3-2.32-19.14-3.6-28.94-21.83-9.48-45.2-13.91-68.92-12.48-27.51,1.66-53.09,16.17-54.87,44.02-1.78,27.78,20.93,42.56,45.34,53.08l38.39,16.54c22.19,9.56,45.13,23.98,41.77,48.51-3.58,26.16-34.22,35.47-60.65,32.54-18.78-2.08-35.65-10.07-50.34-21.83l-20.43-16.35c-2.62-1.79-5.34-3.23-8.1-4.32,3.41,15.09,5.09,22.5,7.95,32.32,19.69,9.26,40.39,13.53,62.11,15.22,24.09,1.87,50.65-.69,69.15-16.19,11.87-9.94,17.7-24.04,16.83-39.48Z"/>
         <path d="M629.44,201.49c-7.94,33.76-24.98,56.64-61.57,57.76-40.06,1.22-68.55-13.53-82.07-51.3.24-7.02,5.44-13.26,11.67-16.73,44.31-24.67,89.72-45.68,137.05-64.81-23.99-41.64-77.68-55.94-120.31-39.45-27.83,10.76-48.13,35.02-56.22,60.42-10.29,32.3-4.03,64.03,14.68,89.69,14.36,19.69,34.62,31.92,57.9,37.32,10.14,2.35,16.93,10.76,16.96,21.03l.09,30.14c.02,6.45-4.16,11.94-10.55,12.6l-21.1,2.16c-.72.07-2.86.5-2.54,1.07l1.17,2.06,71.42.1c1.88-.28,3.84-1.54,3.66-2.85l-23.11-2.39c-6.26-.65-10.95-5.8-10.94-12.21l.03-31.22c.01-9.78,7.02-17.91,16.24-20.81,22.66-7.11,33-12.63,41.86-20.52s20.55-17.93,29.61-42.13c-1.37-1.54-13.54-9.5-13.94-9.93ZM480.78,193.33c-6.22-26.5-2.58-53.99,11.72-76.7,11.82-18.77,31.01-31.21,53.55-31,23.78.22,45.38,15.01,54.44,36.56,2.22,5.29.56,11.33-4.94,14.07l-114.76,57.06Z"/>
@@ -193,14 +275,14 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
         <path d="M858.73,237.65c22,30.84,60.06,42.22,95.23,29.03,22.21-8.33,39.36-25.19,50.65-45.79,1.22.42,3.47,1.11,3.34,1.84s-.69,2.29-1.13,3.16c-15.31,29.96-43.47,49.98-77.08,53.84-22.75,2.61-45.27-1.14-65.27-12.12-38.49-21.14-57.81-64.52-49.25-107.31s43.4-75.35,87.95-79.39c28.9-2.62,57.55,4.46,82.54,19.27l5.68,34.91c-8.66-9.97-14.49-19-23.44-27.08-16.27-14.7-36.74-23.83-58.89-22.79-25.4,1.19-46.85,15-58.89,37-19.43,35.5-15.29,82,8.55,115.43Z"/>
         <circle cx="1039.6" cy="51.22" r="14.45"/>
         <path d="M1028.13,260.32l.12-148.16-1.25-14.99c-1.81-3.54-3.78-5.41-7.89-8.98l32.14-4.91.15,177.75c0,6.6,2.77,10.41,7.71,15.83l-38.91.13c4.48-5.16,7.93-9.1,7.93-16.66Z"/>
-        <path d="M595.54,136.27l-114.76,57.06c-6.22-26.5-2.58-53.99,11.72-76.7,11.82-18.77,31.01-31.21,53.55-31,23.78.22,45.38,15.01,54.44,36.56,2.22,5.29.56,11.33-4.94,14.07Z"/>
+        <!-- <path d="M595.54,136.27l-114.76,57.06c-6.22-26.5-2.58-53.99,11.72-76.7,11.82-18.77,31.01-31.21,53.55-31,23.78.22,45.38,15.01,54.44,36.56,2.22,5.29.56,11.33-4.94,14.07Z"/> -->
       </svg>
     </div>
     <div class="navlinks" id="navlinks">
       <a href="#home" class="active">Home</a>
       <a href="#chi-siamo">Chi Siamo</a>
       <a href="#menu">Menù</a>
-      <a href="#dove-siamo">Dove Siamo</a>
+      <a href="#dove-siamo">Contatti</a>
     </div>
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </nav>
@@ -208,12 +290,12 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
     <a href="#home">Home</a>
     <a href="#chi-siamo">Chi Siamo</a>
     <a href="#menu">Menù</a>
-    <a href="#dove-siamo">Dove Siamo</a>
+    <a href="#dove-siamo">Contatti</a>
   </div>
 </header>
 
 <section class="hero" id="home">
-  <div class="eyebrow">Dal 2018 · nel cuore della città</div>
+  <div class="eyebrow">Wine Bar</div>
   <div class="logo-mark">
     <svg viewBox="0 0 1173.86 400" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
       <path d="M803.99,224.7c-1.55-27.49-26.13-41.85-50.7-52.51l-45.63-19.8c-7.72-3.35-14.66-7.65-20.78-13.19-12.34-11.17-13.45-30.12-1.42-41.74,6.43-6.21,14.78-9.75,23.61-11.3,31.81-5.56,61.44,8.32,80.28,35.89.36-10.3-2.32-19.14-3.6-28.94-21.83-9.48-45.2-13.91-68.92-12.48-27.51,1.66-53.09,16.17-54.87,44.02-1.78,27.78,20.93,42.56,45.34,53.08l38.39,16.54c22.19,9.56,45.13,23.98,41.77,48.51-3.58,26.16-34.22,35.47-60.65,32.54-18.78-2.08-35.65-10.07-50.34-21.83l-20.43-16.35c-2.62-1.79-5.34-3.23-8.1-4.32,3.41,15.09,5.09,22.5,7.95,32.32,19.69,9.26,40.39,13.53,62.11,15.22,24.09,1.87,50.65-.69,69.15-16.19,11.87-9.94,17.7-24.04,16.83-39.48Z"/>
@@ -222,16 +304,16 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
       <path d="M858.73,237.65c22,30.84,60.06,42.22,95.23,29.03,22.21-8.33,39.36-25.19,50.65-45.79,1.22.42,3.47,1.11,3.34,1.84s-.69,2.29-1.13,3.16c-15.31,29.96-43.47,49.98-77.08,53.84-22.75,2.61-45.27-1.14-65.27-12.12-38.49-21.14-57.81-64.52-49.25-107.31s43.4-75.35,87.95-79.39c28.9-2.62,57.55,4.46,82.54,19.27l5.68,34.91c-8.66-9.97-14.49-19-23.44-27.08-16.27-14.7-36.74-23.83-58.89-22.79-25.4,1.19-46.85,15-58.89,37-19.43,35.5-15.29,82,8.55,115.43Z"/>
       <circle cx="1039.6" cy="51.22" r="14.45"/>
       <path d="M1028.13,260.32l.12-148.16-1.25-14.99c-1.81-3.54-3.78-5.41-7.89-8.98l32.14-4.91.15,177.75c0,6.6,2.77,10.41,7.71,15.83l-38.91.13c4.48-5.16,7.93-9.1,7.93-16.66Z"/>
-      <path d="M595.54,136.27l-114.76,57.06c-6.22-26.5-2.58-53.99,11.72-76.7,11.82-18.77,31.01-31.21,53.55-31,23.78.22,45.38,15.01,54.44,36.56,2.22,5.29.56,11.33-4.94,14.07Z"/>
+        <!-- <path d="M595.54,136.27l-114.76,57.06c-6.22-26.5-2.58-53.99,11.72-76.7,11.82-18.77,31.01-31.21,53.55-31,23.78.22,45.38,15.01,54.44,36.56,2.22,5.29.56,11.33-4.94,14.07Z"/> -->
     </svg>
   </div>
   <div class="pour-line"></div>
   <p class="tag">Versa. Racconta. <em>Resta.</em> Un'enoteca dove ogni calice inizia una conversazione e ogni piatto la accompagna.</p>
   <div class="hero-ctas">
     <a href="#menu" class="btn btn-filled">Scopri il Menù</a>
-    <a href="#dove-siamo" class="btn btn-outline">Dove Siamo</a>
+    <a href="#dove-siamo" class="btn btn-outline">Contatti</a>
   </div>
-  <div class="scroll-cue">↓</div>
+  <div class="scroll-cue" onclick="window.location='#chi-siamo'">↓</div>
 </section>
 
 <section id="chi-siamo">
@@ -247,12 +329,12 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
           <p>La nostra carta cambia con le stagioni e con le annate. Al bancone lavoriamo fianco a fianco con chi viene ogni settimana e con chi entra per la prima volta, cercando sempre l'abbinamento che non si aspettava.</p>
           <p>La cucina segue lo stesso principio: piatti pensati per stare dietro al calice, non per distrarre da esso.</p>
         </div>
-        <div class="stats">
+        <!-- <div class="stats">
           <div class="stat"><div class="num">180+</div><div class="lbl">Etichette in carta</div></div>
           <div class="stat"><div class="num">34</div><div class="lbl">Posti al bancone</div></div>
           <div class="stat"><div class="num">7</div><div class="lbl">Anni di mescita</div></div>
           <div class="stat"><div class="num">Ogni sera</div><div class="lbl">Aperti dal martedì</div></div>
-        </div>
+        </div> -->
       </div>
       <div class="pour-art">
         <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4">
@@ -269,7 +351,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
     <div class="section-head">
       <div class="eyebrow">Il Menù</div>
       <h2>Scelto goccia a <em>goccia</em></h2>
-      <p>Ogni versamento è pensato per il prossimo. Chiedi al banco l'abbinamento della sera.</p>
+      <p>Ogni versamento è pensato per il prossimo. Chiedi al banco l'abbinamento</p>
     </div>
     <div id="menuMain">
       <div class="tabs" role="tablist" aria-label="Categoria principale">
@@ -281,15 +363,16 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
 
       <div class="menu-panel active" data-main="bere" id="main-bere">
         <div class="level2-tabs" role="tablist" aria-label="Sottocategoria da bere">
-          <button class="level2-btn active" data-sub="vini" role="tab" aria-selected="true">Vini al calice</button>
-          <button class="level2-btn" data-sub="cocktail" role="tab" aria-selected="false">Cocktail e birre</button>
+          <button class="level2-btn active" data-sub="vini" role="tab" aria-selected="true">Al calice</button>
+          <button class="level2-btn" data-sub="bottiglia" role="tab" aria-selected="true">In bottiglia</button>
+          <button class="level2-btn" data-sub="cocktail" role="tab" aria-selected="false">Cocktail</button>
           <button class="level2-btn" data-sub="analcolici" role="tab" aria-selected="false">Per chi guida</button>
         </div>
 
         <div class="sub-panel active" id="sub-vini">
           <div class="menu-cat">
-                <h3>Vini al calice</h3>
-             <div class="cat-note">Al calice · 10cl</div>
+                <!-- <h3>Vini al calice</h3>
+             <div class="cat-note">Al calice · 10cl</div> -->
   
   <div class="dish">
     <div class="dish-top">
@@ -360,40 +443,203 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
     <span class="tag-chip">Rosso</span>
   </div>
   </div>
+</div>
+  
 
-          <button class="cantina-cta" id="openCantina">
+          <!-- <button class="cantina-cta" id="openCantina">
             <span class="cantina-cta-title">Scopri la Cantina</span>
             <span class="cantina-cta-sub">Tutti i nostri vini in bottiglia →</span>
-          </button>
-        </div>
-
-        <div class="sub-panel" id="sub-cocktail">
+          </button> -->
+         <div class="sub-panel" id="sub-bottiglia">
           <div class="menu-cols">
             <div class="menu-cat">
-              <h3>Cocktail</h3>
-              <div class="cat-note">Preparati al momento</div>
+              
+              <h3>Bollicine</h3>
+               <div class="cat-note">Consumazione / Asporto</div> 
 
               <div class="dish">
-                <div class="dish-top"><h4>Negroni Mesci</h4><span class="price">€10</span></div>
-                <p>Gin, Campari, vermouth rosso fatto in casa.</p>
-                <span class="tag-chip">Firma</span>
+                <div class="dish-top"><h4>Valdobbiadene DOCG Spumante Extra Dry</h4><span class="price">€22 / €17</span></div>
+                <p>Vettori</p>
+                <!-- <span class="tag-chip">Firma</span> -->
               </div>
               <div class="dish">
-                <div class="dish-top"><h4>Spritz al Bergamotto</h4><span class="price">€9</span></div>
-                <p>Prosecco, bitter al bergamotto, soda tonica.</p>
+                <div class="dish-top"><h4>Valdobbiadene DOCG spumante Brut</h4><span class="price">€22 / €17</span></div>
+                <p>Vettori</p>
               </div>
               <div class="dish">
-                <div class="dish-top"><h4>Old Fashioned</h4><span class="price">€11</span></div>
-                <p>Bourbon, angostura, zucchero, scorza d'arancia.</p>
-                <span class="tag-chip">Classico</span>
+                <div class="dish-top"><h4>Franciacorta Extra Brut Millesimato</h4><span class="price">€38 / €33</span></div>
+                <p>2019 · Massussi</p>
+                <!-- <span class="tag-chip">Classico</span> -->
               </div>
               <div class="dish">
-                <div class="dish-top"><h4>Americano Milano-Torino</h4><span class="price">€9</span></div>
-                <p>Campari, vermouth, soda. Amaro e diretto.</p>
+                <div class="dish-top"><h4>Roccapietra Blanc de Noirs Brut</h4><span class="price">€36 / €33</span></div>
+                <p>Scuropasse</p>
+              </div>
+              
+              <div class="dish">
+                <div class="dish-top"><h4>Roccapietra Gruasè Rosè</h4><span class="price">€39,50 / €34,50</span></div>
+                <p>Scuropasse</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Trento Spumante Extra Brut</h4><span class="price">€42 / €37</span></div>
+                <p>2019 · Fanti</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Crémant de Limoux Blanc Brut</h4><span class="price">€32 / €27</span></div>
+                <p>Altugnac · Collovray &amp; Terrier</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Champagne Roger Barnier Brut Selection</h4><span class="price">€46,50 / €31,50</span></div>
+                <p></p>
+              </div>
+
+            </div>
+            <div class="menu-cat">
+              
+              <h3>Bianchi</h3>
+               <div class="cat-note">Consumazione / Asporto</div> 
+
+              <div class="dish">
+                <div class="dish-top"><h4>Collio Bianco</h4><span class="price">€28 / €23</span></div>
+                <p>Tenuta Stella</p>
+               
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Ribolla Gialla Collio Bio</h4><span class="price">€34 / €29</span></div>
+                <p>2023 · Tenuta Stella</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Friulano Collio Bio</h4><span class="price">€34 / €29</span></div>
+                <p>2024 · Tenuta Stella</p>
+               
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Trentino Nosiola</h4><span class="price">€28 / €23</span></div>
+                <p>2024 · Fanti</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Trentino Chardonnay</h4><span class="price">€32 / €27</span></div>
+                <p>2023 · Fanti</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Gewurztraminer</h4><span class="price">€36 / €31</span></div>
+                <p>2023 · Elfenberg</p>
+              </div>
+               <div class="dish">
+                <div class="dish-top"><h4>Sauvignon Blanc</h4><span class="price">€36 / €31</span></div>
+                <p>2024 · Elfenberg</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Frascati Superiore Doc</h4><span class="price">€28 / €23</span></div>
+                <p>2024 · Casale Marchese</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Les Juritelles Chardonnay</h4><span class="price">€28 / €23</span></div>
+                <p>2025 · Altugnac</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Aligote Bourgogna</h4><span class="price">€36 / €31</span></div>
+                <p>2023 · P &amp; L Borgest</p>
               </div>
             </div>
 
             <div class="menu-cat">
+              <h3>Rossi</h3>
+              <div class="cat-note">Consumazione / Asporto</div>
+
+              <div class="dish">
+                <div class="dish-top"><h4>Lagrein</h4><span class="price">€35,50 / €30,50</span></div>
+                <p>2024 · Elfenberg</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Langhe Nebbiolo Doc Simane</h4><span class="price">€28 / €23</span></div>
+                <p>2023 · Beverdita</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Barbera d'Alba Doc</h4><span class="price">€22 / €17</span></div>
+                <p>2024 · Beverdita</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Barolo</h4><span class="price">€38 / €33</span></div>
+                <p>2020 · Beverdita</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Rosso Manolibera</h4><span class="price">€28 / €23</span></div>
+                <p>2022 · Muralia</p>
+              </div>
+
+              <div class="dish">
+                <div class="dish-top"><h4>Rosato Gorbizzo</h4><span class="price">€24 / €19</span></div>
+                <p>2024 · Muralia</p>
+              </div>
+
+              <div class="dish">
+                <div class="dish-top"><h4>Lambrusco Nebbia &amp; Sabbia</h4><span class="price">€19 / €14</span></div>
+                <p>Podere Crocetta</p>
+              </div>
+              
+              <div class="dish">
+                <div class="dish-top"><h4>Sotè Pierre Lys Pinot Noir</h4><span class="price">€34,50 / €24,50</span></div>
+                <p>2024 · Altugnac</p>
+              </div>
+            </div>
+            <div class="menu-cat">
+              <h3>Dolci</h3>
+              <div class="cat-note">Consumazione / Asporto</div>
+              <div class="dish">
+                <div class="dish-top"><h4>Moscato</h4><span class="price">€22 / €17</span></div>
+                <p>Scuropasso</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-panel" id="sub-cocktail">
+          <!-- <div class="menu-cols"> -->
+            <div class="menu-cat">
+              <!-- <h3>Cocktail</h3>
+              <div class="cat-note">Preparati al momento</div> -->
+
+              <div class="dish">
+                <div class="dish-top"><h4>Spritz Aperol</h4><span class="price">€__</span></div>
+                <p>Gin, Campari, vermouth rosso fatto in casa.</p>
+                <span class="tag-chip">Firma</span>
+              </div>
+
+              <div class="dish">
+                <div class="dish-top"><h4>Spritz Campari</h4><span class="price">€__</span></div>
+                <p>Gin, Campari</p>
+                <span class="tag-chip">Firma</span>
+              </div>
+
+              <div class="dish">
+                <div class="dish-top"><h4>Negroni</h4><span class="price">€__</span></div>
+                <p>Gin, Campari</p>
+                <span class="tag-chip">Firma</span>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Negroni Sbagliato</h4><span class="price">€__</span></div>
+                <p>Gin, Campari</p>
+                <span class="tag-chip">Firma</span>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Americano</h4><span class="price">€__</span></div>
+                <p>Gin, Campari</p>
+                <span class="tag-chip">Firma</span>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Gin Tonic</h4><span class="price">€__</span></div>
+                <p>Gin, Campari</p>
+                <span class="tag-chip">Firma</span>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><h4>Gin Tonic Premium</h4><span class="price">€__</span></div>
+                <p>Gin, Campari</p>
+                <span class="tag-chip">Firma</span>
+              </div>
+            </div>
+
+            <!-- <div class="menu-cat">
               <h3>Birre</h3>
               <div class="cat-note">Da inserire</div>
 
@@ -405,21 +651,25 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
                 <div class="dish-top"><h4>Birra in bottiglia — nome da inserire</h4><span class="price">€__</span></div>
                 <p>Descrizione e provenienza da inserire.</p>
               </div>
-            </div>
-          </div>
+            </div> 
+          </div>-->
         </div>
 
         <div class="sub-panel" id="sub-analcolici">
           <div class="menu-cat">
-            <h3>Per chi guida</h3>
-            <div class="cat-note">Analcolici</div>
+            <!-- <h3>Per chi guida</h3>
+            <div class="cat-note">Analcolici</div> -->
 
             <div class="dish">
-              <div class="dish-top"><h4>Mocktail della casa — nome da inserire</h4><span class="price">€__</span></div>
+              <div class="dish-top"><h4>Mocktail della casa</h4><span class="price">€__</span></div>
               <p>Descrizione da inserire.</p>
             </div>
             <div class="dish">
-              <div class="dish-top"><h4>Succo o spremuta di stagione</h4><span class="price">€__</span></div>
+              <div class="dish-top"><h4>Bibite in lattina</h4><span class="price">€__</span></div>
+              <p>Descrizione da inserire.</p>
+            </div>
+            <div class="dish">
+              <div class="dish-top"><h4>Acqua frizzante</h4><span class="price">€__</span></div>
               <p>Descrizione da inserire.</p>
             </div>
           </div>
@@ -434,8 +684,8 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
 
         <div class="sub-panel active" id="sub-caldi">
   <div class="menu-cat">
-    <h3>Piatti caldi</h3>
-    <div class="cat-note">Dalla cucina</div>
+    <!-- <h3>Piatti caldi</h3>
+    <div class="cat-note">Dalla cucina</div> -->
 
     <div class="dish">
       <div class="dish-top">
@@ -443,6 +693,10 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
         <span class="price">€__</span>
       </div>
       <p>Con salsa brava e aioli</p>
+      <div class="allergen-list">
+      <span class="allergen-icon" title="Latte" aria-label="Latte" data-allergen="Glutine"> </span>
+      <span class="allergen-icon" title="Latte" aria-label="Latte" data-allergen="Pesce"> </span>
+</div>
     </div>
 
     <div class="dish">
@@ -475,6 +729,13 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
         <span class="price">€__</span>
       </div>
       <p>Polenta fritta con stracciatella</p>
+      <div class="allergen-list">
+
+  <span class="allergen-icon" data-allergen="Latte" aria-label="Latte">
+    
+  </span>
+
+</div>
     </div>
 
     <div class="dish">
@@ -491,8 +752,8 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
 
 <div class="sub-panel" id="sub-freddi">
   <div class="menu-cat">
-    <h3>Piatti freddi</h3>
-    <div class="cat-note">Da condividere</div>
+    <!-- <h3>Piatti freddi</h3>
+    <div class="cat-note">Da condividere</div> -->
 
     <div class="dish">
       <div class="dish-top">
@@ -563,7 +824,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
       </div>
     </div>
 
-    <div id="cantinaView" hidden>
+    <!-- <div id="cantinaView" hidden>
       <button class="back-to-menu" id="closeCantina">← Torna al Menu</button>
       <div class="section-head" style="margin-bottom:36px">
         <div class="eyebrow">La Cantina</div>
@@ -609,49 +870,73 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
           <div class="dish"><div class="dish-top"><h4>Vin Santo — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </section>
 
 <section id="dove-siamo">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Dove Siamo</div>
+      <div class="eyebrow">Contatti</div>
       <h2>Vieni a versarne <em>uno</em> con noi</h2>
     </div>
     <div class="contact-grid">
       <div class="info-stack">
         <div class="info-card">
-          <h3>Posizione</h3>
-          <p>Via Milano, 24<br>Pioltello<br>20096 · MI</p>
-        </div>
-        <div class="info-card">
           <h3>Contatti</h3>
           <p>Telefono: +39 02 0000 000<br>Email: mescienoteca@gmail.com</p>
         </div>
         <div class="info-card">
+          <h3>Seguici</h3>
+          <p>Via Milano, 24<br>Pioltello<br>20096 · MI</p>
+        </div>
+        
+        <div class="info-card">
           <h3>Orari</h3>
           <div class="row"><span>Lunedì</span><span class="closed">Chiuso</span></div>
-          <div class="row"><span>Martedì</span><span>18:00 – 24:00</span></div>
-          <div class="row"><span>Mercoledì</span><span>18:00 – 24:00</span></div>
-          <div class="row"><span>Giovedì</span><span>18:00 – 01:00</span></div>
-          <div class="row"><span>Venerdì</span><span>18:00 – 02:00</span></div>
-          <div class="row"><span>Sabato</span><span>18:00 – 02:00</span></div>
+          <div class="row"><span>Martedì</span><span>18:00 – 23:00</span></div>
+          <div class="row"><span>Mercoledì</span><span>18:00 – 23:00</span></div>
+          <div class="row"><span>Giovedì</span><span>18:00 – 23:00</span></div>
+          <div class="row"><span>Venerdì</span><span>18:00 – 24:00</span></div>
+          <div class="row"><span>Sabato</span><span>18:00 – 24:00</span></div>
           <div class="row"><span>Domenica</span><span>18:00 – 23:00</span></div>
         </div>
       </div>
       <div class="map-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s7-7.4 7-12.6A7 7 0 0 0 5 9.4C5 14.6 12 22 12 22z"/><circle cx="12" cy="9" r="2.6"/></svg>
-        <strong>Via da Modificare, 12 — Milano</strong>
-        <span>Sostituisci con la mappa reale (Google Maps embed o immagine)</span>
+       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.430128084445!2d9.327429876631522!3d45.50141933095415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c84980a092d5%3A0x66731abac4a18beb!2sVia%20Milano%2C%2024%2C%2020096%20Pioltello%20MI!5e0!3m2!1sit!2sit!4v1790631921682!5m2!1sit!2sit" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div>
     </div>
   </div>
 </section>
 
 <footer>
+  <div style="justify-content: space-between;">
+<a
+  href="https://www.instagram.com/enoteca.mesci/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-cream-200/40 transition-colors hover:text-gold-300"
+  aria-label="Instagram"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    width="16"
+    height="16"
+    aria-hidden="true"
+  >
+    <rect x="3" y="3" width="18" height="18" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+  </svg>
+</a>
 
-     © 2026 MESCI — Tutti i diritti riservati
+     <p>© 2026 MESCI — Tutti i diritti riservati</p>
+  </div>
+ 
  
 </footer>
 
@@ -738,6 +1023,8 @@ cantinaBtns.forEach(btn => btn.addEventListener('click', () => {
   cantinaBtns.forEach(b => { b.classList.toggle('active', b === btn); b.setAttribute('aria-selected', b === btn); });
   cantinaPanels.forEach(p => p.classList.toggle('active', p.id === 'cantina-' + btn.dataset.cantina));
 }));
+
+
 </script>
 </body>
 </html>
