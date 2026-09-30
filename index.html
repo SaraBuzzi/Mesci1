@@ -9,15 +9,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#142621;
-  --bg-soft:#1b332c;
+  --bg:#9CA095;
+  --bg-soft:#A6AB9F;
   --line:rgba(242,234,216,0.14);
-  --cream:#FAF3DD;
-  --cream-dim:rgba(242,234,216,0.68);
-  --cream-faint:rgba(242,234,216,0.4);
-  --wine:#53131E;
+  --cream:#f7f3e8;
+  --cream-dim:rgba(242,234,216,0.75);
+  --cream-faint:rgba(242,234,216,0.55);
+  --wine:#6B121B;
+  --wine-dim:rgba(83,19,30,0.75);
   --wine-bright:#641723;
-  --radius:2px;
+  --radius:4px;
+  --text:#7D7A40;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:40px}
@@ -40,7 +42,7 @@ header{
   transition:background .35s ease,border-color .35s ease;
   border-bottom:1px solid transparent;
 }
-header.scrolled{background:rgba(20,38,33,0.92);backdrop-filter:blur(10px);border-color:var(--line)}
+header.scrolled{background:var(--bg);backdrop-filter:blur(10px);border-color:var(--line)}
 nav{display:flex;align-items:center;justify-content:space-between;padding:20px 32px;max-width:1180px;margin:0 auto}
 .brand{display:flex;align-items:center;gap:10px}
 .brand svg{height:26px;width:auto;color:var(--cream)}
@@ -80,9 +82,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:20px 3
   display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;
 }
 .btn:hover{transform:translateY(-2px)}
-.btn-filled{background:var(--wine);color:var(--cream)}
+.btn-filled{background:var(--text);color:var(--cream)}
 .btn-filled:hover{background:var(--wine-bright)}
-.btn-outline{border-color:var(--line);color:var(--cream)}
+.btn-outline{border-color:var(--text);color:var(--cream)}
 .btn-outline:hover{border-color:var(--cream-faint)}
 .scroll-cue{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);color:var(--cream-faint);animation:bob 2s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,6px)}}
@@ -117,21 +119,21 @@ section{padding:100px 0}
 .level2-tabs::-webkit-scrollbar{display:none}
 .level2-btn{flex:0 0 auto;border:0;background:none;color:var(--cream-faint);font-family:inherit;font-size:0.85rem;font-weight:600;letter-spacing:0.02em;padding:2px 0 12px;cursor:pointer;position:relative;transition:color .25s;white-space:nowrap}
 .level2-btn.active{color:var(--cream)}
-.level2-btn.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--wine-bright)}
+.level2-btn.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--text)}
 
 .menu-panel,.sub-panel,.cantina-panel{display:none}
 .menu-panel.active,.sub-panel.active,.cantina-panel.active{display:block}
 
 .menu-cols,.cantina-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px}
 .menu-cat h3{font-size:1.5rem;margin-bottom:4px}
-.menu-cat .cat-note{color:var(--cream-faint);font-size:0.82rem;margin-bottom:28px}
+.menu-cat .cat-note{color:var(--wine);font-size:0.82rem;margin-bottom:28px}
 .dish{padding:20px 0;border-bottom:1px solid var(--line)}
 .dish:first-of-type{padding-top:0}
 .dish-top{display:flex;justify-content:space-between;gap:16px;align-items:baseline}
 .dish-top h4{font-family:'Fraunces',serif;font-weight:500;font-size:1.15rem}
-.dish-top .price{color:var(--wine-bright);font-family:'Fraunces',serif;font-size:1.1rem;white-space:nowrap}
+.dish-top .price{color:var(--wine-bright);font-family:'Fraunces',serif;font-size:1.1rem;white-space:nowrap; padding-right: 1rem;}
 .dish p{color:var(--cream-dim);font-size:0.92rem;margin-top:6px;line-height:1.55}
-.tag-chip{display:inline-block;margin-top:10px;margin-right:8px;font-size:0.72rem;letter-spacing:0.04em;color:var(--cream-dim);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
+.tag-chip{display:inline-block;margin-top:10px;margin-right:8px;font-size:0.72rem;letter-spacing:0.04em;color:var(--wine-dim);border:1px solid var(--wine-dim);border-radius:999px;padding:4px 12px}
 
 .cantina-cta{display:block;width:100%;text-align:left;margin-top:36px;padding:26px 28px;background:linear-gradient(135deg,var(--wine),#3d0000);border:1px solid var(--wine-bright);border-radius:var(--radius);cursor:pointer;transition:transform .2s}
 .cantina-cta:hover{transform:translateY(-2px)}
@@ -162,6 +164,10 @@ section{padding:100px 0}
   display: block;
   border: 0;
 }
+
+
+
+
 footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--cream-faint);font-size:0.85rem}
 
 
@@ -236,9 +242,54 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
 .allergen-icon:active::after {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%) translateY(-50%);
 }
 
+.wine-list {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.wine-category {
+  width: 100%;
+}
+.wine-category  h3{font-size:1.2rem;margin-bottom:4px; text-transform: uppercase;}
+.wine-category .cat-note{color:var(--cream-faint);font-size:0.82rem;margin-bottom:28px;padding-bottom: 1.5rem;}
+
+.wine-category-dishes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 40px;
+}
+
+@media (max-width: 840px) {
+  .wine-category-dishes {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Spazio tra le sezioni (Bollicine / Bianchi / Rossi / Dolci) */
+.wine-list + .wine-list {
+  margin-top: 56px;
+}
+
+/* Riga vuota (es. Champagne senza produttore) non deve alterare l'altezza */
+.wine-category-dishes .dish p:empty {
+  display: none;
+}
+
+/* Desktop: i primi DUE vini (prima riga) partono entrambi senza padding sopra,
+   e l'ultima riga non ha la linea di chiusura */
+@media (min-width: 841px) {
+  .wine-category-dishes .dish:nth-child(2) {
+    padding-top: 0;
+  }
+  .wine-category-dishes .dish:last-child,
+  .wine-category-dishes .dish:nth-last-child(2):nth-child(odd) {
+    border-bottom: 0;
+  }
+}
 
 
 @media (max-width:840px){
@@ -322,7 +373,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
       <div>
         <div class="section-head" style="margin-bottom:28px">
           <div class="eyebrow">La nostra storia</div>
-          <h2>Un rito, versato <em>ogni sera</em></h2>
+          <h2><em>Due innamorati</em> dietro il bancone</h2>
         </div>
         <div class="about-text">
           <p>MESCI nasce da un verbo antico — <em>mescere</em>, versare il vino — e da un'idea semplice: il bicchiere giusto, offerto al momento giusto, cambia una serata.</p>
@@ -341,6 +392,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
           <path d="M30 12h40l-4 34a16 16 0 0 1-32 0z"/>
           <path d="M50 62v22M38 90h24"/>
         </svg>
+        <img src="Prova.jpg" alt="" >
       </div>
     </div>
   </div>
@@ -348,12 +400,15 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
 
 <section id="menu" style="background:var(--bg-soft)">
   <div class="wrap">
+
     <div class="section-head">
       <div class="eyebrow">Il Menù</div>
       <h2>Scelto goccia a <em>goccia</em></h2>
       <p>Ogni versamento è pensato per il prossimo. Chiedi al banco l'abbinamento</p>
     </div>
+
     <div id="menuMain">
+
       <div class="tabs" role="tablist" aria-label="Categoria principale">
         <button class="tab-btn active" data-main="bere" role="tab" aria-selected="true">Da Bere</button>
         <button class="tab-btn" data-main="mangiare" role="tab" aria-selected="false">Da Mangiare</button>
@@ -361,518 +416,796 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
 
       <button class="back-to-categories" id="backToCategories">← Torna alle categorie</button>
 
+
+      <!-- ═════════════════════════════════════
+           DA BERE
+      ═════════════════════════════════════ -->
+
       <div class="menu-panel active" data-main="bere" id="main-bere">
+
         <div class="level2-tabs" role="tablist" aria-label="Sottocategoria da bere">
           <button class="level2-btn active" data-sub="vini" role="tab" aria-selected="true">Al calice</button>
-          <button class="level2-btn" data-sub="bottiglia" role="tab" aria-selected="true">In bottiglia</button>
+          <button class="level2-btn" data-sub="bottiglia" role="tab" aria-selected="false">In bottiglia</button>
           <button class="level2-btn" data-sub="cocktail" role="tab" aria-selected="false">Cocktail</button>
           <button class="level2-btn" data-sub="analcolici" role="tab" aria-selected="false">Per chi guida</button>
         </div>
 
+
+        <!-- ═════════════════════════════════════
+             VINI AL CALICE
+        ═════════════════════════════════════ -->
+
         <div class="sub-panel active" id="sub-vini">
+
           <div class="menu-cat">
-                <!-- <h3>Vini al calice</h3>
-             <div class="cat-note">Al calice · 10cl</div> -->
-  
-  <div class="dish">
-    <div class="dish-top">
-      <h4>Valdobbiadene DOCG Spumante Extra Dry</h4>
-      <span class="price">€6</span>
-    </div>
-    <p>Vettori</p>
-    <span class="tag-chip">Bollicine</span>
-  </div>
-  
-  <div class="dish">
-    <div class="dish-top">
-      <h4>Franciacorta Extra Brut Millesimato</h4>
-      
-      <span class="price">€9</span>
-    </div>
-    <p>2019 · Massussi</p>
-    <span class="tag-chip">Bollicine</span>
-  </div>
-  
-  <div class="dish">
-    <div class="dish-top">
-      <h4>Crémant de Limoux Blanc Brut</h4>
-      
-      <span class="price">€8</span>
-    </div>
-    <p>Altugnac · Collovray &amp; Terrier</p>
-    <span class="tag-chip">Bollicine</span>
-  </div>
-  
-  <div class="dish">
-    <div class="dish-top">
-      <h4>Collio Bianco</h4>
-      
-      <span class="price">€7</span>
-    </div>
-    <p>2024 · Tenuta Stella</p>
-    <span class="tag-chip">Bianco</span>
-  </div>
-  
-  <div class="dish">
-    <div class="dish-top">
-      <h4>Les Turitelles Chardonnay</h4>
-      
-      <span class="price">€7</span>
-    </div>
-    <p>2025 · Altugnac</p>
-    <span class="tag-chip">Bianco</span>
-  </div>
-  
-  <div class="dish">
-    <div class="dish-top">
-      <h4>Langhe Nebbiolo DOC Simane</h4>
-      
-      <span class="price">€6</span>
-    </div>
-    <p>2023 · Reverdito</p>
-    <span class="tag-chip">Rosso</span>
-  </div>
-  
-  <div class="dish">
-    <div class="dish-top">
-      <h4>Rosso Manolibera</h4>
-  
-      <span class="price">€6</span>
-    </div>
-    <p>2022 · Muralia</p>
-    <span class="tag-chip">Rosso</span>
-  </div>
-  </div>
-</div>
-  
 
-          <!-- <button class="cantina-cta" id="openCantina">
-            <span class="cantina-cta-title">Scopri la Cantina</span>
-            <span class="cantina-cta-sub">Tutti i nostri vini in bottiglia →</span>
-          </button> -->
-         <div class="sub-panel" id="sub-bottiglia">
-          <div class="menu-cols">
-            <div class="menu-cat">
-              
+            <!--
+            <h3>Vini al calice</h3>
+            <div class="cat-note">Al calice · 10cl</div>
+            -->
+
+            <div class="dish">
+              <div class="dish-top">
+                <h4>Valdobbiadene DOCG Spumante Extra Dry</h4>
+                <span class="price">6€</span>
+              </div>
+              <p>Vettori</p>
+              <span class="tag-chip">Bollicine</span>
+            </div>
+
+            <div class="dish">
+              <div class="dish-top">
+                <h4>Franciacorta Extra Brut Millesimato</h4>
+                <span class="price">9€</span>
+              </div>
+              <p>2019 · Massussi</p>
+              <span class="tag-chip">Bollicine</span>
+            </div>
+
+            <div class="dish">
+              <div class="dish-top">
+                <h4>Crémant de Limoux Blanc Brut</h4>
+                <span class="price">8€</span>
+              </div>
+              <p>Altugnac · Collovray &amp; Terrier</p>
+              <span class="tag-chip">Bollicine</span>
+            </div>
+
+            <div class="dish">
+              <div class="dish-top">
+                <h4>Collio Bianco</h4>
+                <span class="price">7€</span>
+              </div>
+              <p>2024 · Tenuta Stella</p>
+              <span class="tag-chip">Bianco</span>
+            </div>
+
+            <div class="dish">
+              <div class="dish-top">
+                <h4>Les Turitelles Chardonnay</h4>
+                <span class="price">7€</span>
+              </div>
+              <p>2025 · Altugnac</p>
+              <span class="tag-chip">Bianco</span>
+            </div>
+
+            <div class="dish">
+              <div class="dish-top">
+                <h4>Langhe Nebbiolo DOC Simane</h4>
+                <span class="price">6€</span>
+              </div>
+              <p>2023 · Reverdito</p>
+              <span class="tag-chip">Rosso</span>
+            </div>
+
+            <div class="dish">
+              <div class="dish-top">
+                <h4>Rosso Manolibera</h4>
+                <span class="price">6€</span>
+              </div>
+              <p>2022 · Muralia</p>
+              <span class="tag-chip">Rosso</span>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- ═════════════════════════════════════
+             VINI IN BOTTIGLIA
+        ═════════════════════════════════════ -->
+
+        <div class="sub-panel" id="sub-bottiglia">
+
+          <!-- BOLLICINE -->
+          <div class="wine-list">
+
+            <div class="wine-category">
+
               <h3>Bollicine</h3>
-               <div class="cat-note">Consumazione / Asporto</div> 
+              <div class="cat-note">Consumazione / Asporto</div>
 
-              <div class="dish">
-                <div class="dish-top"><h4>Valdobbiadene DOCG Spumante Extra Dry</h4><span class="price">€22 / €17</span></div>
-                <p>Vettori</p>
-                <!-- <span class="tag-chip">Firma</span> -->
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Valdobbiadene DOCG spumante Brut</h4><span class="price">€22 / €17</span></div>
-                <p>Vettori</p>
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Franciacorta Extra Brut Millesimato</h4><span class="price">€38 / €33</span></div>
-                <p>2019 · Massussi</p>
-                <!-- <span class="tag-chip">Classico</span> -->
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Roccapietra Blanc de Noirs Brut</h4><span class="price">€36 / €33</span></div>
-                <p>Scuropasse</p>
-              </div>
-              
-              <div class="dish">
-                <div class="dish-top"><h4>Roccapietra Gruasè Rosè</h4><span class="price">€39,50 / €34,50</span></div>
-                <p>Scuropasse</p>
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Trento Spumante Extra Brut</h4><span class="price">€42 / €37</span></div>
-                <p>2019 · Fanti</p>
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Crémant de Limoux Blanc Brut</h4><span class="price">€32 / €27</span></div>
-                <p>Altugnac · Collovray &amp; Terrier</p>
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Champagne Roger Barnier Brut Selection</h4><span class="price">€46,50 / €31,50</span></div>
-                <p></p>
-              </div>
+              <div class="wine-category-dishes">
 
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Valdobbiadene DOCG Spumante Extra Dry</h4>
+                    <span class="price">17€</span>
+                  </div>
+                  <p>Vettori</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Valdobbiadene DOCG spumante Brut</h4>
+                    <span class="price">17€</span>
+                  </div>
+                  <p>Vettori</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Franciacorta Extra Brut Millesimato</h4>
+                    <span class="price">38€</span>
+                  </div>
+                  <p>2019 · Massussi</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Roccapietra Blanc de Noirs Brut</h4>
+                    <span class="price">36€</span>
+                  </div>
+                  <p>Scuropasse</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Roccapietra Gruasè Rosè</h4>
+                    <span class="price">39,50€</span>
+                  </div>
+                  <p>Scuropasse</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Trento Spumante Extra Brut</h4>
+                    <span class="price">42€</span>
+                  </div>
+                  <p>2019 · Fanti</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Crémant de Limoux Blanc Brut</h4>
+                    <span class="price">32€</span>
+                  </div>
+                  <p>Altugnac · Collovray &amp; Terrier</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Champagne Roger Barnier Brut Selection</h4>
+                    <span class="price">46,50€</span>
+                  </div>
+                  <p></p>
+                </div>
+
+              </div>
             </div>
-            <div class="menu-cat">
-              
+
+          </div>
+
+
+          <!-- BIANCHI -->
+          <div class="wine-list">
+
+            <div class="wine-category">
+
               <h3>Bianchi</h3>
-               <div class="cat-note">Consumazione / Asporto</div> 
+              <div class="cat-note">Consumazione / Asporto</div>
 
-              <div class="dish">
-                <div class="dish-top"><h4>Collio Bianco</h4><span class="price">€28 / €23</span></div>
-                <p>Tenuta Stella</p>
-               
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Ribolla Gialla Collio Bio</h4><span class="price">€34 / €29</span></div>
-                <p>2023 · Tenuta Stella</p>
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Friulano Collio Bio</h4><span class="price">€34 / €29</span></div>
-                <p>2024 · Tenuta Stella</p>
-               
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Trentino Nosiola</h4><span class="price">€28 / €23</span></div>
-                <p>2024 · Fanti</p>
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Trentino Chardonnay</h4><span class="price">€32 / €27</span></div>
-                <p>2023 · Fanti</p>
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Gewurztraminer</h4><span class="price">€36 / €31</span></div>
-                <p>2023 · Elfenberg</p>
-              </div>
-               <div class="dish">
-                <div class="dish-top"><h4>Sauvignon Blanc</h4><span class="price">€36 / €31</span></div>
-                <p>2024 · Elfenberg</p>
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Frascati Superiore Doc</h4><span class="price">€28 / €23</span></div>
-                <p>2024 · Casale Marchese</p>
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Les Juritelles Chardonnay</h4><span class="price">€28 / €23</span></div>
-                <p>2025 · Altugnac</p>
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Aligote Bourgogna</h4><span class="price">€36 / €31</span></div>
-                <p>2023 · P &amp; L Borgest</p>
+              <div class="wine-category-dishes">
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Collio Bianco</h4>
+                    <span class="price">28€</span>
+                  </div>
+                  <p>Tenuta Stella</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Ribolla Gialla Collio Bio</h4>
+                    <span class="price">34€</span>
+                  </div>
+                  <p>2023 · Tenuta Stella</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Friulano Collio Bio</h4>
+                    <span class="price">34€</span>
+                  </div>
+                  <p>2024 · Tenuta Stella</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Trentino Nosiola</h4>
+                    <span class="price">€28</span>
+                  </div>
+                  <p>2024 · Fanti</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Trentino Chardonnay</h4>
+                    <span class="price">32€</span>
+                  </div>
+                  <p>2023 · Fanti</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Gewurztraminer</h4>
+                    <span class="price">36€</span>
+                  </div>
+                  <p>2023 · Elfenberg</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Sauvignon Blanc</h4>
+                    <span class="price">36€</span>
+                  </div>
+                  <p>2024 · Elfenberg</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Frascati Superiore Doc</h4>
+                    <span class="price">28€</span>
+                  </div>
+                  <p>2024 · Casale Marchese</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Les Juritelles Chardonnay</h4>
+                    <span class="price">28€</span>
+                  </div>
+                  <p>2025 · Altugnac</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Aligote Bourgogna</h4>
+                    <span class="price">36€</span>
+                  </div>
+                  <p>2023 · P &amp; L Borgest</p>
+                </div>
+
               </div>
             </div>
 
-            <div class="menu-cat">
+          </div>
+
+
+          <!-- ROSSI -->
+          <div class="wine-list">
+
+            <div class="wine-category">
+
               <h3>Rossi</h3>
               <div class="cat-note">Consumazione / Asporto</div>
 
-              <div class="dish">
-                <div class="dish-top"><h4>Lagrein</h4><span class="price">€35,50 / €30,50</span></div>
-                <p>2024 · Elfenberg</p>
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Langhe Nebbiolo Doc Simane</h4><span class="price">€28 / €23</span></div>
-                <p>2023 · Beverdita</p>
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Barbera d'Alba Doc</h4><span class="price">€22 / €17</span></div>
-                <p>2024 · Beverdita</p>
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Barolo</h4><span class="price">€38 / €33</span></div>
-                <p>2020 · Beverdita</p>
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Rosso Manolibera</h4><span class="price">€28 / €23</span></div>
-                <p>2022 · Muralia</p>
-              </div>
+              <div class="wine-category-dishes">
 
-              <div class="dish">
-                <div class="dish-top"><h4>Rosato Gorbizzo</h4><span class="price">€24 / €19</span></div>
-                <p>2024 · Muralia</p>
-              </div>
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Lagrein</h4>
+                    <span class="price">35,50€</span>
+                  </div>
+                  <p>2024 · Elfenberg</p>
+                </div>
 
-              <div class="dish">
-                <div class="dish-top"><h4>Lambrusco Nebbia &amp; Sabbia</h4><span class="price">€19 / €14</span></div>
-                <p>Podere Crocetta</p>
-              </div>
-              
-              <div class="dish">
-                <div class="dish-top"><h4>Sotè Pierre Lys Pinot Noir</h4><span class="price">€34,50 / €24,50</span></div>
-                <p>2024 · Altugnac</p>
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Langhe Nebbiolo Doc Simane</h4>
+                    <span class="price">28€</span>
+                  </div>
+                  <p>2023 · Beverdita</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Barbera d'Alba Doc</h4>
+                    <span class="price">22€</span>
+                  </div>
+                  <p>2024 · Beverdita</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Barolo</h4>
+                    <span class="price">38€</span>
+                  </div>
+                  <p>2020 · Beverdita</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Rosso Manolibera</h4>
+                    <span class="price">28€</span>
+                  </div>
+                  <p>2022 · Muralia</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Rosato Gorbizzo</h4>
+                    <span class="price">24€</span>
+                  </div>
+                  <p>2024 · Muralia</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Lambrusco Nebbia &amp; Sabbia</h4>
+                    <span class="price">19€</span>
+                  </div>
+                  <p>Podere Crocetta</p>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Sotè Pierre Lys Pinot Noir</h4>
+                    <span class="price">34,50€</span>
+                  </div>
+                  <p>2024 · Altugnac</p>
+                </div>
+
               </div>
             </div>
-            <div class="menu-cat">
+
+          </div>
+
+
+          <!-- DOLCI -->
+          <div class="wine-list">
+
+            <div class="wine-category">
+
               <h3>Dolci</h3>
               <div class="cat-note">Consumazione / Asporto</div>
-              <div class="dish">
-                <div class="dish-top"><h4>Moscato</h4><span class="price">€22 / €17</span></div>
-                <p>Scuropasso</p>
+
+              <div class="wine-category-dishes">
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Moscato</h4>
+                    <span class="price">22€</span>
+                  </div>
+                  <p>Scuropasso</p>
+                </div>
+
               </div>
             </div>
+
           </div>
+
         </div>
+
+
+        <!-- ═════════════════════════════════════
+             COCKTAIL
+        ═════════════════════════════════════ -->
 
         <div class="sub-panel" id="sub-cocktail">
-          <!-- <div class="menu-cols"> -->
-            <div class="menu-cat">
-              <!-- <h3>Cocktail</h3>
-              <div class="cat-note">Preparati al momento</div> -->
 
-              <div class="dish">
-                <div class="dish-top"><h4>Spritz Aperol</h4><span class="price">€__</span></div>
-                <p>Gin, Campari, vermouth rosso fatto in casa.</p>
-                <span class="tag-chip">Firma</span>
-              </div>
+          <div class="menu-cat">
 
-              <div class="dish">
-                <div class="dish-top"><h4>Spritz Campari</h4><span class="price">€__</span></div>
-                <p>Gin, Campari</p>
-                <span class="tag-chip">Firma</span>
-              </div>
+            <!--
+            <h3>Cocktail</h3>
+            <div class="cat-note">Preparati al momento</div>
+            -->
 
-              <div class="dish">
-                <div class="dish-top"><h4>Negroni</h4><span class="price">€__</span></div>
-                <p>Gin, Campari</p>
-                <span class="tag-chip">Firma</span>
+            <div class="dish">
+              <div class="dish-top">
+                <h4>Spritz Aperol</h4>
+                <span class="price">7€</span>
               </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Negroni Sbagliato</h4><span class="price">€__</span></div>
-                <p>Gin, Campari</p>
-                <span class="tag-chip">Firma</span>
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Americano</h4><span class="price">€__</span></div>
-                <p>Gin, Campari</p>
-                <span class="tag-chip">Firma</span>
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Gin Tonic</h4><span class="price">€__</span></div>
-                <p>Gin, Campari</p>
-                <span class="tag-chip">Firma</span>
-              </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Gin Tonic Premium</h4><span class="price">€__</span></div>
-                <p>Gin, Campari</p>
-                <span class="tag-chip">Firma</span>
-              </div>
+              <p>Gin, Campari, vermouth rosso fatto in casa.</p>
+              <span class="tag-chip">Firma</span>
             </div>
 
-            <!-- <div class="menu-cat">
-              <h3>Birre</h3>
-              <div class="cat-note">Da inserire</div>
+            <div class="dish">
+              <div class="dish-top">
+                <h4>Spritz Campari</h4>
+                <span class="price">7€</span>
+              </div>
+              <p>Gin, Campari</p>
+              <span class="tag-chip">Firma</span>
+            </div>
 
-              <div class="dish">
-                <div class="dish-top"><h4>Birra artigianale — nome da inserire</h4><span class="price">€__</span></div>
-                <p>Descrizione e stile da inserire.</p>
+            <div class="dish">
+              <div class="dish-top">
+                <h4>Negroni</h4>
+                <span class="price">7€</span>
               </div>
-              <div class="dish">
-                <div class="dish-top"><h4>Birra in bottiglia — nome da inserire</h4><span class="price">€__</span></div>
-                <p>Descrizione e provenienza da inserire.</p>
+              <p>Gin, Campari</p>
+              <span class="tag-chip">Firma</span>
+            </div>
+
+            <div class="dish">
+              <div class="dish-top">
+                <h4>Negroni Sbagliato</h4>
+                <span class="price">7€</span>
               </div>
-            </div> 
-          </div>-->
+              <p>Gin, Campari</p>
+              <span class="tag-chip">Firma</span>
+            </div>
+
+            <div class="dish">
+              <div class="dish-top">
+                <h4>Americano</h4>
+                <span class="price">7€</span>
+              </div>
+              <p>Gin, Campari</p>
+              <span class="tag-chip">Firma</span>
+            </div>
+
+            <div class="dish">
+              <div class="dish-top">
+                <h4>Gin Tonic</h4>
+                <span class="price">7€</span>
+              </div>
+              <p>Gin, Campari</p>
+              <span class="tag-chip">Firma</span>
+            </div>
+
+            <div class="dish">
+              <div class="dish-top">
+                <h4>Gin Tonic Premium</h4>
+                <span class="price">10€</span>
+              </div>
+              <p>Esse Gin  </p>
+              <span class="tag-chip">Firma</span>
+            </div>
+
+            <div class="dish">
+              <div class="dish-top">
+                <h4>Picci</h4>
+                <span class="price">8€</span>
+              </div>
+              <p>Cetriolo pestato · Vodka · Lime · Triple Sec</p>
+              <span class="tag-chip">Firma</span>
+            </div>
+
+          </div>
+
         </div>
+
+
+        <!-- ═════════════════════════════════════
+             PER CHI GUIDA
+        ═════════════════════════════════════ -->
 
         <div class="sub-panel" id="sub-analcolici">
+
           <div class="menu-cat">
-            <!-- <h3>Per chi guida</h3>
-            <div class="cat-note">Analcolici</div> -->
+
+            <!--
+            <h3>Per chi guida</h3>
+            <div class="cat-note">Analcolici</div>
+            -->
 
             <div class="dish">
-              <div class="dish-top"><h4>Mocktail della casa</h4><span class="price">€__</span></div>
-              <p>Descrizione da inserire.</p>
+              <div class="dish-top">
+                <h4>Analcolico della casa</h4>
+                <span class="price">Dai 7€</span>
+              </div>
+              <p> </p>
             </div>
+
             <div class="dish">
-              <div class="dish-top"><h4>Bibite in lattina</h4><span class="price">€__</span></div>
-              <p>Descrizione da inserire.</p>
+              <div class="dish-top">
+                <h4>Bibite</h4>
+                <span class="price">3€</span>
+              </div>
+              <p> </p>
             </div>
+
             <div class="dish">
-              <div class="dish-top"><h4>Acqua frizzante</h4><span class="price">€__</span></div>
-              <p>Descrizione da inserire.</p>
+              <div class="dish-top">
+                <h4>Acqua frizzante</h4>
+                <span class="price">1€</span>
+              </div>
+              <p> </p>
             </div>
+
           </div>
+
         </div>
+
       </div>
 
+
+      <!-- ═════════════════════════════════════
+           DA MANGIARE
+      ═════════════════════════════════════ -->
+
       <div class="menu-panel" data-main="mangiare" id="main-mangiare">
+
         <div class="level2-tabs" role="tablist" aria-label="Sottocategoria da mangiare">
           <button class="level2-btn active" data-sub="caldi" role="tab" aria-selected="true">Piatti caldi</button>
           <button class="level2-btn" data-sub="freddi" role="tab" aria-selected="false">Piatti freddi</button>
         </div>
 
+
+        <!-- ═════════════════════════════════════
+             PIATTI CALDI
+        ═════════════════════════════════════ -->
+
         <div class="sub-panel active" id="sub-caldi">
-  <div class="menu-cat">
-    <!-- <h3>Piatti caldi</h3>
-    <div class="cat-note">Dalla cucina</div> -->
 
-    <div class="dish">
-      <div class="dish-top">
-        <h4>Patatas Bravas</h4>
-        <span class="price">€__</span>
-      </div>
-      <p>Con salsa brava e aioli</p>
-      <div class="allergen-list">
-      <span class="allergen-icon" title="Latte" aria-label="Latte" data-allergen="Glutine"> </span>
-      <span class="allergen-icon" title="Latte" aria-label="Latte" data-allergen="Pesce"> </span>
-</div>
-    </div>
+          <div class="menu-cat">
 
-    <div class="dish">
-      <div class="dish-top">
-        <h4>Serranito</h4>
-        <span class="price">€__</span>
-      </div>
-      <p>Panino con lonza di maiale, jamón e friggitelli</p>
-    </div>
+            <!--
+            <h3>Piatti caldi</h3>
+            <div class="cat-note">Dalla cucina</div>
+            -->
 
-    <div class="dish">
-      <div class="dish-top">
-        <h4>Pulpo a la Gallega</h4>
-        <span class="price">€__</span>
-      </div>
-      <p>Polpo, patate, cristalli di sale e paprika affumicata</p>
-    </div>
+            <div class="dish">
 
-    <div class="dish">
-      <div class="dish-top">
-        <h4>Polpette al Sugo</h4>
-        <span class="price">€__</span>
-      </div>
-      <p>Accompagnate da pane rustico</p>
-    </div>
+              <div class="dish-top">
+                <h4>Patatas Bravas</h4>
+                <span class="price">5,50€</span>
+              </div>
 
-    <div class="dish">
-      <div class="dish-top">
-        <h4>Scagliozze di Polenta</h4>
-        <span class="price">€__</span>
-      </div>
-      <p>Polenta fritta con stracciatella</p>
-      <div class="allergen-list">
+              <p>Con salsa brava e aioli</p>
 
-  <span class="allergen-icon" data-allergen="Latte" aria-label="Latte">
-    
-  </span>
+              <div class="allergen-list">
+                <span class="allergen-icon"
+                      title="Latte"
+                      aria-label="Latte"
+                      data-allergen="Glutine">
+                </span>
 
-</div>
-    </div>
+                <span class="allergen-icon"
+                      title="Latte"
+                      aria-label="Latte"
+                      data-allergen="Pesce">
+                </span>
+              </div>
 
-    <div class="dish">
-      <div class="dish-top">
-        <h4>Verdure dell'Orto</h4>
-        <span class="price">€__</span>
-      </div>
-      <p>Dall'orto di Corbari, con cotture e preparazioni variabili in base alla disponibilità</p>
-    </div>
-
-  </div>
-</div>
+            </div>
 
 
-<div class="sub-panel" id="sub-freddi">
-  <div class="menu-cat">
-    <!-- <h3>Piatti freddi</h3>
-    <div class="cat-note">Da condividere</div> -->
+            <div class="dish">
 
-    <div class="dish">
-      <div class="dish-top">
-        <h4>Crostone Cantabrico</h4>
-        <span class="price">€__</span>
-      </div>
-      <p>Pane tostato, burro e acciughe del Cantabrico, zest di limone</p>
-    </div>
+              <div class="dish-top">
+                <h4>Serranito</h4>
+                <span class="price">5€</span>
+              </div>
 
-    <div class="dish">
-      <div class="dish-top">
-        <h4>Bruschetta Stagionale</h4>
-        <span class="price">€__</span>
-      </div>
-      <p>Ingredienti variabili secondo stagionalità</p>
-    </div>
+              <p>Panino con lonza di maiale, jamón e friggitelli</p>
 
-    <div class="dish">
-      <div class="dish-top">
-        <h4>Tartare di Manzo</h4>
-        <span class="price">€__</span>
-      </div>
-      <p>Con nocciole tostate, senape in grani e timo</p>
-    </div>
+            </div>
 
-    <div class="dish">
-      <div class="dish-top">
-        <h4>Selezione di Salumi e Formaggi</h4>
-        <span class="price">€__</span>
-      </div>
-      <p>Selezione di prodotti locali</p>
-    </div>
 
-    <div class="dish">
-      <div class="dish-top">
-        <h4>Carpaccio di Pomodori</h4>
-        <span class="price">€__</span>
-      </div>
-      <p>Con burrata e olive taggiasche</p>
-    </div>
+            <div class="dish">
 
-    <div class="dish">
-      <div class="dish-top">
-        <h4>Babaganoush</h4>
-        <span class="price">€__</span>
-      </div>
-      <p>Con pane libanese</p>
-    </div>
+              <div class="dish-top">
+                <h4>Pulpo a la Gallega</h4>
+                <span class="price">9€</span>
+              </div>
 
-  </div>
-</div>
+              <p>Polpo, patate, cristalli di sale e paprika affumicata</p>
+
+            </div>
+
+
+            <div class="dish">
+
+              <div class="dish-top">
+                <h4>Polpette al Sugo</h4>
+                <span class="price">6€</span>
+              </div>
+
+              <p>Accompagnate da pane rustico</p>
+
+            </div>
+
+
+            <div class="dish">
+
+              <div class="dish-top">
+                <h4>Scagliozze di Polenta</h4>
+                <span class="price">3,50€</span>
+              </div>
+
+              <p>Polenta fritta con stracciatella</p>
+
+              <div class="allergen-list">
+
+                <span class="allergen-icon"
+                      data-allergen="Latte"
+                      aria-label="Latte">
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="dish">
+
+              <div class="dish-top">
+                <h4>Verdure dell'Orto</h4>
+                <span class="price">4€</span>
+              </div>
+
+              <p>Dall'orto di Corbari, con cotture e preparazioni variabili in base alla disponibilità</p>
+
+            </div>
+
+            <div class="dish">
+
+              <div class="dish-top">
+                <h4>Il Toast</h4>
+                <span class="price">4€</span>
+              </div>
+
+              <p>Prosciutto, formaggio, maionese</p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ═════════════════════════════════════
+             PIATTI FREDDI
+        ═════════════════════════════════════ -->
+
+        <div class="sub-panel" id="sub-freddi">
+
+          <div class="menu-cat">
+
+            <!--
+            <h3>Piatti freddi</h3>
+            <div class="cat-note">Da condividere</div>
+            -->
+
+            <div class="dish">
+
+              <div class="dish-top">
+                <h4>Pan Y Tomate</h4>
+                <span class="price">2,50€</span>
+              </div>
+
+              <p>Prosciutto, formaggio, maionese</p>
+
+            </div>
+            <div class="dish">
+
+              <div class="dish-top">
+                <h4>Crostone Cantabrico</h4>
+                <span class="price">4,50€</span>
+              </div>
+
+              <p>Pane tostato, burro e acciughe del Cantabrico, zest di limone</p>
+
+            </div>
+
+
+            <div class="dish">
+
+              <div class="dish-top">
+                <h4>Bruschetta Stagionale</h4>
+                <span class="price">4,50€</span>
+              </div>
+
+              <p>Ingredienti variabili secondo stagionalità</p>
+
+            </div>
+
+
+            <div class="dish">
+
+              <div class="dish-top">
+                <h4>Tartare di Manzo</h4>
+                <span class="price">8€</span>
+              </div>
+
+              <p>Con nocciole tostate, senape in grani e timo</p>
+
+            </div>
+
+
+            <div class="dish">
+
+              <div class="dish-top">
+                <h4>Selezione di Salumi e Formaggi</h4>
+                <span class="price">7€</span>
+              </div>
+
+              <p>Selezione di prodotti locali</p>
+
+            </div>
+
+
+            <div class="dish">
+
+              <div class="dish-top">
+                <h4>Carpaccio di Pomodori</h4>
+                <span class="price">5,50€</span>
+              </div>
+
+              <p>Con burrata e olive taggiasche</p>
+
+            </div>
+
+
+            <div class="dish">
+
+            <div class="dish">
+
+              <div class="dish-top">
+                <h4>Cestino di Pane</h4>
+                <span class="price">2€</span>
+              </div>
+
+              <p>Pane rustico</p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ═════════════════════════════════════
+             DOLCI — CIBO
+        ═════════════════════════════════════ -->
 
         <div class="sub-panel" id="sub-dolci-cibo">
+
           <div class="menu-cat">
+
             <h3>Dolci</h3>
             <div class="cat-note">Fatti in casa</div>
 
             <div class="dish">
-              <div class="dish-top"><h4>Tiramisù della casa</h4><span class="price">€__</span></div>
+              <div class="dish-top">
+                <h4>Tiramisù della casa</h4>
+                <span class="price">€__</span>
+              </div>
               <p>Descrizione da inserire.</p>
             </div>
+
             <div class="dish">
-              <div class="dish-top"><h4>Dolce del giorno — nome da inserire</h4><span class="price">€__</span></div>
+              <div class="dish-top">
+                <h4>Dolce del giorno — nome da inserire</h4>
+                <span class="price">€__</span>
+              </div>
               <p>Descrizione da inserire.</p>
             </div>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
-
-    <!-- <div id="cantinaView" hidden>
-      <button class="back-to-menu" id="closeCantina">← Torna al Menu</button>
-      <div class="section-head" style="margin-bottom:36px">
-        <div class="eyebrow">La Cantina</div>
-        <h2>Tutta la nostra <em>selezione</em></h2>
-        <p>Oltre 180 etichette in bottiglia, catalogate per tipo. Chiedi consiglio al banco.</p>
-      </div>
-
-      <div class="level2-tabs" role="tablist" aria-label="Categoria cantina">
-        <button class="level2-btn active" data-cantina="bollicine" role="tab" aria-selected="true">Bollicine</button>
-        <button class="level2-btn" data-cantina="bianchi" role="tab" aria-selected="false">Bianchi</button>
-        <button class="level2-btn" data-cantina="rossi" role="tab" aria-selected="false">Rossi</button>
-        <button class="level2-btn" data-cantina="rosati" role="tab" aria-selected="false">Rosati</button>
-        <button class="level2-btn" data-cantina="dolci-vino" role="tab" aria-selected="false">Dolci</button>
-      </div>
-
-      <div class="cantina-panel active" id="cantina-bollicine">
-        <div class="cantina-grid">
-          <div class="dish"><div class="dish-top"><h4>Bollicina — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
-          <div class="dish"><div class="dish-top"><h4>Bollicina — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
-        </div>
-      </div>
-      <div class="cantina-panel" id="cantina-bianchi">
-        <div class="cantina-grid">
-          <div class="dish"><div class="dish-top"><h4>Bianco — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
-          <div class="dish"><div class="dish-top"><h4>Bianco — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
-        </div>
-      </div>
-      <div class="cantina-panel" id="cantina-rossi">
-        <div class="cantina-grid">
-          <div class="dish"><div class="dish-top"><h4>Rosso — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
-          <div class="dish"><div class="dish-top"><h4>Rosso — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
-        </div>
-      </div>
-      <div class="cantina-panel" id="cantina-rosati">
-        <div class="cantina-grid">
-          <div class="dish"><div class="dish-top"><h4>Rosato — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
-          <div class="dish"><div class="dish-top"><h4>Rosato — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
-        </div>
-      </div>
-      <div class="cantina-panel" id="cantina-dolci-vino">
-        <div class="cantina-grid">
-          <div class="dish"><div class="dish-top"><h4>Passito — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
-          <div class="dish"><div class="dish-top"><h4>Vin Santo — nome da inserire</h4><span class="price">€__</span></div><p>Zona, annata, descrizione da inserire.</p></div>
-        </div>
-      </div>
-    </div> -->
   </div>
 </section>
+
 
 <section id="dove-siamo">
   <div class="wrap">
@@ -903,8 +1236,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
         </div>
       </div>
       <div class="map-box">
-       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.430128084445!2d9.327429876631522!3d45.50141933095415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c84980a092d5%3A0x66731abac4a18beb!2sVia%20Milano%2C%2024%2C%2020096%20Pioltello%20MI!5e0!3m2!1sit!2sit!4v1790631921682!5m2!1sit!2sit" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-      </div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.430128084445!2d9.327429876631522!3d45.50141933095415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c993d5418301%3A0xbc7f43cbec28d1ce!2sMesci%20-%20Wine%20Bar!5e0!3m2!1sit!2sit!4v1790790307302!5m2!1sit!2sit" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>      </div>
     </div>
   </div>
 </section>
