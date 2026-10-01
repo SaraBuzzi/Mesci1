@@ -1,220 +1,858 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>MESCI — Wine Bar</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#9CA095;
-  --bg-soft:#A6AB9F;
-  --line:rgba(242,234,216,0.14);
-  --cream:#f7f3e8;
-  --cream-dim:rgba(242,234,216,0.75);
-  --cream-faint:rgba(242,234,216,0.55);
-  --wine:#6B121B;
-  --wine-dim:rgba(83,19,30,0.75);
-  --wine-bright:#641723;
-  --radius:4px;
-  --text:#7D7A40;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MESCI — Wine Bar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #73766d;
+      --bg-soft: #787c73;
+      --line: rgba(242, 234, 216, 0.14);
+      --cream: #f7f3e8;
+      --cream-dim: rgba(242, 234, 216, 0.90);
+      --cream-faint: rgba(242, 234, 216, 0.75);
+      --wine: #6B121B;
+      --wine-dim: rgba(83, 19, 30, 0.75);
+      --wine-bright: #641723;
+      --radius: 4px;
+      --text: #928e47;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 40px
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Manrope', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      padding-top: env(safe-area-inset-top, 0px);
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -0.01em
+    }
+
+    em {
+      font-style: italic;
+      color: var(--cream)
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    img,
+    svg {
+      max-width: 100%
+    }
+
+    /* ---- NAV ---- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding-top: env(safe-area-inset-top, 0px);
+      transition: background .35s ease, border-color .35s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    header.scrolled {
+      background: var(--bg);
+      backdrop-filter: blur(10px);
+      border-color: var(--line)
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 32px;
+      max-width: 1180px;
+      margin: 0 auto
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .brand svg {
+      height: 26px;
+      width: auto;
+      color: var(--cream)
+    }
+
+    .brand span {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.06em
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 38px;
+      font-size: 0.92rem
+    }
+
+    .navlinks a {
+      position: relative;
+      padding-bottom: 6px;
+      color: var(--cream-dim);
+      transition: color .25s
+    }
+
+    .navlinks a:hover {
+      color: var(--cream)
+    }
+
+    .navlinks a.active {
+      color: var(--cream)
+    }
+
+    .navlinks a.active::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: var(--wine-bright)
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      padding: 4px
+    }
+
+    .burger span {
+      width: 22px;
+      height: 2px;
+      background: var(--cream)
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background: var(--bg-soft);
+      border-top: 1px solid var(--line)
+    }
+
+    .mobile-menu a {
+      padding: 16px 32px;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.95rem
+    }
+
+    .mobile-menu.open {
+      display: flex
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 140px 24px 80px;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 20%, rgba(105, 0, 0, 0.35), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(105, 0, 0, 0.18), transparent 70%),
+        var(--bg);
+    }
+
+    .hero .eyebrow {
+      color: var(--cream-faint);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 28px
+    }
+
+    .hero .eyebrow::before,
+    .hero .eyebrow::after {
+      content: '—';
+      margin: 0 12px;
+      color: var(--text)
+    }
+
+    .logo-mark {
+      width: min(560px, 80vw);
+      color: var(--cream);
+      opacity: 0;
+      animation: riseIn 1.1s ease forwards .15s
+    }
+
+    .pour-line {
+      width: 1px;
+      height: 0;
+      background: var(--wine-bright);
+      margin: 0 auto;
+      animation: pour 1.4s ease forwards .4s
+    }
+
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @keyframes pour {
+      to {
+        height: 46px
+      }
+    }
+
+    .hero p.tag {
+      max-width: 560px;
+      margin: 34px auto 0;
+      font-size: 1.12rem;
+      line-height: 1.6;
+      color: var(--cream-dim)
+    }
+
+    .hero p.tag em {
+      color: var(--cream)
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      margin-top: 42px;
+      flex-wrap: wrap;
+      justify-content: center
+    }
+
+    .btn {
+      padding: 15px 32px;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .2s, background .2s, border-color .2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid transparent;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px)
+    }
+
+    .btn-filled {
+      background: var(--wine);
+      color: var(--cream)
+    }
+
+    .btn-filled:hover {
+      background: var(--wine-bright)
+    }
+
+    .btn-outline {
+      border-color: var(--cream-dim);
+      color: var(--cream)
+    }
+
+    .btn-outline:hover {
+      border-color: var(--cream-faint)
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--cream-faint);
+      animation: bob 2s ease-in-out infinite
+    }
+
+    @keyframes bob {
+
+      0%,
+      100% {
+        transform: translate(-50%, 0)
+      }
+
+      50% {
+        transform: translate(-50%, 6px)
+      }
+    }
+
+    /* ---- SECTION GENERIC ---- */
+    section {
+      padding: 100px 0
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 32px;
+      width: 100%
+    }
+
+    .section-head {
+      max-width: 640px;
+      margin-bottom: 64px
+    }
+
+    .section-head .eyebrow {
+      color: var(--wine-bright);
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 14px;
+      font-weight: 600
+    }
+
+    .section-head h2 {
+      font-size: clamp(2rem, 4vw, 2.7rem)
+    }
+
+    .section-head p {
+      color: var(--cream-dim);
+      margin-top: 18px;
+      font-size: 1.05rem;
+      line-height: 1.6
+    }
+
+    /* ---- CHI SIAMO ---- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 72px;
+      align-items: start
+    }
+
+    .about-text p {
+      color: var(--cream-dim);
+      line-height: 1.75;
+      margin-bottom: 20px;
+      font-size: 1.02rem
+    }
+
+    .pour-art {
+      position: relative;
+      aspect-ratio: 4/5;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(160deg, var(--bg-soft), var(--bg));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden
+    }
+
+    .pour-art svg {
+      width: 46%;
+      color: var(--wine-bright);
+      opacity: .9
+    }
+
+    .pour-art::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(105, 0, 0, 0.28), transparent 60%)
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      margin-top: 56px
+    }
+
+    .stat {
+      border-top: 1px solid var(--line);
+      padding-top: 18px
+    }
+
+    .stat .num {
+      font-family: 'Fraunces', serif;
+      font-size: 2.1rem;
+      color: var(--cream)
+    }
+
+    .stat .lbl {
+      color: var(--cream-faint);
+      font-size: 0.85rem;
+      margin-top: 6px
+    }
+
+    /* ---- MENU: livello 1 (Da Bere / Da Mangiare) ---- */
+    .tabs {
+      display: flex;
+      width: max-content;
+      background: var(--bg-soft);
+      border: 1px solid var(--cream-faint);
+      border-radius: 999px;
+      padding: 5px;
+      margin: 0 auto 40px;
+      gap: 2px
+    }
+
+    .tab-btn {
+      padding: 14px 30px;
+      border-radius: 999px;
+      border: 0;
+      background: none;
+      color: var(--cream-dim);
+      font-family: inherit;
+      font-size: 0.98rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .25s, color .25s;
+      white-space: nowrap
+    }
+
+    .tab-btn.active {
+      background: var(--wine);
+      color: var(--cream)
+    }
+
+    /* ---- MENU: livello 2 (sottocategorie), discreto e sticky ---- */
+    .level2-tabs {
+      display: flex;
+      gap: 26px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      position: sticky;
+      top: 40px;
+      z-index: 20;
+      background: var(--bg-soft);
+      padding: 16px 0 14px;
+      margin-bottom: 36px;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .level2-tabs::-webkit-scrollbar {
+      display: none
+    }
+
+    .level2-btn {
+      flex: 0 0 auto;
+      border: 0;
+      background: none;
+      color: var(--cream-faint);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 2px 0 12px;
+      cursor: pointer;
+      position: relative;
+      transition: color .25s;
+      white-space: nowrap
+    }
+
+    .level2-btn.active {
+      color: var(--cream)
+    }
+
+    .level2-btn.active::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: var(--wine)
+    }
+
+    .menu-panel,
+    .sub-panel,
+    .cantina-panel {
+      display: none
+    }
+
+    .menu-panel.active,
+    .sub-panel.active,
+    .cantina-panel.active {
+      display: block
+    }
+
+    .menu-cols,
+    .cantina-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px
+    }
+
+    .menu-cat h3 {
+      font-size: 1.5rem;
+      margin-bottom: 4px
+    }
+
+    .menu-cat .cat-note {
+      color: var(--wine);
+      font-size: 0.82rem;
+      margin-bottom: 28px
+    }
+
+    .dish {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .dish:first-of-type {
+      padding-top: 0
+    }
+
+    .dish-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: baseline
+    }
+
+    .dish-top h4 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 1.15rem
+    }
+
+    .dish-top .price {
+      color: var(--wine-bright);
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      white-space: nowrap;
+      padding-right: 1rem;
+    }
+
+    .dish p {
+      color: var(--cream-dim);
+      font-size: 0.92rem;
+      margin-top: 6px;
+      line-height: 1.55
+    }
+
+    .tag-chip {
+      display: inline-block;
+      margin-top: 10px;
+      margin-right: 8px;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      color: var(--wine-dim);
+      border: 1px solid var(--wine-dim);
+      border-radius: 999px;
+      padding: 4px 12px
+    }
+
+
+    .back-to-menu {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--cream-dim);
+      background: none;
+      border: 0;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 36px;
+      padding: 0
+    }
+
+    .back-to-menu:hover {
+      color: var(--cream)
+    }
+
+    .back-to-categories {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      color: var(--cream-dim);
+      background: none;
+      border: 0;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 6px;
+      padding: 0
+    }
+
+    .back-to-categories:hover {
+      color: var(--cream)
+    }
+
+    /* ---- DOVE SIAMO ---- */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 28px;
+      align-items: start
+    }
+
+    .info-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 20px
+    }
+
+    .info-card {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px
+    }
+
+    .info-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 12px
+    }
+
+    .info-card p,
+    .info-card .row {
+      color: var(--cream-dim);
+      font-size: 0.94rem;
+      line-height: 1.6
+    }
+
+    .info-card .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .info-card .row:last-child {
+      border-bottom: 0
+    }
+
+    .info-card .row .closed {
+      color: var(--wine-bright)
+    }
+    .social-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:40px}
-body{
-  background:var(--bg);color:var(--cream);
-  font-family:'Manrope',sans-serif;
-  -webkit-font-smoothing:antialiased;
-  padding-top:env(safe-area-inset-top,0px);
-  overflow-x:hidden;
+
+.social-tagline {
+  color: var(--cream-faint);
+  font-size: 0.88rem;
+  line-height: 1.4;
+  margin-bottom: 4px;
 }
-h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.08;letter-spacing:-0.01em}
-em{font-style:italic;color:var(--cream)}
-a{color:inherit;text-decoration:none}
-img,svg{max-width:100%}
 
-/* ---- NAV ---- */
-header{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding-top:env(safe-area-inset-top,0px);
-  transition:background .35s ease,border-color .35s ease;
-  border-bottom:1px solid transparent;
+.social-link svg {
+  width: 24px !important;
+  height: 24px !important;
+  flex-shrink: 0;
+  color: var(--cream);
 }
-header.scrolled{background:var(--bg);backdrop-filter:blur(10px);border-color:var(--line)}
-nav{display:flex;align-items:center;justify-content:space-between;padding:20px 32px;max-width:1180px;margin:0 auto}
-.brand{display:flex;align-items:center;gap:10px}
-.brand svg{height:26px;width:auto;color:var(--cream)}
-.brand span{font-family:'Fraunces',serif;font-size:1.25rem;letter-spacing:0.06em}
-.navlinks{display:flex;gap:38px;font-size:0.92rem}
-.navlinks a{position:relative;padding-bottom:6px;color:var(--cream-dim);transition:color .25s}
-.navlinks a:hover{color:var(--cream)}
-.navlinks a.active{color:var(--cream)}
-.navlinks a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--wine-bright)}
-.burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:4px}
-.burger span{width:22px;height:2px;background:var(--cream)}
-.mobile-menu{display:none;flex-direction:column;gap:0;background:var(--bg-soft);border-top:1px solid var(--line)}
-.mobile-menu a{padding:16px 32px;border-bottom:1px solid var(--line);font-size:0.95rem}
-.mobile-menu.open{display:flex}
 
-/* ---- HERO ---- */
-.hero{
-  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;position:relative;padding:140px 24px 80px;
-  background:
-    radial-gradient(ellipse 70% 55% at 50% 20%, rgba(105,0,0,0.35), transparent 60%),
-    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(105,0,0,0.18), transparent 70%),
-    var(--bg);
+.contact-row-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
-.hero .eyebrow{color:var(--cream-faint);font-size:0.85rem;letter-spacing:0.08em;margin-bottom:28px}
-.hero .eyebrow::before,.hero .eyebrow::after{content:'—';margin:0 12px;color:var(--wine-bright)}
-.logo-mark{width:min(560px,80vw);color:var(--cream);opacity:0;animation:riseIn 1.1s ease forwards .15s}
-.pour-line{width:1px;height:0;background:var(--wine-bright);margin:0 auto;animation:pour 1.4s ease forwards .4s}
-@keyframes riseIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-@keyframes pour{to{height:46px}}
-.hero p.tag{max-width:560px;margin:34px auto 0;font-size:1.12rem;line-height:1.6;color:var(--cream-dim)}
-.hero p.tag em{color:var(--cream)}
-.hero-ctas{display:flex;gap:16px;margin-top:42px;flex-wrap:wrap;justify-content:center}
-.btn{
-  padding:15px 32px;border-radius:var(--radius);font-size:0.95rem;font-weight:600;
-  cursor:pointer;transition:transform .2s,background .2s,border-color .2s;
-  display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;
+
+/* Stile per i link dei contatti cliccabili */
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
 }
-.btn:hover{transform:translateY(-2px)}
-.btn-filled{background:var(--text);color:var(--cream)}
-.btn-filled:hover{background:var(--wine-bright)}
-.btn-outline{border-color:var(--text);color:var(--cream)}
-.btn-outline:hover{border-color:var(--cream-faint)}
-.scroll-cue{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);color:var(--cream-faint);animation:bob 2s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,6px)}}
+.contact-links a {
+  color: var(--cream-dim);
+  transition: color 0.2s ease;
+}
+.contact-links a:hover {
+  color: var(--wine);
+}
 
-/* ---- SECTION GENERIC ---- */
-section{padding:100px 0}
-.wrap{max-width:1180px;margin:0 auto;padding:0 32px;width:100%}
-.section-head{max-width:640px;margin-bottom:64px}
-.section-head .eyebrow{color:var(--wine-bright);font-size:0.85rem;letter-spacing:0.04em;margin-bottom:14px;font-weight:600}
-.section-head h2{font-size:clamp(2rem,4vw,2.7rem)}
-.section-head p{color:var(--cream-dim);margin-top:18px;font-size:1.05rem;line-height:1.6}
+/* Stile raffinato per il box Social */
+.social-note {
+  color: var(--cream-faint) !important;
+  font-size: 0.85rem !important;
+  margin-bottom: 12px;
+}
 
-/* ---- CHI SIAMO ---- */
-.about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:72px;align-items:start}
-.about-text p{color:var(--cream-dim);line-height:1.75;margin-bottom:20px;font-size:1.02rem}
-.pour-art{position:relative;aspect-ratio:4/5;border:1px solid var(--line);border-radius:var(--radius);
-  background:linear-gradient(160deg,var(--bg-soft),var(--bg));display:flex;align-items:center;justify-content:center;overflow:hidden}
-.pour-art svg{width:46%;color:var(--wine-bright);opacity:.9}
-.pour-art::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(105,0,0,0.28),transparent 60%)}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:56px}
-.stat{border-top:1px solid var(--line);padding-top:18px}
-.stat .num{font-family:'Fraunces',serif;font-size:2.1rem;color:var(--cream)}
-.stat .lbl{color:var(--cream-faint);font-size:0.85rem;margin-top:6px}
+.social-link-clean {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--cream);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
 
-/* ---- MENU: livello 1 (Da Bere / Da Mangiare) ---- */
-.tabs{display:flex;width:max-content;background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;padding:5px;margin:0 auto 40px;gap:2px}
-.tab-btn{padding:14px 30px;border-radius:999px;border:0;background:none;color:var(--cream-dim);font-family:inherit;font-size:0.98rem;font-weight:600;cursor:pointer;transition:background .25s,color .25s;white-space:nowrap}
-.tab-btn.active{background:var(--wine);color:var(--cream)}
+.social-link-clean:hover {
+  color: var(--wine-bright); /* Diventa rosso bordeaux al passaggio del mouse */
+}
 
-/* ---- MENU: livello 2 (sottocategorie), discreto e sticky ---- */
-.level2-tabs{display:flex;gap:26px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:40px;z-index:20;background:var(--bg-soft);padding:16px 0 14px;margin-bottom:36px;border-bottom:1px solid var(--line)}
-.level2-tabs::-webkit-scrollbar{display:none}
-.level2-btn{flex:0 0 auto;border:0;background:none;color:var(--cream-faint);font-family:inherit;font-size:0.85rem;font-weight:600;letter-spacing:0.02em;padding:2px 0 12px;cursor:pointer;position:relative;transition:color .25s;white-space:nowrap}
-.level2-btn.active{color:var(--cream)}
-.level2-btn.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--text)}
+/* Forza la dimensione dell'icona Instagram a 22px per evitare che esploda */
+.social-link-clean svg {
+  width: 22px !important;
+  height: 22px !important;
+  flex-shrink: 0;
+}
 
-.menu-panel,.sub-panel,.cantina-panel{display:none}
-.menu-panel.active,.sub-panel.active,.cantina-panel.active{display:block}
+/* Su smartphone, mettili uno sotto l'altro per non schiacciarli troppo */
+@media (max-width: 600px) {
+  .contact-row-split {
+    grid-template-columns: 1fr;
+  }
+}
 
-.menu-cols,.cantina-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px}
-.menu-cat h3{font-size:1.5rem;margin-bottom:4px}
-.menu-cat .cat-note{color:var(--wine);font-size:0.82rem;margin-bottom:28px}
-.dish{padding:20px 0;border-bottom:1px solid var(--line)}
-.dish:first-of-type{padding-top:0}
-.dish-top{display:flex;justify-content:space-between;gap:16px;align-items:baseline}
-.dish-top h4{font-family:'Fraunces',serif;font-weight:500;font-size:1.15rem}
-.dish-top .price{color:var(--wine-bright);font-family:'Fraunces',serif;font-size:1.1rem;white-space:nowrap; padding-right: 1rem;}
-.dish p{color:var(--cream-dim);font-size:0.92rem;margin-top:6px;line-height:1.55}
-.tag-chip{display:inline-block;margin-top:10px;margin-right:8px;font-size:0.72rem;letter-spacing:0.04em;color:var(--wine-dim);border:1px solid var(--wine-dim);border-radius:999px;padding:4px 12px}
+.contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--cream-dim);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  font-size: 0.94rem;
+}
 
-.cantina-cta{display:block;width:100%;text-align:left;margin-top:36px;padding:26px 28px;background:linear-gradient(135deg,var(--wine),#3d0000);border:1px solid var(--wine-bright);border-radius:var(--radius);cursor:pointer;transition:transform .2s}
-.cantina-cta:hover{transform:translateY(-2px)}
-.cantina-cta-title{display:block;font-family:'Fraunces',serif;font-size:1.3rem;color:var(--cream)}
-.cantina-cta-sub{display:block;color:rgba(242,234,216,0.75);font-size:0.9rem;margin-top:6px}
+.contact-item:hover {
+  color: var(--cream);
+}
 
-.back-to-menu{display:inline-flex;align-items:center;gap:8px;color:var(--cream-dim);background:none;border:0;font-family:inherit;font-size:0.92rem;font-weight:600;cursor:pointer;margin-bottom:36px;padding:0}
-.back-to-menu:hover{color:var(--cream)}
-.back-to-categories{display:none;align-items:center;gap:8px;color:var(--cream-dim);background:none;border:0;font-family:inherit;font-size:0.92rem;font-weight:600;cursor:pointer;margin-bottom:6px;padding:0}
-.back-to-categories:hover{color:var(--cream)}
+/* Forza la dimensione delle icone mail e telefono a 18px */
+.contact-item svg {
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0;
+  color: inherit;
+}
 
-/* ---- DOVE SIAMO ---- */
-.contact-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:28px;align-items:start}
-.info-stack{display:flex;flex-direction:column;gap:20px}
-.info-card{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
-.info-card h3{font-size:1.15rem;margin-bottom:12px}
-.info-card p,.info-card .row{color:var(--cream-dim);font-size:0.94rem;line-height:1.6}
-.info-card .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)}
-.info-card .row:last-child{border-bottom:0}
-.info-card .row .closed{color:var(--wine-bright)}
-.map-box{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);min-height:100%;
-  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;color:var(--cream-faint);text-align:center;padding:40px}
-.map-box svg{width:34px;color:var(--wine-bright)}
-.map-box strong{color:var(--cream-dim);font-weight:600;font-size:0.95rem}
+.social-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
+    .map-box strong {
+      color: var(--cream-dim);
+      font-weight: 600;
+      font-size: 0.95rem
+    }
+
+    .map-box {
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 450px; 
+}
+
 .map-box iframe {
   width: 100%;
   height: 100%;
   display: block;
   border: 0;
+  margin: 0;
+  padding: 30px; 
 }
 
 
 
-
-footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--cream-faint);font-size:0.85rem}
-
-
-
- .allergen-list {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 10px;
-}
-
-.allergen-icon {
-  position: relative;
-  width: 26px;
-  height: 26px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--cream-dim);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  flex-shrink: 0;
-  cursor: help;
-}
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 36px 0;
+      text-align: center;
+      color: var(--cream-faint);
+      font-size: 0.85rem
+    }
 
 
-.allergen-icon svg {
-  width: 15px;
-  height: 15px;
-  display: block;
-}
 
-/* Tooltip */
-.allergen-icon::after {
+    .allergen-list {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .allergen-icon {
+      position: relative;
+      width: 26px;
+      height: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cream-dim);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      flex-shrink: 0;
+      cursor: help;
+    }
+
+
+    .allergen-icon svg {
+      width: 15px;
+      height: 15px;
+      display: block;
+    }
+
+    /* Tooltip */
+    .allergen-icon::after {
   content: attr(data-allergen);
   position: absolute;
   left: 50%;
-  bottom: calc(100% + 8px);
+  bottom: calc(100% - 2px);
   transform: translateX(-50%) translateY(4px);
 
-  background: var(--soft);
+  background: var(--wine-bright); /* Errore corretto: prima era var(--soft) */
   color: var(--cream);
-  border: 1px solid var(--line);
+  border: 1px solid var(--wine);
   border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* Aggiunta ombra per leggibilità */
 
-  padding: 5px 8px;
-  font-size: 0.68rem;
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
   line-height: 1.2;
   letter-spacing: 0.02em;
   white-space: nowrap;
@@ -223,1140 +861,1345 @@ footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:v
   visibility: hidden;
   pointer-events: none;
 
-  transition: opacity 0.15s ease, transform 0.15s ease;
-  z-index: 20;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 100;
 }
 
- .allergen-icon:hover {
-    color: var(--cream);
-    border-color: var(--cream-dim);
-  }
+    .allergen-icon:hover {
+      color: var(--cream);
+      border-color: var(--cream-dim);
+    }
 
-   .tag-chip:hover {
-    color: var(--cream);
-    border-color: var(--cream-dim);
-  }
+    .tag-chip:hover {
+      color: var(--cream);
+      border-color: var(--cream-dim);
+    }
 
-.allergen-icon:hover::after,
-.allergen-icon:focus::after,
-.allergen-icon:active::after {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(-50%);
-}
+    .allergen-icon:hover::after,
+    .allergen-icon:focus::after,
+    .allergen-icon:active::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(-50%);
+    }
 
-.wine-list {
-  display: flex;
-  flex-direction: column;
-  gap: 56px;
-}
+    .wine-list {
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+    }
 
-.wine-category {
-  width: 100%;
-}
-.wine-category  h3{font-size:1.2rem;margin-bottom:4px; text-transform: uppercase;}
-.wine-category .cat-note{color:var(--cream-faint);font-size:0.82rem;margin-bottom:28px;padding-bottom: 1.5rem;}
+    .wine-category {
+      width: 100%;
+    }
 
-.wine-category-dishes {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 40px;
-}
+    .wine-category h3 {
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
 
-@media (max-width: 840px) {
-  .wine-category-dishes {
-    grid-template-columns: 1fr;
-  }
-}
+    .wine-category .cat-note {
+      color: var(--cream-faint);
+      font-size: 0.82rem;
+      margin-bottom: 28px;
+      padding-bottom: 1.5rem;
+    }
 
-/* Spazio tra le sezioni (Bollicine / Bianchi / Rossi / Dolci) */
-.wine-list + .wine-list {
-  margin-top: 56px;
-}
+    .wine-category-dishes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 40px;
+    }
 
-/* Riga vuota (es. Champagne senza produttore) non deve alterare l'altezza */
-.wine-category-dishes .dish p:empty {
-  display: none;
-}
+    @media (max-width: 840px) {
+      .wine-category-dishes {
+        grid-template-columns: 1fr;
+      }
+    }
 
-/* Desktop: i primi DUE vini (prima riga) partono entrambi senza padding sopra,
+    /* Spazio tra le sezioni (Bollicine / Bianchi / Rossi / Dolci) */
+    .wine-list+.wine-list {
+      margin-top: 56px;
+    }
+
+    /* Riga vuota (es. Champagne senza produttore) non deve alterare l'altezza */
+    .wine-category-dishes .dish p:empty {
+      display: none;
+    }
+
+
+
+    /* Desktop: i primi DUE vini (prima riga) partono entrambi senza padding sopra,
    e l'ultima riga non ha la linea di chiusura */
-@media (min-width: 841px) {
-  .wine-category-dishes .dish:nth-child(2) {
-    padding-top: 0;
-  }
-  .wine-category-dishes .dish:last-child,
-  .wine-category-dishes .dish:nth-last-child(2):nth-child(odd) {
-    border-bottom: 0;
-  }
-}
+    @media (min-width: 841px) {
+      .wine-category-dishes .dish:nth-child(2) {
+        padding-top: 0;
+      }
+
+      .wine-category-dishes .dish:last-child,
+      .wine-category-dishes .dish:nth-last-child(2):nth-child(odd) {
+        border-bottom: 0;
+      }
+    }
 
 
-@media (max-width:840px){
-  .navlinks{display:none}
-  .burger{display:flex}
-  .about-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .menu-cols{grid-template-columns:1fr;gap:44px}
-  section{padding:64px 0}
-  .wrap{padding:0 22px}
-  .tabs{flex-direction:column;background:none;border:0;padding:0;gap:14px;width:100%}
-  .tab-btn{width:100%;text-align:left;background:var(--bg-soft);border:1px solid var(--line);padding:20px 24px;border-radius:var(--radius);font-size:1.05rem;display:flex;justify-content:space-between;align-items:center}
-  .tab-btn.active{background:var(--wine);border-color:var(--wine)}
-  .tab-btn::after{content:'›';color:var(--cream-faint);font-size:1.4rem;margin-left:12px}
-  .cantina-grid{grid-template-columns:1fr}
-  #menuMain.collapsed .menu-panel{display:none!important}
-  #menuMain:not(.collapsed) .tabs{display:none}
-  #menuMain:not(.collapsed) .back-to-categories{display:flex}
-}
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
-}
-</style>
+    @media (max-width:840px) {
+      .navlinks {
+        display: none
+      }
+
+      .burger {
+        display: flex
+      }
+
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .menu-cols {
+        grid-template-columns: 1fr;
+        gap: 44px
+      }
+
+      section {
+        padding: 64px 0
+      }
+
+      .wrap {
+        padding: 0 22px
+      }
+
+      .tabs {
+        flex-direction: column;
+        background: none;
+        border: 0;
+        padding: 0;
+        gap: 14px;
+        width: 100%
+      }
+
+      .tab-btn {
+        width: 100%;
+        text-align: left;
+        background: var(--wine);
+        border: 1px solid var(--cream-dim);
+        border-radius: 999px;
+        padding: 20px 24px;
+        font-size: 1.05rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center
+      }
+
+      .tab-btn.active {
+        background: var(--wine);
+        border-color: var(--wine)
+      }
+
+      .tab-btn::after {
+        content: '›';
+        color: var(--cream-faint);
+        font-size: 1.4rem;
+        margin-left: 12px
+      }
+
+      .cantina-grid {
+        grid-template-columns: 1fr
+      }
+
+      #menuMain.collapsed .menu-panel {
+        display: none !important
+      }
+
+      #menuMain:not(.collapsed) .tabs {
+        display: none
+      }
+
+      #menuMain:not(.collapsed) .back-to-categories {
+        display: flex
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      * {
+        animation: none !important;
+        transition: none !important
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<header id="siteHeader">
-  <nav>
-    <div onclick="window.location='#home'" class="brand">
-      <svg viewBox="0 0 1173.86 350" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-        <path d="M803.99,224.7c-1.55-27.49-26.13-41.85-50.7-52.51l-45.63-19.8c-7.72-3.35-14.66-7.65-20.78-13.19-12.34-11.17-13.45-30.12-1.42-41.74,6.43-6.21,14.78-9.75,23.61-11.3,31.81-5.56,61.44,8.32,80.28,35.89.36-10.3-2.32-19.14-3.6-28.94-21.83-9.48-45.2-13.91-68.92-12.48-27.51,1.66-53.09,16.17-54.87,44.02-1.78,27.78,20.93,42.56,45.34,53.08l38.39,16.54c22.19,9.56,45.13,23.98,41.77,48.51-3.58,26.16-34.22,35.47-60.65,32.54-18.78-2.08-35.65-10.07-50.34-21.83l-20.43-16.35c-2.62-1.79-5.34-3.23-8.1-4.32,3.41,15.09,5.09,22.5,7.95,32.32,19.69,9.26,40.39,13.53,62.11,15.22,24.09,1.87,50.65-.69,69.15-16.19,11.87-9.94,17.7-24.04,16.83-39.48Z"/>
-        <path d="M629.44,201.49c-7.94,33.76-24.98,56.64-61.57,57.76-40.06,1.22-68.55-13.53-82.07-51.3.24-7.02,5.44-13.26,11.67-16.73,44.31-24.67,89.72-45.68,137.05-64.81-23.99-41.64-77.68-55.94-120.31-39.45-27.83,10.76-48.13,35.02-56.22,60.42-10.29,32.3-4.03,64.03,14.68,89.69,14.36,19.69,34.62,31.92,57.9,37.32,10.14,2.35,16.93,10.76,16.96,21.03l.09,30.14c.02,6.45-4.16,11.94-10.55,12.6l-21.1,2.16c-.72.07-2.86.5-2.54,1.07l1.17,2.06,71.42.1c1.88-.28,3.84-1.54,3.66-2.85l-23.11-2.39c-6.26-.65-10.95-5.8-10.94-12.21l.03-31.22c.01-9.78,7.02-17.91,16.24-20.81,22.66-7.11,33-12.63,41.86-20.52s20.55-17.93,29.61-42.13c-1.37-1.54-13.54-9.5-13.94-9.93ZM480.78,193.33c-6.22-26.5-2.58-53.99,11.72-76.7,11.82-18.77,31.01-31.21,53.55-31,23.78.22,45.38,15.01,54.44,36.56,2.22,5.29.56,11.33-4.94,14.07l-114.76,57.06Z"/>
-        <path d="M319.23,276.73l-38.81.19,4.94-5.81c1.98-4.65,2.92-10.54,2.92-16.21v-105.81c0-21.64-7.11-43.72-25.98-54.27-11.29-6.31-23.89-5.73-36.05-1.51-18.15,7.66-31.24,23.48-36.03,42.95l.07,124.19c0,6.8,2.81,11.28,7.44,16.5l-39.41-.07c3.64-4.06,6.47-6.26,7.19-10.19.85-4.65,1.45-8.95,1.45-13.84V113.14c0-5.65-.52-10.57-.93-15.99-1.46-4.55-3.28-6.61-7.69-11.13l31.76-.29.25,34.55c11.2-21.63,31.13-36.96,55.62-39.49,18.69-1.93,36.65,4.38,49.22,17.99,8.82,9.55,12.82,21.27,15.19,34.59,4.34-10.8,9.02-20.59,16.24-29.7,21.78-27.5,62.29-31.43,88.15-7.34,12.33,11.48,18,31.29,18.01,48.71l.08,109.86c0,5.92.98,12.05,3.13,16.78l4.49,5.27-38.65-.09c5.23-5.61,7.65-10.1,7.66-16.92l.08-112.24c0-11.78-2.09-22.72-7.05-33.07-7.22-15.05-21.5-25.2-38.55-24.42-14.49.66-27.26,8.24-35.76,20.15-8.99,12.61-16.42,27.87-16.48,43.91l-.33,101.66c-.03,7.94,1.21,14.8,7.84,20.82Z"/>
-        <path d="M858.73,237.65c22,30.84,60.06,42.22,95.23,29.03,22.21-8.33,39.36-25.19,50.65-45.79,1.22.42,3.47,1.11,3.34,1.84s-.69,2.29-1.13,3.16c-15.31,29.96-43.47,49.98-77.08,53.84-22.75,2.61-45.27-1.14-65.27-12.12-38.49-21.14-57.81-64.52-49.25-107.31s43.4-75.35,87.95-79.39c28.9-2.62,57.55,4.46,82.54,19.27l5.68,34.91c-8.66-9.97-14.49-19-23.44-27.08-16.27-14.7-36.74-23.83-58.89-22.79-25.4,1.19-46.85,15-58.89,37-19.43,35.5-15.29,82,8.55,115.43Z"/>
-        <circle cx="1039.6" cy="51.22" r="14.45"/>
-        <path d="M1028.13,260.32l.12-148.16-1.25-14.99c-1.81-3.54-3.78-5.41-7.89-8.98l32.14-4.91.15,177.75c0,6.6,2.77,10.41,7.71,15.83l-38.91.13c4.48-5.16,7.93-9.1,7.93-16.66Z"/>
-        <!-- <path d="M595.54,136.27l-114.76,57.06c-6.22-26.5-2.58-53.99,11.72-76.7,11.82-18.77,31.01-31.21,53.55-31,23.78.22,45.38,15.01,54.44,36.56,2.22,5.29.56,11.33-4.94,14.07Z"/> -->
-      </svg>
-    </div>
-    <div class="navlinks" id="navlinks">
-      <a href="#home" class="active">Home</a>
+  <header id="siteHeader">
+    <nav>
+      <div onclick="window.location='#home'" class="brand">
+        <svg viewBox="0 0 1173.86 350" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+          <path
+            d="M803.99,224.7c-1.55-27.49-26.13-41.85-50.7-52.51l-45.63-19.8c-7.72-3.35-14.66-7.65-20.78-13.19-12.34-11.17-13.45-30.12-1.42-41.74,6.43-6.21,14.78-9.75,23.61-11.3,31.81-5.56,61.44,8.32,80.28,35.89.36-10.3-2.32-19.14-3.6-28.94-21.83-9.48-45.2-13.91-68.92-12.48-27.51,1.66-53.09,16.17-54.87,44.02-1.78,27.78,20.93,42.56,45.34,53.08l38.39,16.54c22.19,9.56,45.13,23.98,41.77,48.51-3.58,26.16-34.22,35.47-60.65,32.54-18.78-2.08-35.65-10.07-50.34-21.83l-20.43-16.35c-2.62-1.79-5.34-3.23-8.1-4.32,3.41,15.09,5.09,22.5,7.95,32.32,19.69,9.26,40.39,13.53,62.11,15.22,24.09,1.87,50.65-.69,69.15-16.19,11.87-9.94,17.7-24.04,16.83-39.48Z" />
+          <path
+            d="M629.44,201.49c-7.94,33.76-24.98,56.64-61.57,57.76-40.06,1.22-68.55-13.53-82.07-51.3.24-7.02,5.44-13.26,11.67-16.73,44.31-24.67,89.72-45.68,137.05-64.81-23.99-41.64-77.68-55.94-120.31-39.45-27.83,10.76-48.13,35.02-56.22,60.42-10.29,32.3-4.03,64.03,14.68,89.69,14.36,19.69,34.62,31.92,57.9,37.32,10.14,2.35,16.93,10.76,16.96,21.03l.09,30.14c.02,6.45-4.16,11.94-10.55,12.6l-21.1,2.16c-.72.07-2.86.5-2.54,1.07l1.17,2.06,71.42.1c1.88-.28,3.84-1.54,3.66-2.85l-23.11-2.39c-6.26-.65-10.95-5.8-10.94-12.21l.03-31.22c.01-9.78,7.02-17.91,16.24-20.81,22.66-7.11,33-12.63,41.86-20.52s20.55-17.93,29.61-42.13c-1.37-1.54-13.54-9.5-13.94-9.93ZM480.78,193.33c-6.22-26.5-2.58-53.99,11.72-76.7,11.82-18.77,31.01-31.21,53.55-31,23.78.22,45.38,15.01,54.44,36.56,2.22,5.29.56,11.33-4.94,14.07l-114.76,57.06Z" />
+          <path
+            d="M319.23,276.73l-38.81.19,4.94-5.81c1.98-4.65,2.92-10.54,2.92-16.21v-105.81c0-21.64-7.11-43.72-25.98-54.27-11.29-6.31-23.89-5.73-36.05-1.51-18.15,7.66-31.24,23.48-36.03,42.95l.07,124.19c0,6.8,2.81,11.28,7.44,16.5l-39.41-.07c3.64-4.06,6.47-6.26,7.19-10.19.85-4.65,1.45-8.95,1.45-13.84V113.14c0-5.65-.52-10.57-.93-15.99-1.46-4.55-3.28-6.61-7.69-11.13l31.76-.29.25,34.55c11.2-21.63,31.13-36.96,55.62-39.49,18.69-1.93,36.65,4.38,49.22,17.99,8.82,9.55,12.82,21.27,15.19,34.59,4.34-10.8,9.02-20.59,16.24-29.7,21.78-27.5,62.29-31.43,88.15-7.34,12.33,11.48,18,31.29,18.01,48.71l.08,109.86c0,5.92.98,12.05,3.13,16.78l4.49,5.27-38.65-.09c5.23-5.61,7.65-10.1,7.66-16.92l.08-112.24c0-11.78-2.09-22.72-7.05-33.07-7.22-15.05-21.5-25.2-38.55-24.42-14.49.66-27.26,8.24-35.76,20.15-8.99,12.61-16.42,27.87-16.48,43.91l-.33,101.66c-.03,7.94,1.21,14.8,7.84,20.82Z" />
+          <path
+            d="M858.73,237.65c22,30.84,60.06,42.22,95.23,29.03,22.21-8.33,39.36-25.19,50.65-45.79,1.22.42,3.47,1.11,3.34,1.84s-.69,2.29-1.13,3.16c-15.31,29.96-43.47,49.98-77.08,53.84-22.75,2.61-45.27-1.14-65.27-12.12-38.49-21.14-57.81-64.52-49.25-107.31s43.4-75.35,87.95-79.39c28.9-2.62,57.55,4.46,82.54,19.27l5.68,34.91c-8.66-9.97-14.49-19-23.44-27.08-16.27-14.7-36.74-23.83-58.89-22.79-25.4,1.19-46.85,15-58.89,37-19.43,35.5-15.29,82,8.55,115.43Z" />
+          <circle cx="1039.6" cy="51.22" r="14.45" />
+          <path
+            d="M1028.13,260.32l.12-148.16-1.25-14.99c-1.81-3.54-3.78-5.41-7.89-8.98l32.14-4.91.15,177.75c0,6.6,2.77,10.41,7.71,15.83l-38.91.13c4.48-5.16,7.93-9.1,7.93-16.66Z" />
+          <!-- <path d="M595.54,136.27l-114.76,57.06c-6.22-26.5-2.58-53.99,11.72-76.7,11.82-18.77,31.01-31.21,53.55-31,23.78.22,45.38,15.01,54.44,36.56,2.22,5.29.56,11.33-4.94,14.07Z"/> -->
+        </svg>
+      </div>
+      <div class="navlinks" id="navlinks">
+        <a href="#home" class="active">Home</a>
+        <a href="#chi-siamo">Chi Siamo</a>
+        <a href="#menu">Menù</a>
+        <a href="#dove-siamo">Contatti</a>
+      </div>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#home">Home</a>
       <a href="#chi-siamo">Chi Siamo</a>
       <a href="#menu">Menù</a>
       <a href="#dove-siamo">Contatti</a>
     </div>
-    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
-  </nav>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#home">Home</a>
-    <a href="#chi-siamo">Chi Siamo</a>
-    <a href="#menu">Menù</a>
-    <a href="#dove-siamo">Contatti</a>
-  </div>
-</header>
+  </header>
 
-<section class="hero" id="home">
-  <div class="eyebrow">Wine Bar</div>
-  <div class="logo-mark">
-    <svg viewBox="0 0 1173.86 400" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-      <path d="M803.99,224.7c-1.55-27.49-26.13-41.85-50.7-52.51l-45.63-19.8c-7.72-3.35-14.66-7.65-20.78-13.19-12.34-11.17-13.45-30.12-1.42-41.74,6.43-6.21,14.78-9.75,23.61-11.3,31.81-5.56,61.44,8.32,80.28,35.89.36-10.3-2.32-19.14-3.6-28.94-21.83-9.48-45.2-13.91-68.92-12.48-27.51,1.66-53.09,16.17-54.87,44.02-1.78,27.78,20.93,42.56,45.34,53.08l38.39,16.54c22.19,9.56,45.13,23.98,41.77,48.51-3.58,26.16-34.22,35.47-60.65,32.54-18.78-2.08-35.65-10.07-50.34-21.83l-20.43-16.35c-2.62-1.79-5.34-3.23-8.1-4.32,3.41,15.09,5.09,22.5,7.95,32.32,19.69,9.26,40.39,13.53,62.11,15.22,24.09,1.87,50.65-.69,69.15-16.19,11.87-9.94,17.7-24.04,16.83-39.48Z"/>
-      <path d="M629.44,201.49c-7.94,33.76-24.98,56.64-61.57,57.76-40.06,1.22-68.55-13.53-82.07-51.3.24-7.02,5.44-13.26,11.67-16.73,44.31-24.67,89.72-45.68,137.05-64.81-23.99-41.64-77.68-55.94-120.31-39.45-27.83,10.76-48.13,35.02-56.22,60.42-10.29,32.3-4.03,64.03,14.68,89.69,14.36,19.69,34.62,31.92,57.9,37.32,10.14,2.35,16.93,10.76,16.96,21.03l.09,30.14c.02,6.45-4.16,11.94-10.55,12.6l-21.1,2.16c-.72.07-2.86.5-2.54,1.07l1.17,2.06,71.42.1c1.88-.28,3.84-1.54,3.66-2.85l-23.11-2.39c-6.26-.65-10.95-5.8-10.94-12.21l.03-31.22c.01-9.78,7.02-17.91,16.24-20.81,22.66-7.11,33-12.63,41.86-20.52s20.55-17.93,29.61-42.13c-1.37-1.54-13.54-9.5-13.94-9.93ZM480.78,193.33c-6.22-26.5-2.58-53.99,11.72-76.7,11.82-18.77,31.01-31.21,53.55-31,23.78.22,45.38,15.01,54.44,36.56,2.22,5.29.56,11.33-4.94,14.07l-114.76,57.06Z"/>
-      <path d="M319.23,276.73l-38.81.19,4.94-5.81c1.98-4.65,2.92-10.54,2.92-16.21v-105.81c0-21.64-7.11-43.72-25.98-54.27-11.29-6.31-23.89-5.73-36.05-1.51-18.15,7.66-31.24,23.48-36.03,42.95l.07,124.19c0,6.8,2.81,11.28,7.44,16.5l-39.41-.07c3.64-4.06,6.47-6.26,7.19-10.19.85-4.65,1.45-8.95,1.45-13.84V113.14c0-5.65-.52-10.57-.93-15.99-1.46-4.55-3.28-6.61-7.69-11.13l31.76-.29.25,34.55c11.2-21.63,31.13-36.96,55.62-39.49,18.69-1.93,36.65,4.38,49.22,17.99,8.82,9.55,12.82,21.27,15.19,34.59,4.34-10.8,9.02-20.59,16.24-29.7,21.78-27.5,62.29-31.43,88.15-7.34,12.33,11.48,18,31.29,18.01,48.71l.08,109.86c0,5.92.98,12.05,3.13,16.78l4.49,5.27-38.65-.09c5.23-5.61,7.65-10.1,7.66-16.92l.08-112.24c0-11.78-2.09-22.72-7.05-33.07-7.22-15.05-21.5-25.2-38.55-24.42-14.49.66-27.26,8.24-35.76,20.15-8.99,12.61-16.42,27.87-16.48,43.91l-.33,101.66c-.03,7.94,1.21,14.8,7.84,20.82Z"/>
-      <path d="M858.73,237.65c22,30.84,60.06,42.22,95.23,29.03,22.21-8.33,39.36-25.19,50.65-45.79,1.22.42,3.47,1.11,3.34,1.84s-.69,2.29-1.13,3.16c-15.31,29.96-43.47,49.98-77.08,53.84-22.75,2.61-45.27-1.14-65.27-12.12-38.49-21.14-57.81-64.52-49.25-107.31s43.4-75.35,87.95-79.39c28.9-2.62,57.55,4.46,82.54,19.27l5.68,34.91c-8.66-9.97-14.49-19-23.44-27.08-16.27-14.7-36.74-23.83-58.89-22.79-25.4,1.19-46.85,15-58.89,37-19.43,35.5-15.29,82,8.55,115.43Z"/>
-      <circle cx="1039.6" cy="51.22" r="14.45"/>
-      <path d="M1028.13,260.32l.12-148.16-1.25-14.99c-1.81-3.54-3.78-5.41-7.89-8.98l32.14-4.91.15,177.75c0,6.6,2.77,10.41,7.71,15.83l-38.91.13c4.48-5.16,7.93-9.1,7.93-16.66Z"/>
-        <!-- <path d="M595.54,136.27l-114.76,57.06c-6.22-26.5-2.58-53.99,11.72-76.7,11.82-18.77,31.01-31.21,53.55-31,23.78.22,45.38,15.01,54.44,36.56,2.22,5.29.56,11.33-4.94,14.07Z"/> -->
-    </svg>
-  </div>
-  <div class="pour-line"></div>
-  <p class="tag">Versa. Racconta. <em>Resta.</em> Un'enoteca dove ogni calice inizia una conversazione e ogni piatto la accompagna.</p>
-  <div class="hero-ctas">
-    <a href="#menu" class="btn btn-filled">Scopri il Menù</a>
-    <a href="#dove-siamo" class="btn btn-outline">Contatti</a>
-  </div>
-  <div class="scroll-cue" onclick="window.location='#chi-siamo'">↓</div>
-</section>
+  <section class="hero" id="home">
+    <div class="eyebrow">Wine Bar</div> 
+    <div class="logo-mark">
+      <svg viewBox="0 0 1173.86 400" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+        <path 
+          d="M803.99,224.7c-1.55-27.49-26.13-41.85-50.7-52.51l-45.63-19.8c-7.72-3.35-14.66-7.65-20.78-13.19-12.34-11.17-13.45-30.12-1.42-41.74,6.43-6.21,14.78-9.75,23.61-11.3,31.81-5.56,61.44,8.32,80.28,35.89.36-10.3-2.32-19.14-3.6-28.94-21.83-9.48-45.2-13.91-68.92-12.48-27.51,1.66-53.09,16.17-54.87,44.02-1.78,27.78,20.93,42.56,45.34,53.08l38.39,16.54c22.19,9.56,45.13,23.98,41.77,48.51-3.58,26.16-34.22,35.47-60.65,32.54-18.78-2.08-35.65-10.07-50.34-21.83l-20.43-16.35c-2.62-1.79-5.34-3.23-8.1-4.32,3.41,15.09,5.09,22.5,7.95,32.32,19.69,9.26,40.39,13.53,62.11,15.22,24.09,1.87,50.65-.69,69.15-16.19,11.87-9.94,17.7-24.04,16.83-39.48Z" />
+        <path style="fill: rgba(83, 19, 30, 0.75)"
+          d="M629.44,201.49c-7.94,33.76-24.98,56.64-61.57,57.76-40.06,1.22-68.55-13.53-82.07-51.3.24-7.02,5.44-13.26,11.67-16.73,44.31-24.67,89.72-45.68,137.05-64.81-23.99-41.64-77.68-55.94-120.31-39.45-27.83,10.76-48.13,35.02-56.22,60.42-10.29,32.3-4.03,64.03,14.68,89.69,14.36,19.69,34.62,31.92,57.9,37.32,10.14,2.35,16.93,10.76,16.96,21.03l.09,30.14c.02,6.45-4.16,11.94-10.55,12.6l-21.1,2.16c-.72.07-2.86.5-2.54,1.07l1.17,2.06,71.42.1c1.88-.28,3.84-1.54,3.66-2.85l-23.11-2.39c-6.26-.65-10.95-5.8-10.94-12.21l.03-31.22c.01-9.78,7.02-17.91,16.24-20.81,22.66-7.11,33-12.63,41.86-20.52s20.55-17.93,29.61-42.13c-1.37-1.54-13.54-9.5-13.94-9.93ZM480.78,193.33c-6.22-26.5-2.58-53.99,11.72-76.7,11.82-18.77,31.01-31.21,53.55-31,23.78.22,45.38,15.01,54.44,36.56,2.22,5.29.56,11.33-4.94,14.07l-114.76,57.06Z" />
+        <path 
+          d="M319.23,276.73l-38.81.19,4.94-5.81c1.98-4.65,2.92-10.54,2.92-16.21v-105.81c0-21.64-7.11-43.72-25.98-54.27-11.29-6.31-23.89-5.73-36.05-1.51-18.15,7.66-31.24,23.48-36.03,42.95l.07,124.19c0,6.8,2.81,11.28,7.44,16.5l-39.41-.07c3.64-4.06,6.47-6.26,7.19-10.19.85-4.65,1.45-8.95,1.45-13.84V113.14c0-5.65-.52-10.57-.93-15.99-1.46-4.55-3.28-6.61-7.69-11.13l31.76-.29.25,34.55c11.2-21.63,31.13-36.96,55.62-39.49,18.69-1.93,36.65,4.38,49.22,17.99,8.82,9.55,12.82,21.27,15.19,34.59,4.34-10.8,9.02-20.59,16.24-29.7,21.78-27.5,62.29-31.43,88.15-7.34,12.33,11.48,18,31.29,18.01,48.71l.08,109.86c0,5.92.98,12.05,3.13,16.78l4.49,5.27-38.65-.09c5.23-5.61,7.65-10.1,7.66-16.92l.08-112.24c0-11.78-2.09-22.72-7.05-33.07-7.22-15.05-21.5-25.2-38.55-24.42-14.49.66-27.26,8.24-35.76,20.15-8.99,12.61-16.42,27.87-16.48,43.91l-.33,101.66c-.03,7.94,1.21,14.8,7.84,20.82Z" />
+        <path 
+          d="M858.73,237.65c22,30.84,60.06,42.22,95.23,29.03,22.21-8.33,39.36-25.19,50.65-45.79,1.22.42,3.47,1.11,3.34,1.84s-.69,2.29-1.13,3.16c-15.31,29.96-43.47,49.98-77.08,53.84-22.75,2.61-45.27-1.14-65.27-12.12-38.49-21.14-57.81-64.52-49.25-107.31s43.4-75.35,87.95-79.39c28.9-2.62,57.55,4.46,82.54,19.27l5.68,34.91c-8.66-9.97-14.49-19-23.44-27.08-16.27-14.7-36.74-23.83-58.89-22.79-25.4,1.19-46.85,15-58.89,37-19.43,35.5-15.29,82,8.55,115.43Z" />
+        <circle cx="1039.6" cy="51.22" r="14.45" />
+        <path 
+          d="M1028.13,260.32l.12-148.16-1.25-14.99c-1.81-3.54-3.78-5.41-7.89-8.98l32.14-4.91.15,177.75c0,6.6,2.77,10.41,7.71,15.83l-38.91.13c4.48-5.16,7.93-9.1,7.93-16.66Z" />
+      </svg>
+    </div>
+    
+    <p class="tag">Versa. Racconta. <em>Resta.</em> Un'enoteca dove ogni calice inizia una conversazione e ogni piatto
+      la accompagna.</p>
+    <div class="hero-ctas">
+      <a href="#menu" class="btn btn-filled">Scopri il Menù</a>
+      <a href="#dove-siamo" class="btn btn-outline">Contatti</a>
+    </div>
+    <div class="scroll-cue" onclick="window.location='#chi-siamo'">↓</div>
+  </section>
 
-<section id="chi-siamo">
-  <div class="wrap">
-    <div class="about-grid">
-      <div>
-        <div class="section-head" style="margin-bottom:28px">
-          <div class="eyebrow">La nostra storia</div>
-          <h2><em>Due innamorati</em> dietro il bancone</h2>
-        </div>
-        <div class="about-text">
-          <p>MESCI nasce da un verbo antico — <em>mescere</em>, versare il vino — e da un'idea semplice: il bicchiere giusto, offerto al momento giusto, cambia una serata.</p>
-          <p>La nostra carta cambia con le stagioni e con le annate. Al bancone lavoriamo fianco a fianco con chi viene ogni settimana e con chi entra per la prima volta, cercando sempre l'abbinamento che non si aspettava.</p>
-          <p>La cucina segue lo stesso principio: piatti pensati per stare dietro al calice, non per distrarre da esso.</p>
-        </div>
-        <!-- <div class="stats">
+  <section id="chi-siamo">
+    <div class="wrap">
+      <div class="about-grid">
+        <div>
+          <div class="section-head" style="margin-bottom:28px">
+            <div class="eyebrow">La nostra storia</div>
+            <h2><em>Due innamorati</em> dietro il bancone</h2>
+          </div>
+          <div class="about-text">
+            <p>MESCI nasce da un verbo antico — <em>mescere</em>, versare il vino — e da un'idea semplice: il bicchiere
+              giusto, offerto al momento giusto, cambia una serata.</p>
+            <p>La nostra carta cambia con le stagioni e con le annate. Al bancone lavoriamo fianco a fianco con chi
+              viene ogni settimana e con chi entra per la prima volta, cercando sempre l'abbinamento che non si
+              aspettava.</p>
+            <p>La cucina segue lo stesso principio: piatti pensati per stare dietro al calice, non per distrarre da
+              esso.</p>
+          </div>
+          <!-- <div class="stats">
           <div class="stat"><div class="num">180+</div><div class="lbl">Etichette in carta</div></div>
           <div class="stat"><div class="num">34</div><div class="lbl">Posti al bancone</div></div>
           <div class="stat"><div class="num">7</div><div class="lbl">Anni di mescita</div></div>
           <div class="stat"><div class="num">Ogni sera</div><div class="lbl">Aperti dal martedì</div></div>
         </div> -->
-      </div>
-      <div class="pour-art">
-        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4">
-          <path d="M30 12h40l-4 34a16 16 0 0 1-32 0z"/>
-          <path d="M50 62v22M38 90h24"/>
-        </svg>
-        <img src="Prova.jpg" alt="" >
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="menu" style="background:var(--bg-soft)">
-  <div class="wrap">
-
-    <div class="section-head">
-      <div class="eyebrow">Il Menù</div>
-      <h2>Scelto goccia a <em>goccia</em></h2>
-      <p>Ogni versamento è pensato per il prossimo. Chiedi al banco l'abbinamento</p>
-    </div>
-
-    <div id="menuMain">
-
-      <div class="tabs" role="tablist" aria-label="Categoria principale">
-        <button class="tab-btn active" data-main="bere" role="tab" aria-selected="true">Da Bere</button>
-        <button class="tab-btn" data-main="mangiare" role="tab" aria-selected="false">Da Mangiare</button>
-      </div>
-
-      <button class="back-to-categories" id="backToCategories">← Torna alle categorie</button>
-
-
-      <!-- ═════════════════════════════════════
-           DA BERE
-      ═════════════════════════════════════ -->
-
-      <div class="menu-panel active" data-main="bere" id="main-bere">
-
-        <div class="level2-tabs" role="tablist" aria-label="Sottocategoria da bere">
-          <button class="level2-btn active" data-sub="vini" role="tab" aria-selected="true">Al calice</button>
-          <button class="level2-btn" data-sub="bottiglia" role="tab" aria-selected="false">In bottiglia</button>
-          <button class="level2-btn" data-sub="cocktail" role="tab" aria-selected="false">Cocktail</button>
-          <button class="level2-btn" data-sub="analcolici" role="tab" aria-selected="false">Per chi guida</button>
         </div>
+        <div class="pour-art">
+          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M30 12h40l-4 34a16 16 0 0 1-32 0z" />
+            <path d="M50 62v22M38 90h24" />
+          </svg>
+          <img src="Prova.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu" style="background:var(--bg-soft)">
+    <div class="wrap">
+
+      <div class="section-head">
+        <div class="eyebrow">Il Menù</div>
+        <h2>Scelto goccia a <em>goccia</em></h2>
+        <p>Ogni versamento è pensato per il prossimo. Chiedi al banco l'abbinamento</p>
+      </div>
+
+      <div id="menuMain">
+
+        <div class="tabs" role="tablist" aria-label="Categoria principale">
+          <button class="tab-btn active" data-main="bere" role="tab" aria-selected="true">Da Bere</button>
+          <button class="tab-btn" data-main="mangiare" role="tab" aria-selected="false">Da Mangiare</button>
+        </div>
+
+        <button class="back-to-categories" id="backToCategories">← Torna alle categorie</button>
 
 
         <!-- ═════════════════════════════════════
+           DA BERE
+      ═════════════════════════════════════ -->
+
+        <div class="menu-panel active" data-main="bere" id="main-bere">
+
+          <div class="level2-tabs" role="tablist" aria-label="Sottocategoria da bere">
+            <button class="level2-btn active" data-sub="vini" role="tab" aria-selected="true">Al calice</button>
+            <button class="level2-btn" data-sub="bottiglia" role="tab" aria-selected="false">In bottiglia</button>
+            <button class="level2-btn" data-sub="cocktail" role="tab" aria-selected="false">Cocktail</button>
+            <button class="level2-btn" data-sub="analcolici" role="tab" aria-selected="false">Per chi guida</button>
+          </div>
+
+
+          <!-- ═════════════════════════════════════
              VINI AL CALICE
         ═════════════════════════════════════ -->
 
-        <div class="sub-panel active" id="sub-vini">
+          <div class="sub-panel active" id="sub-vini">
 
-          <div class="menu-cat">
+            <div class="menu-cat">
 
-            <!--
+              <!--
             <h3>Vini al calice</h3>
             <div class="cat-note">Al calice · 10cl</div>
             -->
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Valdobbiadene DOCG Spumante Extra Dry</h4>
-                <span class="price">6€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Valdobbiadene DOCG Spumante Extra Dry</h4>
+                  <span class="price">6€</span>
+                </div>
+                <p>Vettori</p>
+                <span class="tag-chip">Bollicine</span>
               </div>
-              <p>Vettori</p>
-              <span class="tag-chip">Bollicine</span>
-            </div>
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Franciacorta Extra Brut Millesimato</h4>
-                <span class="price">9€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Franciacorta Extra Brut Millesimato</h4>
+                  <span class="price">9€</span>
+                </div>
+                <p>2019 · Massussi</p>
+                <span class="tag-chip">Bollicine</span>
               </div>
-              <p>2019 · Massussi</p>
-              <span class="tag-chip">Bollicine</span>
-            </div>
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Crémant de Limoux Blanc Brut</h4>
-                <span class="price">8€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Crémant de Limoux Blanc Brut</h4>
+                  <span class="price">8€</span>
+                </div>
+                <p>Altugnac · Collovray &amp; Terrier</p>
+                <span class="tag-chip">Bollicine</span>
               </div>
-              <p>Altugnac · Collovray &amp; Terrier</p>
-              <span class="tag-chip">Bollicine</span>
-            </div>
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Collio Bianco</h4>
-                <span class="price">7€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Collio Bianco</h4>
+                  <span class="price">7€</span>
+                </div>
+                <p>2024 · Tenuta Stella</p>
+                <span class="tag-chip">Bianco</span>
               </div>
-              <p>2024 · Tenuta Stella</p>
-              <span class="tag-chip">Bianco</span>
-            </div>
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Les Turitelles Chardonnay</h4>
-                <span class="price">7€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Les Turitelles Chardonnay</h4>
+                  <span class="price">7€</span>
+                </div>
+                <p>2025 · Altugnac</p>
+                <span class="tag-chip">Bianco</span>
               </div>
-              <p>2025 · Altugnac</p>
-              <span class="tag-chip">Bianco</span>
-            </div>
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Langhe Nebbiolo DOC Simane</h4>
-                <span class="price">6€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Langhe Nebbiolo DOC Simane</h4>
+                  <span class="price">6€</span>
+                </div>
+                <p>2023 · Reverdito</p>
+                <span class="tag-chip">Rosso</span>
               </div>
-              <p>2023 · Reverdito</p>
-              <span class="tag-chip">Rosso</span>
-            </div>
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Rosso Manolibera</h4>
-                <span class="price">6€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Rosso Manolibera</h4>
+                  <span class="price">6€</span>
+                </div>
+                <p>2022 · Muralia</p>
+                <span class="tag-chip">Rosso</span>
               </div>
-              <p>2022 · Muralia</p>
-              <span class="tag-chip">Rosso</span>
-            </div>
 
+            </div>
           </div>
-        </div>
 
 
-        <!-- ═════════════════════════════════════
+          <!-- ═════════════════════════════════════
              VINI IN BOTTIGLIA
         ═════════════════════════════════════ -->
 
-        <div class="sub-panel" id="sub-bottiglia">
+          <div class="sub-panel" id="sub-bottiglia">
 
-          <!-- BOLLICINE -->
-          <div class="wine-list">
+            <!-- BOLLICINE -->
+            <div class="wine-list">
 
-            <div class="wine-category">
+              <div class="wine-category">
 
-              <h3>Bollicine</h3>
-              <div class="cat-note">Consumazione / Asporto</div>
+                <h3>Bollicine</h3>
+                <div class="cat-note">Consumazione / Asporto</div>
 
-              <div class="wine-category-dishes">
+                <div class="wine-category-dishes">
 
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Valdobbiadene DOCG Spumante Extra Dry</h4>
-                    <span class="price">17€</span>
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Valdobbiadene DOCG Spumante Extra Dry</h4>
+                      <span class="price">17€</span>
+                    </div>
+                    <p>Vettori</p>
                   </div>
-                  <p>Vettori</p>
-                </div>
 
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Valdobbiadene DOCG spumante Brut</h4>
-                    <span class="price">17€</span>
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Valdobbiadene DOCG spumante Brut</h4>
+                      <span class="price">17€</span>
+                    </div>
+                    <p>Vettori</p>
                   </div>
-                  <p>Vettori</p>
-                </div>
 
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Franciacorta Extra Brut Millesimato</h4>
-                    <span class="price">38€</span>
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Franciacorta Extra Brut Millesimato</h4>
+                      <span class="price">38€</span>
+                    </div>
+                    <p>2019 · Massussi</p>
                   </div>
-                  <p>2019 · Massussi</p>
-                </div>
 
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Roccapietra Blanc de Noirs Brut</h4>
-                    <span class="price">36€</span>
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Roccapietra Blanc de Noirs Brut</h4>
+                      <span class="price">36€</span>
+                    </div>
+                    <p>Scuropasse</p>
                   </div>
-                  <p>Scuropasse</p>
-                </div>
 
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Roccapietra Gruasè Rosè</h4>
-                    <span class="price">39,50€</span>
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Roccapietra Gruasè Rosè</h4>
+                      <span class="price">39,50€</span>
+                    </div>
+                    <p>Scuropasse</p>
                   </div>
-                  <p>Scuropasse</p>
-                </div>
 
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Trento Spumante Extra Brut</h4>
-                    <span class="price">42€</span>
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Trento Spumante Extra Brut</h4>
+                      <span class="price">42€</span>
+                    </div>
+                    <p>2019 · Fanti</p>
                   </div>
-                  <p>2019 · Fanti</p>
-                </div>
 
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Crémant de Limoux Blanc Brut</h4>
-                    <span class="price">32€</span>
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Crémant de Limoux Blanc Brut</h4>
+                      <span class="price">32€</span>
+                    </div>
+                    <p>Altugnac · Collovray &amp; Terrier</p>
                   </div>
-                  <p>Altugnac · Collovray &amp; Terrier</p>
-                </div>
 
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Champagne Roger Barnier Brut Selection</h4>
-                    <span class="price">46,50€</span>
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Champagne Roger Barnier Brut Selection</h4>
+                      <span class="price">46,50€</span>
+                    </div>
+                    <p></p>
                   </div>
-                  <p></p>
-                </div>
 
+                </div>
               </div>
+
+            </div>
+
+
+            <!-- BIANCHI -->
+            <div class="wine-list">
+
+              <div class="wine-category">
+
+                <h3>Bianchi</h3>
+                <div class="cat-note">Consumazione / Asporto</div>
+
+                <div class="wine-category-dishes">
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Collio Bianco</h4>
+                      <span class="price">28€</span>
+                    </div>
+                    <p>Tenuta Stella</p>
+                  </div>
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Ribolla Gialla Collio Bio</h4>
+                      <span class="price">34€</span>
+                    </div>
+                    <p>2023 · Tenuta Stella</p>
+                  </div>
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Friulano Collio Bio</h4>
+                      <span class="price">34€</span>
+                    </div>
+                    <p>2024 · Tenuta Stella</p>
+                  </div>
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Trentino Nosiola</h4>
+                      <span class="price">€28</span>
+                    </div>
+                    <p>2024 · Fanti</p>
+                  </div>
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Trentino Chardonnay</h4>
+                      <span class="price">32€</span>
+                    </div>
+                    <p>2023 · Fanti</p>
+                  </div>
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Gewurztraminer</h4>
+                      <span class="price">36€</span>
+                    </div>
+                    <p>2023 · Elfenberg</p>
+                  </div>
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Sauvignon Blanc</h4>
+                      <span class="price">36€</span>
+                    </div>
+                    <p>2024 · Elfenberg</p>
+                  </div>
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Frascati Superiore Doc</h4>
+                      <span class="price">28€</span>
+                    </div>
+                    <p>2024 · Casale Marchese</p>
+                  </div>
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Les Juritelles Chardonnay</h4>
+                      <span class="price">28€</span>
+                    </div>
+                    <p>2025 · Altugnac</p>
+                  </div>
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Aligote Bourgogna</h4>
+                      <span class="price">36€</span>
+                    </div>
+                    <p>2023 · P &amp; L Borgest</p>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+
+            <!-- ROSSI -->
+            <div class="wine-list">
+
+              <div class="wine-category">
+
+                <h3>Rossi</h3>
+                <div class="cat-note">Consumazione / Asporto</div>
+
+                <div class="wine-category-dishes">
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Lagrein</h4>
+                      <span class="price">35,50€</span>
+                    </div>
+                    <p>2024 · Elfenberg</p>
+                  </div>
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Langhe Nebbiolo Doc Simane</h4>
+                      <span class="price">28€</span>
+                    </div>
+                    <p>2023 · Beverdita</p>
+                  </div>
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Barbera d'Alba Doc</h4>
+                      <span class="price">22€</span>
+                    </div>
+                    <p>2024 · Beverdita</p>
+                  </div>
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Barolo</h4>
+                      <span class="price">38€</span>
+                    </div>
+                    <p>2020 · Beverdita</p>
+                  </div>
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Rosso Manolibera</h4>
+                      <span class="price">28€</span>
+                    </div>
+                    <p>2022 · Muralia</p>
+                  </div>
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Rosato Gorbizzo</h4>
+                      <span class="price">24€</span>
+                    </div>
+                    <p>2024 · Muralia</p>
+                  </div>
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Lambrusco Nebbia &amp; Sabbia</h4>
+                      <span class="price">19€</span>
+                    </div>
+                    <p>Podere Crocetta</p>
+                  </div>
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Sotè Pierre Lys Pinot Noir</h4>
+                      <span class="price">34,50€</span>
+                    </div>
+                    <p>2024 · Altugnac</p>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+
+            <!-- DOLCI -->
+            <div class="wine-list">
+
+              <div class="wine-category">
+
+                <h3>Dolci</h3>
+                <div class="cat-note">Consumazione / Asporto</div>
+
+                <div class="wine-category-dishes">
+
+                  <div class="dish">
+                    <div class="dish-top">
+                      <h4>Moscato</h4>
+                      <span class="price">22€</span>
+                    </div>
+                    <p>Scuropasso</p>
+                  </div>
+
+                </div>
+              </div>
+
             </div>
 
           </div>
 
 
-          <!-- BIANCHI -->
-          <div class="wine-list">
-
-            <div class="wine-category">
-
-              <h3>Bianchi</h3>
-              <div class="cat-note">Consumazione / Asporto</div>
-
-              <div class="wine-category-dishes">
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Collio Bianco</h4>
-                    <span class="price">28€</span>
-                  </div>
-                  <p>Tenuta Stella</p>
-                </div>
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Ribolla Gialla Collio Bio</h4>
-                    <span class="price">34€</span>
-                  </div>
-                  <p>2023 · Tenuta Stella</p>
-                </div>
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Friulano Collio Bio</h4>
-                    <span class="price">34€</span>
-                  </div>
-                  <p>2024 · Tenuta Stella</p>
-                </div>
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Trentino Nosiola</h4>
-                    <span class="price">€28</span>
-                  </div>
-                  <p>2024 · Fanti</p>
-                </div>
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Trentino Chardonnay</h4>
-                    <span class="price">32€</span>
-                  </div>
-                  <p>2023 · Fanti</p>
-                </div>
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Gewurztraminer</h4>
-                    <span class="price">36€</span>
-                  </div>
-                  <p>2023 · Elfenberg</p>
-                </div>
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Sauvignon Blanc</h4>
-                    <span class="price">36€</span>
-                  </div>
-                  <p>2024 · Elfenberg</p>
-                </div>
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Frascati Superiore Doc</h4>
-                    <span class="price">28€</span>
-                  </div>
-                  <p>2024 · Casale Marchese</p>
-                </div>
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Les Juritelles Chardonnay</h4>
-                    <span class="price">28€</span>
-                  </div>
-                  <p>2025 · Altugnac</p>
-                </div>
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Aligote Bourgogna</h4>
-                    <span class="price">36€</span>
-                  </div>
-                  <p>2023 · P &amp; L Borgest</p>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-
-
-          <!-- ROSSI -->
-          <div class="wine-list">
-
-            <div class="wine-category">
-
-              <h3>Rossi</h3>
-              <div class="cat-note">Consumazione / Asporto</div>
-
-              <div class="wine-category-dishes">
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Lagrein</h4>
-                    <span class="price">35,50€</span>
-                  </div>
-                  <p>2024 · Elfenberg</p>
-                </div>
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Langhe Nebbiolo Doc Simane</h4>
-                    <span class="price">28€</span>
-                  </div>
-                  <p>2023 · Beverdita</p>
-                </div>
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Barbera d'Alba Doc</h4>
-                    <span class="price">22€</span>
-                  </div>
-                  <p>2024 · Beverdita</p>
-                </div>
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Barolo</h4>
-                    <span class="price">38€</span>
-                  </div>
-                  <p>2020 · Beverdita</p>
-                </div>
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Rosso Manolibera</h4>
-                    <span class="price">28€</span>
-                  </div>
-                  <p>2022 · Muralia</p>
-                </div>
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Rosato Gorbizzo</h4>
-                    <span class="price">24€</span>
-                  </div>
-                  <p>2024 · Muralia</p>
-                </div>
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Lambrusco Nebbia &amp; Sabbia</h4>
-                    <span class="price">19€</span>
-                  </div>
-                  <p>Podere Crocetta</p>
-                </div>
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Sotè Pierre Lys Pinot Noir</h4>
-                    <span class="price">34,50€</span>
-                  </div>
-                  <p>2024 · Altugnac</p>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-
-
-          <!-- DOLCI -->
-          <div class="wine-list">
-
-            <div class="wine-category">
-
-              <h3>Dolci</h3>
-              <div class="cat-note">Consumazione / Asporto</div>
-
-              <div class="wine-category-dishes">
-
-                <div class="dish">
-                  <div class="dish-top">
-                    <h4>Moscato</h4>
-                    <span class="price">22€</span>
-                  </div>
-                  <p>Scuropasso</p>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- ═════════════════════════════════════
+          <!-- ═════════════════════════════════════
              COCKTAIL
         ═════════════════════════════════════ -->
 
-        <div class="sub-panel" id="sub-cocktail">
+          <div class="sub-panel" id="sub-cocktail">
 
-          <div class="menu-cat">
+            <div class="menu-cat">
 
-            <!--
+              <!--
             <h3>Cocktail</h3>
             <div class="cat-note">Preparati al momento</div>
             -->
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Spritz Aperol</h4>
-                <span class="price">7€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Spritz Aperol</h4>
+                  <span class="price">7€</span>
+                </div>
+                <p>Gin, Campari, vermouth rosso fatto in casa.</p>
+                <span class="tag-chip">Firma</span>
               </div>
-              <p>Gin, Campari, vermouth rosso fatto in casa.</p>
-              <span class="tag-chip">Firma</span>
-            </div>
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Spritz Campari</h4>
-                <span class="price">7€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Spritz Campari</h4>
+                  <span class="price">7€</span>
+                </div>
+                <p>Gin, Campari</p>
+                <span class="tag-chip">Firma</span>
               </div>
-              <p>Gin, Campari</p>
-              <span class="tag-chip">Firma</span>
-            </div>
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Negroni</h4>
-                <span class="price">7€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Negroni</h4>
+                  <span class="price">7€</span>
+                </div>
+                <p>Gin, Campari</p>
+                <span class="tag-chip">Firma</span>
               </div>
-              <p>Gin, Campari</p>
-              <span class="tag-chip">Firma</span>
-            </div>
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Negroni Sbagliato</h4>
-                <span class="price">7€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Negroni Sbagliato</h4>
+                  <span class="price">7€</span>
+                </div>
+                <p>Gin, Campari</p>
+                <span class="tag-chip">Firma</span>
               </div>
-              <p>Gin, Campari</p>
-              <span class="tag-chip">Firma</span>
-            </div>
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Americano</h4>
-                <span class="price">7€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Americano</h4>
+                  <span class="price">7€</span>
+                </div>
+                <p>Gin, Campari</p>
+                <span class="tag-chip">Firma</span>
               </div>
-              <p>Gin, Campari</p>
-              <span class="tag-chip">Firma</span>
-            </div>
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Gin Tonic</h4>
-                <span class="price">7€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Gin Tonic</h4>
+                  <span class="price">7€</span>
+                </div>
+                <p>Gin, Campari</p>
+                <span class="tag-chip">Firma</span>
               </div>
-              <p>Gin, Campari</p>
-              <span class="tag-chip">Firma</span>
-            </div>
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Gin Tonic Premium</h4>
-                <span class="price">10€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Gin Tonic Premium</h4>
+                  <span class="price">10€</span>
+                </div>
+                <p>Esse Gin </p>
+                <span class="tag-chip">Firma</span>
               </div>
-              <p>Esse Gin  </p>
-              <span class="tag-chip">Firma</span>
-            </div>
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Picci</h4>
-                <span class="price">8€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Picci</h4>
+                  <span class="price">8€</span>
+                </div>
+                <p>Cetriolo pestato · Vodka · Lime · Triple Sec</p>
+                <span class="tag-chip">Firma</span>
               </div>
-              <p>Cetriolo pestato · Vodka · Lime · Triple Sec</p>
-              <span class="tag-chip">Firma</span>
+
             </div>
 
           </div>
 
-        </div>
 
-
-        <!-- ═════════════════════════════════════
+          <!-- ═════════════════════════════════════
              PER CHI GUIDA
         ═════════════════════════════════════ -->
 
-        <div class="sub-panel" id="sub-analcolici">
+          <div class="sub-panel" id="sub-analcolici">
 
-          <div class="menu-cat">
+            <div class="menu-cat">
 
-            <!--
+              <!--
             <h3>Per chi guida</h3>
             <div class="cat-note">Analcolici</div>
             -->
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Analcolico della casa</h4>
-                <span class="price">Dai 7€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Analcolico della casa</h4>
+                  <span class="price">Dai 7€</span>
+                </div>
+                <p> </p>
               </div>
-              <p> </p>
-            </div>
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Bibite</h4>
-                <span class="price">3€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Bibite</h4>
+                  <span class="price">3€</span>
+                </div>
+                <p> </p>
               </div>
-              <p> </p>
-            </div>
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Acqua frizzante</h4>
-                <span class="price">1€</span>
+              <div class="dish">
+                <div class="dish-top">
+                  <h4>Acqua frizzante</h4>
+                  <span class="price">1€</span>
+                </div>
+                <p> </p>
               </div>
-              <p> </p>
+
             </div>
 
           </div>
 
         </div>
 
-      </div>
 
-
-      <!-- ═════════════════════════════════════
+        <!-- ═════════════════════════════════════
            DA MANGIARE
       ═════════════════════════════════════ -->
 
-      <div class="menu-panel" data-main="mangiare" id="main-mangiare">
+        <div class="menu-panel" data-main="mangiare" id="main-mangiare">
 
-        <div class="level2-tabs" role="tablist" aria-label="Sottocategoria da mangiare">
-          <button class="level2-btn active" data-sub="caldi" role="tab" aria-selected="true">Piatti caldi</button>
-          <button class="level2-btn" data-sub="freddi" role="tab" aria-selected="false">Piatti freddi</button>
-        </div>
+          <div class="level2-tabs" role="tablist" aria-label="Sottocategoria da mangiare">
+            <button class="level2-btn active" data-sub="caldi" role="tab" aria-selected="true">Piatti caldi</button>
+            <button class="level2-btn" data-sub="freddi" role="tab" aria-selected="false">Piatti freddi</button>
+          </div>
 
 
-        <!-- ═════════════════════════════════════
+          <!-- ═════════════════════════════════════
              PIATTI CALDI
         ═════════════════════════════════════ -->
 
-        <div class="sub-panel active" id="sub-caldi">
+          <div class="sub-panel active" id="sub-caldi">
 
-          <div class="menu-cat">
+            <div class="menu-cat">
 
-            <!--
+              <!--
             <h3>Piatti caldi</h3>
             <div class="cat-note">Dalla cucina</div>
             -->
 
-            <div class="dish">
+              <div class="dish">
 
-              <div class="dish-top">
-                <h4>Patatas Bravas</h4>
-                <span class="price">5,50€</span>
-              </div>
+                <div class="dish-top">
+                  <h4>Patatas Bravas</h4>
+                  <span class="price">5,50€</span>
+                </div>
 
-              <p>Con salsa brava e aioli</p>
+                <p>Con salsa brava e aioli</p>
 
-              <div class="allergen-list">
-                <span class="allergen-icon"
-                      title="Latte"
-                      aria-label="Latte"
-                      data-allergen="Glutine">
-                </span>
+                <div class="allergen-list">
+                  <span class="allergen-icon" title="Uova" aria-label="Uova" data-allergen="Uova">
+                    <img src="images/allergens/eggs.png" alt="">
+                  </span>
+                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                    <img src="images/allergens/gluten.png" alt="">
+                  </span>
+                  <span class="allergen-icon" title="Vegetariano" aria-label="Vegetariano" data-allergen="Vegetariano">
+                    <img src="images/allergens/leaf.png" alt="">
+                  </span>
 
-                <span class="allergen-icon"
-                      title="Latte"
-                      aria-label="Latte"
-                      data-allergen="Pesce">
-                </span>
-              </div>
-
-            </div>
-
-
-            <div class="dish">
-
-              <div class="dish-top">
-                <h4>Serranito</h4>
-                <span class="price">5€</span>
-              </div>
-
-              <p>Panino con lonza di maiale, jamón e friggitelli</p>
-
-            </div>
-
-
-            <div class="dish">
-
-              <div class="dish-top">
-                <h4>Pulpo a la Gallega</h4>
-                <span class="price">9€</span>
-              </div>
-
-              <p>Polpo, patate, cristalli di sale e paprika affumicata</p>
-
-            </div>
-
-
-            <div class="dish">
-
-              <div class="dish-top">
-                <h4>Polpette al Sugo</h4>
-                <span class="price">6€</span>
-              </div>
-
-              <p>Accompagnate da pane rustico</p>
-
-            </div>
-
-
-            <div class="dish">
-
-              <div class="dish-top">
-                <h4>Scagliozze di Polenta</h4>
-                <span class="price">3,50€</span>
-              </div>
-
-              <p>Polenta fritta con stracciatella</p>
-
-              <div class="allergen-list">
-
-                <span class="allergen-icon"
-                      data-allergen="Latte"
-                      aria-label="Latte">
-                </span>
+                
+                </div>
 
               </div>
 
-            </div>
 
+              <div class="dish">
 
-            <div class="dish">
+                <div class="dish-top">
+                  <h4>Serranito</h4>
+                  <span class="price">5€</span>
+                </div>
 
-              <div class="dish-top">
-                <h4>Verdure dell'Orto</h4>
-                <span class="price">4€</span>
+                <p>Panino con lonza di maiale, jamón e friggitelli</p>
+                <div class="allergen-list">
+                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                    <img src="images/allergens/gluten.png" alt="">
+                  </span>
+
+              
+                </div>
               </div>
 
-              <p>Dall'orto di Corbari, con cotture e preparazioni variabili in base alla disponibilità</p>
 
-            </div>
+              <div class="dish">
 
-            <div class="dish">
+                <div class="dish-top">
+                  <h4>Pulpo a la Gallega</h4>
+                  <span class="price">9€</span>
+                </div>
 
-              <div class="dish-top">
-                <h4>Il Toast</h4>
-                <span class="price">4€</span>
+                <p>Polpo, patate, cristalli di sale e paprika affumicata</p>
+                <div class="allergen-list">
+                  <span class="allergen-icon" title="Molluschi" aria-label="Molluschi" data-allergen="Molluschi">
+                    <img src="images/allergens/molluscs.png" alt="">
+                  </span>
+
+                
+                </div>
               </div>
 
-              <p>Prosciutto, formaggio, maionese</p>
+
+              <div class="dish">
+
+                <div class="dish-top">
+                  <h4>Polpette al Sugo</h4>
+                  <span class="price">6€</span>
+                </div>
+
+                <p>Accompagnate da pane rustico</p>
+                <div class="allergen-list">
+                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                    <img src="images/allergens/gluten.png" alt="">
+                  </span>
+
+                  <span class="allergen-icon" title="Latte" aria-label="Latte" data-allergen="Latte">
+                    <img src="images/allergens/milk.png" alt="">
+                  </span>
+                </div>
+              </div>
+
+
+              <div class="dish">
+
+                <div class="dish-top">
+                  <h4>Scagliozze di Polenta</h4>
+                  <span class="price">3,50€</span>
+                </div>
+
+                <p>Polenta fritta con stracciatella</p>
+                <div class="allergen-list">
+
+                  <span class="allergen-icon" title="Latte" aria-label="Latte" data-allergen="Latte">
+                    <img src="images/allergens/milk.png" alt="">
+                  </span>
+                  <span class="allergen-icon" title="Vegetariano" aria-label="Vegetariano" data-allergen="Vegetariano">
+                    <img src="images/allergens/leaf.png" alt="">
+                  </span>
+                </div>
+
+              </div>
+
+
+              <div class="dish">
+
+                <div class="dish-top">
+                  <h4>Verdure dell'Orto</h4>
+                  <span class="price">4€</span>
+                </div>
+
+                <p>Dall'orto di Corbari, con cotture e preparazioni variabili in base alla disponibilità</p>
+                <div class="allergen-list">
+                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                    <img src="images/allergens/gluten.png" alt="">
+                  </span>
+                  <span class="allergen-icon" title="Vegetariano" aria-label="Vegetariano" data-allergen="Vegetariano">
+                    <img src="images/allergens/leaf.png" alt="">
+                  </span>
+
+                
+                </div>
+              </div>
+
+              <div class="dish">
+
+                <div class="dish-top">
+                  <h4>Il Toast</h4>
+                  <span class="price">4€</span>
+                </div>
+
+                <p>Prosciutto, formaggio, maionese</p>
+                <div class="allergen-list">
+                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                    <img src="images/allergens/gluten.png" alt="">
+                  </span>
+
+                  <span class="allergen-icon" title="Latte" aria-label="Latte" data-allergen="Latte">
+                    <img src="images/allergens/milk.png" alt="">
+                  </span>
+                  <span class="allergen-icon" title="Uova" aria-label="Uova" data-allergen="Uova">
+                    <img src="images/allergens/eggs.png" alt="">
+                  </span>
+                </div>
+              </div>
 
             </div>
 
           </div>
 
-        </div>
 
-
-        <!-- ═════════════════════════════════════
+          <!-- ═════════════════════════════════════
              PIATTI FREDDI
         ═════════════════════════════════════ -->
 
-        <div class="sub-panel" id="sub-freddi">
+          <div class="sub-panel" id="sub-freddi">
 
-          <div class="menu-cat">
+            <div class="menu-cat">
 
-            <!--
+              <!--
             <h3>Piatti freddi</h3>
             <div class="cat-note">Da condividere</div>
             -->
 
-            <div class="dish">
+              <div class="dish">
 
-              <div class="dish-top">
-                <h4>Pan Y Tomate</h4>
-                <span class="price">2,50€</span>
+                <div class="dish-top">
+                  <h4>Pan Y Tomate</h4>
+                  <span class="price">2,50€</span>
+                </div>
+
+                <p>Pane e pomodoro</p>
+                <div class="allergen-list">
+                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                    <img src="images/allergens/gluten.png" alt="">
+                  </span>
+                  <span class="allergen-icon" title="Vegetariano" aria-label="Vegetariano" data-allergen="Vegetariano">
+                    <img src="images/allergens/leaf.png" alt="">
+                  </span>
+
+                  
+                </div>
+              </div>
+              <div class="dish">
+
+                <div class="dish-top">
+                  <h4>Crostone Cantabrico</h4>
+                  <span class="price">4,50€</span>
+                </div>
+
+                <p>Pane tostato, burro e acciughe del Cantabrico, zest di limone</p>
+                <div class="allergen-list">
+                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                    <img src="images/allergens/gluten.png" alt="">
+                  </span>
+
+                  <span class="allergen-icon" title="Latte" aria-label="Latte" data-allergen="Latte">
+                    <img src="images/allergens/milk.png" alt="">
+                  </span>
+
+                  <span class="allergen-icon" title="Pesce" aria-label="Pesce" data-allergen="Pesce">
+                    <img src="images/allergens/fish.png" alt="">
+                  </span>
+                </div>
               </div>
 
-              <p>Prosciutto, formaggio, maionese</p>
 
-            </div>
-            <div class="dish">
+              <div class="dish">
 
-              <div class="dish-top">
-                <h4>Crostone Cantabrico</h4>
-                <span class="price">4,50€</span>
+                <div class="dish-top">
+                  <h4>Bruschetta Stagionale</h4>
+                  <span class="price">4,50€</span>
+                </div>
+
+                <p>Ingredienti variabili secondo stagionalità</p>
+                <div class="allergen-list">
+                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                    <img src="images/allergens/gluten.png" alt="">
+                  </span>
+
+                </div>
               </div>
 
-              <p>Pane tostato, burro e acciughe del Cantabrico, zest di limone</p>
 
-            </div>
+              <div class="dish">
 
+                <div class="dish-top">
+                  <h4>Tartare di Manzo</h4>
+                  <span class="price">8€</span>
+                </div>
 
-            <div class="dish">
+                <p>Con nocciole tostate, senape in grani e timo</p>
+                <div class="allergen-list">
+                  <span class="allergen-icon" title="Guscio" aria-label="Guscio" data-allergen="Frutta a guscio">
+                    <img src="images/allergens/peanut.png" alt="">
+                  </span>
 
-              <div class="dish-top">
-                <h4>Bruschetta Stagionale</h4>
-                <span class="price">4,50€</span>
+                  
+                </div>
               </div>
 
-              <p>Ingredienti variabili secondo stagionalità</p>
 
-            </div>
+              <div class="dish">
 
+                <div class="dish-top">
+                  <h4>Selezione di Salumi e Formaggi</h4>
+                  <span class="price">7€</span>
+                </div>
 
-            <div class="dish">
-
-              <div class="dish-top">
-                <h4>Tartare di Manzo</h4>
-                <span class="price">8€</span>
+                <p>Selezione di prodotti locali</p>
+                <div class="allergen-list">
+                  <span class="allergen-icon" title="Latte" aria-label="Latte" data-allergen="Latte">
+                    <img src="images/allergens/milk.png" alt="">
+                  </span>
+                </div>
               </div>
 
-              <p>Con nocciole tostate, senape in grani e timo</p>
 
-            </div>
+              <div class="dish">
 
+                <div class="dish-top">
+                  <h4>Carpaccio di Pomodori</h4>
+                  <span class="price">5,50€</span>
+                </div>
 
-            <div class="dish">
-
-              <div class="dish-top">
-                <h4>Selezione di Salumi e Formaggi</h4>
-                <span class="price">7€</span>
+                <p>Con burrata e olive taggiasche</p>
+                <div class="allergen-list">
+                  <span class="allergen-icon" title="Latte" aria-label="Latte" data-allergen="Latte">
+                    <img src="images/allergens/milk.png" alt="">
+                  </span>
+                  <span class="allergen-icon" title="Vegetariano" aria-label="Vegetariano" data-allergen="Vegetariano">
+                    <img src="images/allergens/leaf.png" alt="">
+                  </span>
+                
+                </div>
               </div>
 
-              <p>Selezione di prodotti locali</p>
+
+              <div class="dish">
+
+               
+
+                  <div class="dish-top">
+                    <h4>Cestino di Pane</h4>
+                    <span class="price">2€</span>
+                  </div>
+
+                  <p>Pane rustico</p>
+                  <div class="allergen-list">
+                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                    <img src="images/allergens/gluten.png" alt="">
+                  </span>
+                </div>
+                </div>
+
+             
 
             </div>
 
 
-            <div class="dish">
-
-              <div class="dish-top">
-                <h4>Carpaccio di Pomodori</h4>
-                <span class="price">5,50€</span>
-              </div>
-
-              <p>Con burrata e olive taggiasche</p>
-
-            </div>
-
-
-            <div class="dish">
-
-            <div class="dish">
-
-              <div class="dish-top">
-                <h4>Cestino di Pane</h4>
-                <span class="price">2€</span>
-              </div>
-
-              <p>Pane rustico</p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- ═════════════════════════════════════
+            <!-- ═════════════════════════════════════
              DOLCI — CIBO
         ═════════════════════════════════════ -->
 
-        <div class="sub-panel" id="sub-dolci-cibo">
+            <div class="sub-panel" id="sub-dolci-cibo">
 
-          <div class="menu-cat">
+              <div class="menu-cat">
 
-            <h3>Dolci</h3>
-            <div class="cat-note">Fatti in casa</div>
+                <h3>Dolci</h3>
+                <div class="cat-note">Fatti in casa</div>
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Tiramisù della casa</h4>
-                <span class="price">€__</span>
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Tiramisù della casa</h4>
+                    <span class="price">€__</span>
+                  </div>
+                  <p>Descrizione da inserire.</p>
+                  <div class="allergen-list">
+                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                    <img src="images/allergens/gluten.png" alt="">
+                  </span>
+                </div>
+                </div>
+
+                
+
               </div>
-              <p>Descrizione da inserire.</p>
-            </div>
 
-            <div class="dish">
-              <div class="dish-top">
-                <h4>Dolce del giorno — nome da inserire</h4>
-                <span class="price">€__</span>
-              </div>
-              <p>Descrizione da inserire.</p>
             </div>
 
           </div>
 
         </div>
-
       </div>
+  </section>
 
-    </div>
+
+  <section id="dove-siamo">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Contatti</div>
+        <h2>Vieni a versarne <em>uno</em> con noi</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="info-stack">
+          <div class="contact-row-split">
+    <div class="info-card">
+
+  <div class="contact-links">
+    
+    <!-- Link Email con Icona -->
+    <a href="mailto:mescienoteca@gmail.com" class="contact-item">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </svg>
+      mescienoteca@gmail.com
+    </a>
+    
+    <!-- Link Telefono con Icona -->
+    <a href="tel:+390000000000" class="contact-item">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+      0000000000
+    </a>
+    
   </div>
-</section>
-
-
-<section id="dove-siamo">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Contatti</div>
-      <h2>Vieni a versarne <em>uno</em> con noi</h2>
+  
+</div>
+<div class="info-card social-box">
+    
+      <a href="https://www.instagram.com/mesciwinebar/" target="_blank" rel="noopener noreferrer" class="social-link-clean">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+          mesciwinebar
+      </a>
     </div>
-    <div class="contact-grid">
-      <div class="info-stack">
-        <div class="info-card">
-          <h3>Contatti</h3>
-          <p>Telefono: +39 02 0000 000<br>Email: mescienoteca@gmail.com</p>
+
+    
+
+  </div>
+
+
+
+          <div class="info-card">
+            <h3>Orari</h3>
+            <div class="row"><span>Lunedì</span><span class="closed">Chiuso</span></div>
+            <div class="row"><span>Martedì</span><span>18:00 – 23:00</span></div>
+            <div class="row"><span>Mercoledì</span><span>18:00 – 23:00</span></div>
+            <div class="row"><span>Giovedì</span><span>18:00 – 23:00</span></div>
+            <div class="row"><span>Venerdì</span><span>18:00 – 24:00</span></div>
+            <div class="row"><span>Sabato</span><span>18:00 – 24:00</span></div>
+            <div class="row"><span>Domenica</span><span>18:00 – 23:00</span></div>
+          </div>
         </div>
-        <div class="info-card">
-          <h3>Seguici</h3>
-          <p>Via Milano, 24<br>Pioltello<br>20096 · MI</p>
-        </div>
-        
-        <div class="info-card">
-          <h3>Orari</h3>
-          <div class="row"><span>Lunedì</span><span class="closed">Chiuso</span></div>
-          <div class="row"><span>Martedì</span><span>18:00 – 23:00</span></div>
-          <div class="row"><span>Mercoledì</span><span>18:00 – 23:00</span></div>
-          <div class="row"><span>Giovedì</span><span>18:00 – 23:00</span></div>
-          <div class="row"><span>Venerdì</span><span>18:00 – 24:00</span></div>
-          <div class="row"><span>Sabato</span><span>18:00 – 24:00</span></div>
-          <div class="row"><span>Domenica</span><span>18:00 – 23:00</span></div>
+        <div class="map-box">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.430128084445!2d9.327429876631522!3d45.50141933095415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c993d5418301%3A0xbc7f43cbec28d1ce!2sMesci%20-%20Wine%20Bar!5e0!3m2!1sit!2sit!4v1790790307302!5m2!1sit!2sit"
+            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
       </div>
-      <div class="map-box">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.430128084445!2d9.327429876631522!3d45.50141933095415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c993d5418301%3A0xbc7f43cbec28d1ce!2sMesci%20-%20Wine%20Bar!5e0!3m2!1sit!2sit!4v1790790307302!5m2!1sit!2sit" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <div style="justify-content: space-between;">
-<a
-  href="https://www.instagram.com/enoteca.mesci/"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="text-cream-200/40 transition-colors hover:text-gold-300"
-  aria-label="Instagram"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.5"
-    width="16"
-    height="16"
-    aria-hidden="true"
-  >
-    <rect x="3" y="3" width="18" height="18" rx="5" />
-    <circle cx="12" cy="12" r="4" />
-    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-  </svg>
-</a>
+  <footer>
 
-     <p>© 2026 MESCI — Tutti i diritti riservati</p>
-  </div>
- 
- 
-</footer>
+    <p>© 2026 MESCI s.r.l.s. Tutti i diritti riservati </p>
+    <p>P.IVA &amp; C.F. : 14878740969 </p>
+    <p>Sede legale : via Milano 24</p>
+    <p>Iscritta al Reg. Imprese di Milano - REA MI-2812660</p>
+    <p>Capitale Sociale : 1000€</p>
+    <p>PEC : enoteca.mesci@ionospec.it</p>
+    <p></p>
 
-<script>
-const header = document.getElementById('siteHeader');
-window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 40);
-});
+  </footer>
 
-const burger = document.getElementById('burger');
-const mobileMenu = document.getElementById('mobileMenu');
-burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+  <script>
+    const header = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    });
 
-const sections = ['home','chi-siamo','menu','dove-siamo'].map(id => document.getElementById(id));
-const navLinks = document.querySelectorAll('.navlinks a');
-const setActive = (id) => {
-  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
-};
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) setActive(entry.target.id);
-  });
-}, { rootMargin: '-45% 0px -50% 0px' });
-sections.forEach(s => observer.observe(s));
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
 
-/* ---- MENU: livello 1 (Da Bere / Da Mangiare) ---- */
-const menuMain = document.getElementById('menuMain');
-const level1Btns = document.querySelectorAll('.tab-btn[data-main]');
-const mainPanels = document.querySelectorAll('.menu-panel[data-main]');
+    const sections = ['home', 'chi-siamo', 'menu', 'dove-siamo'].map(id => document.getElementById(id));
+    const navLinks = document.querySelectorAll('.navlinks a');
+    const setActive = (id) => {
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(s => observer.observe(s));
 
-function selectMain(key){
-  level1Btns.forEach(b => {
-    const active = b.dataset.main === key;
-    b.classList.toggle('active', active);
-    b.setAttribute('aria-selected', active);
-  });
-  mainPanels.forEach(p => p.classList.toggle('active', p.dataset.main === key));
-  menuMain.classList.remove('collapsed');
+    /* ---- MENU: livello 1 (Da Bere / Da Mangiare) ---- */
+    const menuMain = document.getElementById('menuMain');
+    const level1Btns = document.querySelectorAll('.tab-btn[data-main]');
+    const mainPanels = document.querySelectorAll('.menu-panel[data-main]');
 
-  if (window.matchMedia('(max-width:840px)').matches) {
-    document.getElementById('backToCategories').scrollIntoView({ block: 'start' });
-  }
-}
-level1Btns.forEach(btn => btn.addEventListener('click', () => selectMain(btn.dataset.main)));
+    function selectMain(key) {
+      level1Btns.forEach(b => {
+        const active = b.dataset.main === key;
+        b.classList.toggle('active', active);
+        b.setAttribute('aria-selected', active);
+      });
+      mainPanels.forEach(p => p.classList.toggle('active', p.dataset.main === key));
+      menuMain.classList.remove('collapsed');
 
-/* su mobile, all'arrivo, nessuna categoria è aperta: solo i due pulsanti */
-if (window.matchMedia('(max-width:840px)').matches) {
-  menuMain.classList.add('collapsed');
-  level1Btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
-}
+      if (window.matchMedia('(max-width:840px)').matches) {
+        document.getElementById('backToCategories').scrollIntoView({ block: 'start' });
+      }
+    }
+    level1Btns.forEach(btn => btn.addEventListener('click', () => selectMain(btn.dataset.main)));
 
-document.getElementById('backToCategories').addEventListener('click', () => {
-  menuMain.classList.add('collapsed');
-  level1Btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
-  document.getElementById('menu').scrollIntoView({ block: 'start' });
-});
+    /* su mobile, all'arrivo, nessuna categoria è aperta: solo i due pulsanti */
+    if (window.matchMedia('(max-width:840px)').matches) {
+      menuMain.classList.add('collapsed');
+      level1Btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+    }
 
-/* ---- MENU: livello 2 (sottocategorie), una per ogni categoria principale ---- */
-mainPanels.forEach(panel => {
-  const subBtns = panel.querySelectorAll('.level2-btn');
-  const subPanels = panel.querySelectorAll('.sub-panel');
-  subBtns.forEach(btn => btn.addEventListener('click', () => {
-    subBtns.forEach(b => { b.classList.toggle('active', b === btn); b.setAttribute('aria-selected', b === btn); });
-    subPanels.forEach(p => p.classList.toggle('active', p.id === 'sub-' + btn.dataset.sub));
-  }));
-});
+    document.getElementById('backToCategories').addEventListener('click', () => {
+      menuMain.classList.add('collapsed');
+      level1Btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+      document.getElementById('menu').scrollIntoView({ block: 'start' });
+    });
 
-/* ---- CANTINA: vista separata, con navigazione propria ---- */
-const cantinaView = document.getElementById('cantinaView');
-document.getElementById('openCantina').addEventListener('click', () => {
-  menuMain.hidden = true;
-  cantinaView.hidden = false;
-  document.getElementById('menu').scrollIntoView({ block: 'start' });
-});
-document.getElementById('closeCantina').addEventListener('click', () => {
-  cantinaView.hidden = true;
-  menuMain.hidden = false;
-  document.getElementById('menu').scrollIntoView({ block: 'start' });
-});
-const cantinaBtns = document.querySelectorAll('.level2-btn[data-cantina]');
-const cantinaPanels = document.querySelectorAll('.cantina-panel');
-cantinaBtns.forEach(btn => btn.addEventListener('click', () => {
-  cantinaBtns.forEach(b => { b.classList.toggle('active', b === btn); b.setAttribute('aria-selected', b === btn); });
-  cantinaPanels.forEach(p => p.classList.toggle('active', p.id === 'cantina-' + btn.dataset.cantina));
-}));
+    /* ---- MENU: livello 2 (sottocategorie), una per ogni categoria principale ---- */
+    mainPanels.forEach(panel => {
+      const subBtns = panel.querySelectorAll('.level2-btn');
+      const subPanels = panel.querySelectorAll('.sub-panel');
+      subBtns.forEach(btn => btn.addEventListener('click', () => {
+        subBtns.forEach(b => { b.classList.toggle('active', b === btn); b.setAttribute('aria-selected', b === btn); });
+        subPanels.forEach(p => p.classList.toggle('active', p.id === 'sub-' + btn.dataset.sub));
+      }));
+    });
+
+    /* ---- CANTINA: vista separata, con navigazione propria ---- */
+    const cantinaView = document.getElementById('cantinaView');
+    document.getElementById('openCantina').addEventListener('click', () => {
+      menuMain.hidden = true;
+      cantinaView.hidden = false;
+      document.getElementById('menu').scrollIntoView({ block: 'start' });
+    });
+    document.getElementById('closeCantina').addEventListener('click', () => {
+      cantinaView.hidden = true;
+      menuMain.hidden = false;
+      document.getElementById('menu').scrollIntoView({ block: 'start' });
+    });
+    const cantinaBtns = document.querySelectorAll('.level2-btn[data-cantina]');
+    const cantinaPanels = document.querySelectorAll('.cantina-panel');
+    cantinaBtns.forEach(btn => btn.addEventListener('click', () => {
+      cantinaBtns.forEach(b => { b.classList.toggle('active', b === btn); b.setAttribute('aria-selected', b === btn); });
+      cantinaPanels.forEach(p => p.classList.toggle('active', p.id === 'cantina-' + btn.dataset.cantina));
+    }));
 
 
-</script>
+  </script>
 </body>
+
 </html>
