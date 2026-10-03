@@ -23,6 +23,7 @@
       --wine-bright: #641723;
       --radius: 4px;
       --text: #928e47;
+      --font-display: 'Fraunces', serif;
     }
 
     * {
@@ -48,7 +49,7 @@
     h1,
     h2,
     h3 {
-      font-family: 'Fraunces', serif;
+      font-family: var(--font-display);
       font-weight: 500;
       line-height: 1.08;
       letter-spacing: -0.01em
@@ -109,7 +110,7 @@
     }
 
     .brand span {
-      font-family: 'Fraunces', serif;
+      font-family: var(--font-display);
       font-size: 1.25rem;
       letter-spacing: 0.06em
     }
@@ -158,26 +159,10 @@
     .burger span {
       width: 22px;
       height: 2px;
+      border-radius: 5px;
       background: var(--cream)
     }
 
-    .mobile-menu {
-      display: none;
-      flex-direction: column;
-      gap: 0;
-      background: var(--bg-soft);
-      border-top: 1px solid var(--line)
-    }
-
-    .mobile-menu a {
-      padding: 16px 32px;
-      border-bottom: 1px solid var(--line);
-      font-size: 0.95rem
-    }
-
-    .mobile-menu.open {
-      display: flex
-    }
 
     /* ---- HERO ---- */
     .hero {
@@ -216,13 +201,7 @@
       animation: riseIn 1.1s ease forwards .15s
     }
 
-    .pour-line {
-      width: 1px;
-      height: 0;
-      background: var(--wine-bright);
-      margin: 0 auto;
-      animation: pour 1.4s ease forwards .4s
-    }
+
 
     @keyframes riseIn {
       from {
@@ -320,7 +299,10 @@
 
     /* ---- SECTION GENERIC ---- */
     section {
-      padding: 100px 0
+      min-height: 100dvh;
+      max-width: 100%;
+      padding: 100px 0;
+      align-content: center;
     }
 
     .wrap {
@@ -332,7 +314,7 @@
 
     .section-head {
       max-width: 640px;
-      margin-bottom: 64px
+      margin-bottom: 64px;   
     }
 
     .section-head .eyebrow {
@@ -370,29 +352,22 @@
     }
 
     .pour-art {
-      position: relative;
-      aspect-ratio: 4/5;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: linear-gradient(160deg, var(--bg-soft), var(--bg));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden
-    }
+  aspect-ratio: 1/1;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-soft);
+  overflow: hidden;
+  padding: 30px;
+}
 
-    .pour-art svg {
-      width: 46%;
-      color: var(--wine-bright);
-      opacity: .9
-    }
-
-    .pour-art::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 0%, rgba(105, 0, 0, 0.28), transparent 60%)
-    }
+.pour-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+   
 
     .stats {
       display: grid;
@@ -407,7 +382,7 @@
     }
 
     .stat .num {
-      font-family: 'Fraunces', serif;
+      font-family: var(--font-display);
       font-size: 2.1rem;
       color: var(--cream)
     }
@@ -520,8 +495,21 @@
 
     .menu-cat h3 {
       font-size: 1.5rem;
-      margin-bottom: 4px
+      margin-bottom: 4px;
     }
+
+    
+
+    .asporto {
+      justify-self:center;
+      text-align: center;
+      padding-bottom:50px;
+      font-style: italic;
+      color: var(--wine);
+
+    }
+
+  
 
     .menu-cat .cat-note {
       color: var(--wine);
@@ -546,14 +534,14 @@
     }
 
     .dish-top h4 {
-      font-family: 'Fraunces', serif;
+      font-family: var(--font-display);
       font-weight: 500;
       font-size: 1.15rem
     }
 
     .dish-top .price {
       color: var(--wine-bright);
-      font-family: 'Fraunces', serif;
+      font-family: var(--font-display);
       font-size: 1.1rem;
       white-space: nowrap;
       padding-right: 1rem;
@@ -755,8 +743,8 @@
 
 /* Forza la dimensione delle icone mail e telefono a 18px */
 .contact-item svg {
-  width: 18px !important;
-  height: 18px !important;
+  width: 22px !important;
+  height: 22px !important;
   flex-shrink: 0;
   color: inherit;
 }
@@ -826,7 +814,6 @@
       border: 1px solid var(--line);
       border-radius: 999px;
       flex-shrink: 0;
-      cursor: help;
     }
 
 
@@ -897,6 +884,7 @@
       font-size: 1.2rem;
       margin-bottom: 4px;
       text-transform: uppercase;
+      border-left:4px solid #641723;
     }
 
     .wine-category .cat-note {
@@ -973,43 +961,52 @@
         padding: 0 22px
       }
 
+    
+
       .tabs {
-        flex-direction: column;
-        background: none;
-        border: 0;
-        padding: 0;
-        gap: 14px;
-        width: 100%
-      }
+  flex-direction: column;
+  background: none;
+  border: 0;
+  padding: 0;
+  gap: 32px;
+  width: 100%;
+  margin: 12px 0 28px;
+}
 
-      .tab-btn {
-        width: 100%;
-        text-align: left;
-        background: var(--wine);
-        border: 1px solid var(--cream-dim);
-        border-radius: 999px;
-        padding: 20px 24px;
-        font-size: 1.05rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center
-      }
+.tab-btn {
+  position: relative;
+  width: 100%;
+  background: var(--wine);
+  color: var(--cream);
+  border: 0;
+  border-radius: 999px;
+  padding: 20px 48px;
+  font-size: 1.05rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 1° ombra = cornice vuota (colore dello sfondo della sezione), 2° = bordo chiaro */
+  box-shadow: 0 0 0 10px var(--bg-soft), 0 0 0 11.5px var(--cream-dim);
+}
 
-      .tab-btn.active {
-        background: var(--wine);
-        border-color: var(--wine)
-      }
+.tab-btn.active {
+  background: var(--wine);
+  color: var(--cream);
+}
 
-      .tab-btn::after {
-        content: '›';
-        color: var(--cream-faint);
-        font-size: 1.4rem;
-        margin-left: 12px
-      }
+.tab-btn::after {
+  content: '›';
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-52%);
+  color: var(--cream-dim);
+  font-size: 1.4rem;
+  margin: 0;
+}
+     
 
-      .cantina-grid {
-        grid-template-columns: 1fr
-      }
+      
 
       #menuMain.collapsed .menu-panel {
         display: none !important
@@ -1030,6 +1027,65 @@
         transition: none !important
       }
     }
+
+    .drawer,
+.drawer-overlay { display: none; }
+
+body.no-scroll { overflow: hidden; }
+
+@media (max-width: 840px) {
+  .drawer-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s ease, visibility .3s;
+    z-index: 200;
+  }
+  .drawer-overlay.open { opacity: 1; visibility: visible; }
+
+  .drawer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 75%;
+    max-width: 340px;
+    background: var(--wine);
+    padding: calc(env(safe-area-inset-top, 0px) + 20px) 28px 32px;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform .35s cubic-bezier(.22, .61, .36, 1), visibility .35s;
+    z-index: 210;
+  }
+  .drawer.open { transform: translateX(0); visibility: visible; }
+
+  .drawer-close {
+    align-self: flex-start;
+    background: none;
+    border: 0;
+    color: var(--cream);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px;
+    margin-bottom: 40px;
+  }
+
+  .drawer-links { display: flex; flex-direction: column; }
+  .drawer-links a {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    padding-bottom: 5px;
+    padding-top: 15px;
+    border-bottom: 1px solid var(--line);
+    color: var(--cream-faint);
+  }
+  .drawer-links a.active { color: var(--cream); }
+}
   </style>
 </head>
 
@@ -1062,12 +1118,18 @@
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </nav>
     <div class="mobile-menu" id="mobileMenu">
-      <a href="#home">Home</a>
-      <a href="#chi-siamo">Chi Siamo</a>
-      <a href="#menu">Menù</a>
-      <a href="#dove-siamo">Contatti</a>
     </div>
   </header>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <button class="drawer-close" id="drawerClose" aria-label="Chiudi">✕</button>
+  <div class="drawer-links">
+    <a href="#home">Home</a>
+    <a href="#chi-siamo">Chi siamo</a>
+    <a href="#menu">Menù</a>
+    <a href="#dove-siamo">Contatti</a>
+  </div>
+</aside>
 
   <section class="hero" id="home">
     <div class="eyebrow">Vino &amp; Tapas</div> 
@@ -1087,8 +1149,7 @@
       </svg>
     </div>
     
-    <p class="tag">Versa. Racconta. <em>Resta.</em> Un'enoteca dove ogni calice inizia una conversazione e ogni piatto
-      la accompagna.</p>
+    <p class="tag">Versa. Racconta. <em>Resta.</em></p>
     <div class="hero-ctas">
       <a href="#menu" class="btn btn-filled">Scopri il Menù</a>
       <a href="#dove-siamo" class="btn btn-outline">Contatti</a>
@@ -1096,36 +1157,25 @@
     <div class="scroll-cue" onclick="window.location='#chi-siamo'">↓</div>
   </section>
 
-  <section id="chi-siamo">
+<section id="chi-siamo">
     <div class="wrap">
       <div class="about-grid">
         <div>
           <div class="section-head" style="margin-bottom:28px">
-            <div class="eyebrow">La nostra storia</div>
-            <h2><em>Due innamorati</em> dietro il bancone</h2>
+            <div class="eyebrow">Chi siamo</div>
+            <h2>L'idea di <em>Mesci</em></h2>
           </div>
           <div class="about-text">
-            <p>MESCI nasce da un verbo antico — <em>mescere</em>, versare il vino — e da un'idea semplice: il bicchiere
-              giusto, offerto al momento giusto, cambia una serata.</p>
-            <p>La nostra carta cambia con le stagioni e con le annate. Al bancone lavoriamo fianco a fianco con chi
-              viene ogni settimana e con chi entra per la prima volta, cercando sempre l'abbinamento che non si
-              aspettava.</p>
-            <p>La cucina segue lo stesso principio: piatti pensati per stare dietro al calice, non per distrarre da
-              esso.</p>
+            <p>Versare, bere e stare insieme. </p>
+              <p>Due ragazzi di Pioltello aprono il locale in cui loro stessi vorrebbero passare la serata: autentica e informale come noi.</p>
+            <p>Riempiamo i calici con vini di produttori indipendenti, che ci piacciono e che raccontano il lavoro di chi li fa, 
+              accompagnandoli con una cucina essenziale, fatta di materie prime locali.</p>
+            <p>Mesci è il nostro modo di farvi stare bene, un bicchiere alla volta.</p>
           </div>
-          <!-- <div class="stats">
-          <div class="stat"><div class="num">180+</div><div class="lbl">Etichette in carta</div></div>
-          <div class="stat"><div class="num">34</div><div class="lbl">Posti al bancone</div></div>
-          <div class="stat"><div class="num">7</div><div class="lbl">Anni di mescita</div></div>
-          <div class="stat"><div class="num">Ogni sera</div><div class="lbl">Aperti dal martedì</div></div>
-        </div> -->
+       
         </div>
         <div class="pour-art">
-          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4">
-            <path d="M30 12h40l-4 34a16 16 0 0 1-32 0z" />
-            <path d="M50 62v22M38 90h24" />
-          </svg>
-          <img src="Prova.jpg" alt="">
+          <img src="images/about.jpeg" alt="">
         </div>
       </div>
     </div>
@@ -1137,14 +1187,14 @@
       <div class="section-head">
         <div class="eyebrow">Il Menù</div>
         <h2>Scelto goccia a <em>goccia</em></h2>
-        <p>Ogni versamento è pensato per il prossimo. Chiedi al banco l'abbinamento</p>
+        
       </div>
 
       <div id="menuMain">
 
         <div class="tabs" role="tablist" aria-label="Categoria principale">
-          <button class="tab-btn active" data-main="bere" role="tab" aria-selected="true">Da Bere</button>
-          <button class="tab-btn" data-main="mangiare" role="tab" aria-selected="false">Da Mangiare</button>
+          <button class="tab-btn active" data-main="bere" role="tab" aria-selected="true">Da bere</button>
+          <button class="tab-btn" data-main="mangiare" role="tab" aria-selected="false">Da mangiare</button>
         </div>
 
         <button class="back-to-categories" id="backToCategories">← Torna alle categorie</button>
@@ -1249,14 +1299,16 @@
         ═════════════════════════════════════ -->
 
           <div class="sub-panel" id="sub-bottiglia">
+            <h3 style="padding-bottom: 5px;" class="asporto"  >Vuoi portarla a casa? </h3>
+            <h3 class="asporto">Tutte le nostre bottiglie sono disponibili da asporto ad un prezzo ridotto</h3>
 
             <!-- BOLLICINE -->
             <div class="wine-list">
 
               <div class="wine-category">
 
-                <h3>Bollicine</h3>
-                <div class="cat-note">Consumazione / Asporto</div>
+                <h3>&nbsp Bollicine</h3>
+                <div class="cat-note"></div>
 
                 <div class="wine-category-dishes">
 
@@ -1335,8 +1387,8 @@
 
               <div class="wine-category">
 
-                <h3>Bianchi</h3>
-                <div class="cat-note">Consumazione / Asporto</div>
+                <h3>&nbsp Bianchi</h3>
+                <div class="cat-note"></div>
 
                 <div class="wine-category-dishes">
 
@@ -1431,8 +1483,8 @@
 
               <div class="wine-category">
 
-                <h3>Rossi</h3>
-                <div class="cat-note">Consumazione / Asporto</div>
+                <h3>&nbsp Rossi</h3>
+                <div class="cat-note"></div>
 
                 <div class="wine-category-dishes">
 
@@ -1511,8 +1563,8 @@
 
               <div class="wine-category">
 
-                <h3>Dolci</h3>
-                <div class="cat-note">Consumazione / Asporto</div>
+                <h3>&nbsp Dolci</h3>
+                <div class="cat-note"></div>
 
                 <div class="wine-category-dishes">
 
@@ -1550,8 +1602,8 @@
                   <h4>Spritz Aperol</h4>
                   <span class="price">7€</span>
                 </div>
-                <p>Gin, Campari, vermouth rosso fatto in casa.</p>
-                <span class="tag-chip">Firma</span>
+                <p>Prosecco · Aperol · Soda</p>
+                
               </div>
 
               <div class="dish">
@@ -1559,8 +1611,8 @@
                   <h4>Spritz Campari</h4>
                   <span class="price">7€</span>
                 </div>
-                <p>Gin, Campari</p>
-                <span class="tag-chip">Firma</span>
+                <p>Prosecco · Bitter · Soda</p>
+                
               </div>
 
               <div class="dish">
@@ -1568,8 +1620,8 @@
                   <h4>Negroni</h4>
                   <span class="price">7€</span>
                 </div>
-                <p>Gin, Campari</p>
-                <span class="tag-chip">Firma</span>
+                <p>Gin · Campari · Vermouth rosso</p>
+                
               </div>
 
               <div class="dish">
@@ -1577,8 +1629,8 @@
                   <h4>Negroni Sbagliato</h4>
                   <span class="price">7€</span>
                 </div>
-                <p>Gin, Campari</p>
-                <span class="tag-chip">Firma</span>
+                <p>Campari · Vermouth rosso · Prosecco</p>
+                
               </div>
 
               <div class="dish">
@@ -1586,8 +1638,8 @@
                   <h4>Americano</h4>
                   <span class="price">7€</span>
                 </div>
-                <p>Gin, Campari</p>
-                <span class="tag-chip">Firma</span>
+                <p>Campari · Vermouth rosso · Soda </p>
+               
               </div>
 
               <div class="dish">
@@ -1595,8 +1647,8 @@
                   <h4>Gin Tonic</h4>
                   <span class="price">7€</span>
                 </div>
-                <p>Gin, Campari</p>
-                <span class="tag-chip">Firma</span>
+                <p>Gin · Fever Tree Tonica</p>
+                
               </div>
 
               <div class="dish">
@@ -1604,8 +1656,8 @@
                   <h4>Gin Tonic Premium</h4>
                   <span class="price">10€</span>
                 </div>
-                <p>Esse Gin </p>
-                <span class="tag-chip">Firma</span>
+                <p>Esse Gin · Fever Tree Tonica</p>
+                
               </div>
 
               <div class="dish">
@@ -1614,7 +1666,7 @@
                   <span class="price">8€</span>
                 </div>
                 <p>Cetriolo pestato · Vodka · Lime · Triple Sec</p>
-                <span class="tag-chip">Firma</span>
+                
               </div>
 
             </div>
@@ -1648,7 +1700,7 @@
                   <h4>Bibite</h4>
                   <span class="price">3€</span>
                 </div>
-                <p> </p>
+                <p> Coca Cola (Zero) · Fanta · Fuze Tea (Pesca/Limone)</p>
               </div>
 
               <div class="dish">
@@ -1708,7 +1760,7 @@
                     <img src="images/allergens/gluten.png" alt="">
                   </span>
                   <span class="allergen-icon" title="Vegetariano" aria-label="Vegetariano" data-allergen="Vegetariano">
-                    <img src="images/allergens/leaf.png" alt="">
+                    <img src="images/allergens/plant-based.png" alt="">
                   </span>
 
                 
@@ -1787,7 +1839,7 @@
                     <img src="images/allergens/milk.png" alt="">
                   </span>
                   <span class="allergen-icon" title="Vegetariano" aria-label="Vegetariano" data-allergen="Vegetariano">
-                    <img src="images/allergens/leaf.png" alt="">
+                    <img src="images/allergens/plant-based.png" alt="">
                   </span>
                 </div>
 
@@ -1807,7 +1859,7 @@
                     <img src="images/allergens/gluten.png" alt="">
                   </span>
                   <span class="allergen-icon" title="Vegetariano" aria-label="Vegetariano" data-allergen="Vegetariano">
-                    <img src="images/allergens/leaf.png" alt="">
+                    <img src="images/allergens/plant-based.png" alt="">
                   </span>
 
                 
@@ -1867,7 +1919,7 @@
                     <img src="images/allergens/gluten.png" alt="">
                   </span>
                   <span class="allergen-icon" title="Vegetariano" aria-label="Vegetariano" data-allergen="Vegetariano">
-                    <img src="images/allergens/leaf.png" alt="">
+                    <img src="images/allergens/plant-based.png" alt="">
                   </span>
 
                   
@@ -1961,7 +2013,7 @@
                     <img src="images/allergens/milk.png" alt="">
                   </span>
                   <span class="allergen-icon" title="Vegetariano" aria-label="Vegetariano" data-allergen="Vegetariano">
-                    <img src="images/allergens/leaf.png" alt="">
+                    <img src="images/allergens/plant-based.png" alt="">
                   </span>
                 
                 </div>
@@ -2050,17 +2102,17 @@
     </a>
     
     <!-- Link Telefono con Icona -->
-    <a href="tel:+390000000000" class="contact-item">
+    <!-- <a href="tel:+390000000000" class="contact-item">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
       </svg>
       0000000000
-    </a>
+    </a> -->
     
   </div>
   
 </div>
-<div class="info-card social-box">
+<div class="info-card contact-links">
     
       <a href="https://www.instagram.com/mesciwinebar/" target="_blank" rel="noopener noreferrer" class="social-link-clean">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -2068,6 +2120,7 @@
           <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
           <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
         </svg>
+        
           mesciwinebar
       </a>
     </div>
@@ -2103,7 +2156,7 @@
 
     <p>© 2026 MESCI s.r.l.s. Tutti i diritti riservati </p>
     <p>P.IVA &amp; C.F. : 14878740969 </p>
-    <p>Sede legale : via Milano 24</p>
+    <p>Sede legale : via Milano 24, 20096 Pioltello (MI)</p>
     <p>Iscritta al Reg. Imprese di Milano - REA MI-2812660</p>
     <p>Capitale Sociale : 1000€</p>
     <p>PEC : enoteca.mesci@ionospec.it</p>
@@ -2117,13 +2170,27 @@
       header.classList.toggle('scrolled', window.scrollY > 40);
     });
 
+    // const burger = document.getElementById('burger'); const mobileMenu = document.getElementById('mobileMenu'); burger.addEventListener('click', () => mobileMenu.classList.toggle('open')); mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open'))); //
+
     const burger = document.getElementById('burger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+const drawer = document.getElementById('drawer');
+const overlay = document.getElementById('drawerOverlay');
+
+function setDrawer(open) {
+  drawer.classList.toggle('open', open);
+  overlay.classList.toggle('open', open);
+  drawer.setAttribute('aria-hidden', !open);
+  document.body.classList.toggle('no-scroll', open);
+}
+
+burger.addEventListener('click', () => setDrawer(true));
+document.getElementById('drawerClose').addEventListener('click', () => setDrawer(false));
+overlay.addEventListener('click', () => setDrawer(false));
+drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setDrawer(false)));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') setDrawer(false); });
 
     const sections = ['home', 'chi-siamo', 'menu', 'dove-siamo'].map(id => document.getElementById(id));
-    const navLinks = document.querySelectorAll('.navlinks a');
+    const navLinks = document.querySelectorAll('.navlinks a, .drawer-links a');
     const setActive = (id) => {
       navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
     };
