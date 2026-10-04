@@ -182,7 +182,7 @@
 
     .hero .eyebrow {
       color: var(--cream-faint);
-      font-size: 0.85rem;
+      font-size: 0.90rem;
       letter-spacing: 0.08em;
       margin-bottom: 28px
     }
@@ -278,11 +278,22 @@
 
     .scroll-cue {
       position: absolute;
-      bottom: 36px;
+      bottom: 80px;
       left: 50%;
       transform: translateX(-50%);
       color: var(--cream-faint);
-      animation: bob 2s ease-in-out infinite
+      animation: bob 2s ease-in-out infinite; 
+      cursor: pointer;
+    }
+
+
+
+    .scroll-cue img {
+      display: block;
+      width: 22px;             
+      height: auto;
+      filter: invert(1);       
+      opacity: .75;            
     }
 
     @keyframes bob {
@@ -1086,6 +1097,8 @@ body.no-scroll { overflow: hidden; }
   }
   .drawer-links a.active { color: var(--cream); }
 }
+
+
   </style>
 </head>
 
@@ -1154,7 +1167,9 @@ body.no-scroll { overflow: hidden; }
       <a href="#menu" class="btn btn-filled">Scopri il Menù</a>
       <a href="#dove-siamo" class="btn btn-outline">Contatti</a>
     </div>
-    <div class="scroll-cue" onclick="window.location='#chi-siamo'">↓</div>
+    <div class="scroll-cue" onclick="window.location='#chi-siamo'">
+      <img src="images/arrow-down-sign-to-navigate.png" alt="">
+    </div>
   </section>
 
 <section id="chi-siamo">
@@ -1163,14 +1178,14 @@ body.no-scroll { overflow: hidden; }
         <div>
           <div class="section-head" style="margin-bottom:28px">
             <div class="eyebrow">Chi siamo</div>
-            <h2>L'idea di <em>Mesci</em></h2>
+            <h2>L' idea di <em>Mesci</em></h2>
           </div>
           <div class="about-text">
             <p>Versare, bere e stare insieme. </p>
               <p>Due ragazzi di Pioltello aprono il locale in cui loro stessi vorrebbero passare la serata: autentica e informale come noi.</p>
-            <p>Riempiamo i calici con vini di produttori indipendenti, che ci piacciono e che raccontano il lavoro di chi li fa, 
+            <p>Riempiamo i calici con vini di piccoli produttori indipendenti, che ci piacciono e che raccontano il lavoro di chi li fa, 
               accompagnandoli con una cucina essenziale, fatta di materie prime locali.</p>
-            <p>Mesci è il nostro modo di farvi stare bene, un bicchiere alla volta.</p>
+            <p><b>Mesci</b> è il nostro modo di farvi stare bene, un bicchiere alla volta.</p>
           </div>
        
         </div>
@@ -1690,7 +1705,7 @@ body.no-scroll { overflow: hidden; }
               <div class="dish">
                 <div class="dish-top">
                   <h4>Analcolico della casa</h4>
-                  <span class="price">Dai 7€</span>
+                  <span class="price">Da 7€</span>
                 </div>
                 <p> </p>
               </div>
@@ -1873,7 +1888,7 @@ body.no-scroll { overflow: hidden; }
                   <span class="price">4€</span>
                 </div>
 
-                <p>Prosciutto, formaggio, maionese</p>
+                <p>Prosciutto cotto, formaggio, maionese</p>
                 <div class="allergen-list">
                   <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
                     <img src="images/allergens/gluten.png" alt="">
@@ -2076,6 +2091,7 @@ body.no-scroll { overflow: hidden; }
 
         </div>
       </div>
+     
   </section>
 
 
@@ -2149,7 +2165,10 @@ body.no-scroll { overflow: hidden; }
             referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
       </div>
+
+    
     </div>
+
   </section>
 
   <footer>
