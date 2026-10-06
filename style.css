@@ -342,6 +342,8 @@
   padding: 30px;
 }
 
+
+
 .pour-art img {
   display: block;
   width: 100%;
@@ -552,7 +554,7 @@
     }
 
     .info-card {
-      background: var(--bg);
+      background: var(--bg-soft);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 28px
@@ -662,7 +664,7 @@
 
 
     .map-box {
-  background: var(--bg);
+  background: var(--bg-soft);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
