@@ -82,12 +82,21 @@ document.getElementById('backToCategories').addEventListener('click', () => {
 });
 
 /* ---- MENU: livello 2 (sottocategorie), una per ogni categoria principale ---- */
+
+/* porta in vista l'inizio della lista, ma solo se l'utente è già sceso oltre */
+function revealStart(el) {
+  if (el.getBoundingClientRect().top < header.offsetHeight) {
+    el.scrollIntoView({ block: 'start', behavior: 'instant' });
+  }
+}
+
 mainPanels.forEach(panel => {
   const subBtns = panel.querySelectorAll('.level2-btn');
   const subPanels = panel.querySelectorAll('.sub-panel');
   subBtns.forEach(btn => btn.addEventListener('click', () => {
     subBtns.forEach(b => { b.classList.toggle('active', b === btn); b.setAttribute('aria-selected', b === btn); });
     subPanels.forEach(p => p.classList.toggle('active', p.id === 'sub-' + btn.dataset.sub));
+    revealStart(panel);
   }));
 });
 
