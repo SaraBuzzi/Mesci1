@@ -5,19 +5,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>MESCI — Wine Bar</title>
+  <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-title" content="Mesci">
+
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="description"
+    content="Wine bar a Pioltello: vini di piccoli produttori indipendenti, cocktail e tapas con materie prime locali.">
+  <meta name="theme-color" content="#73766d">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:title" content="MESCI — Wine Bar">
+  <meta property="og:description" content="Vino &amp; Tapas">
+  <meta property="og:image" content="https://sarabuzzi.github.io/images/og.jpg">
+  <meta property="og:url" content="https://sarabuzzi.github.io/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap"
     rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
   <header id="siteHeader">
     <nav>
-      <div onclick="window.location='#home'" class="brand">
+      <a href="#home" class="brand">
         <svg viewBox="0 0 1173.86 350" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
           <path
             d="M803.99,224.7c-1.55-27.49-26.13-41.85-50.7-52.51l-45.63-19.8c-7.72-3.35-14.66-7.65-20.78-13.19-12.34-11.17-13.45-30.12-1.42-41.74,6.43-6.21,14.78-9.75,23.61-11.3,31.81-5.56,61.44,8.32,80.28,35.89.36-10.3-2.32-19.14-3.6-28.94-21.83-9.48-45.2-13.91-68.92-12.48-27.51,1.66-53.09,16.17-54.87,44.02-1.78,27.78,20.93,42.56,45.34,53.08l38.39,16.54c22.19,9.56,45.13,23.98,41.77,48.51-3.58,26.16-34.22,35.47-60.65,32.54-18.78-2.08-35.65-10.07-50.34-21.83l-20.43-16.35c-2.62-1.79-5.34-3.23-8.1-4.32,3.41,15.09,5.09,22.5,7.95,32.32,19.69,9.26,40.39,13.53,62.11,15.22,24.09,1.87,50.65-.69,69.15-16.19,11.87-9.94,17.7-24.04,16.83-39.48Z" />
@@ -30,11 +46,11 @@
           <circle cx="1039.6" cy="51.22" r="14.45" />
           <path
             d="M1028.13,260.32l.12-148.16-1.25-14.99c-1.81-3.54-3.78-5.41-7.89-8.98l32.14-4.91.15,177.75c0,6.6,2.77,10.41,7.71,15.83l-38.91.13c4.48-5.16,7.93-9.1,7.93-16.66Z" />
-                  </svg>
-      </div>
+        </svg>
+      </a>
       <div class="navlinks">
         <a href="#home" class="active">Home</a>
-        <a href="#chi-siamo">Chi Siamo</a>
+        <a href="#chi-siamo">Chi siamo</a>
         <a href="#menu">Menù</a>
         <a href="#dove-siamo">Contatti</a>
       </div>
@@ -42,60 +58,64 @@
     </nav>
   </header>
   <div class="drawer-overlay" id="drawerOverlay"></div>
-<aside class="drawer" id="drawer" aria-hidden="true">
-  <button class="drawer-close" id="drawerClose" aria-label="Chiudi">✕</button>
-  <div class="drawer-links">
-    <a href="#home">Home</a>
-    <a href="#chi-siamo">Chi siamo</a>
-    <a href="#menu">Menù</a>
-    <a href="#dove-siamo">Contatti</a>
-  </div>
-</aside>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <button class="drawer-close" id="drawerClose" aria-label="Chiudi">✕</button>
+    <div class="drawer-links">
+      <a href="#home">Home</a>
+      <a href="#chi-siamo">Chi siamo</a>
+      <a href="#menu">Menù</a>
+      <a href="#dove-siamo">Contatti</a>
+    </div>
+  </aside>
 
   <section class="hero" id="home">
-    <div class="eyebrow">Vino &amp; Tapas</div> 
+    <div class="eyebrow">Vino &amp; Tapas</div>
     <div class="logo-mark">
       <svg viewBox="0 0 1173.86 400" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-        <path 
+        <path
           d="M803.99,224.7c-1.55-27.49-26.13-41.85-50.7-52.51l-45.63-19.8c-7.72-3.35-14.66-7.65-20.78-13.19-12.34-11.17-13.45-30.12-1.42-41.74,6.43-6.21,14.78-9.75,23.61-11.3,31.81-5.56,61.44,8.32,80.28,35.89.36-10.3-2.32-19.14-3.6-28.94-21.83-9.48-45.2-13.91-68.92-12.48-27.51,1.66-53.09,16.17-54.87,44.02-1.78,27.78,20.93,42.56,45.34,53.08l38.39,16.54c22.19,9.56,45.13,23.98,41.77,48.51-3.58,26.16-34.22,35.47-60.65,32.54-18.78-2.08-35.65-10.07-50.34-21.83l-20.43-16.35c-2.62-1.79-5.34-3.23-8.1-4.32,3.41,15.09,5.09,22.5,7.95,32.32,19.69,9.26,40.39,13.53,62.11,15.22,24.09,1.87,50.65-.69,69.15-16.19,11.87-9.94,17.7-24.04,16.83-39.48Z" />
         <path style="fill: rgba(83, 19, 30, 0.75)"
           d="M629.44,201.49c-7.94,33.76-24.98,56.64-61.57,57.76-40.06,1.22-68.55-13.53-82.07-51.3.24-7.02,5.44-13.26,11.67-16.73,44.31-24.67,89.72-45.68,137.05-64.81-23.99-41.64-77.68-55.94-120.31-39.45-27.83,10.76-48.13,35.02-56.22,60.42-10.29,32.3-4.03,64.03,14.68,89.69,14.36,19.69,34.62,31.92,57.9,37.32,10.14,2.35,16.93,10.76,16.96,21.03l.09,30.14c.02,6.45-4.16,11.94-10.55,12.6l-21.1,2.16c-.72.07-2.86.5-2.54,1.07l1.17,2.06,71.42.1c1.88-.28,3.84-1.54,3.66-2.85l-23.11-2.39c-6.26-.65-10.95-5.8-10.94-12.21l.03-31.22c.01-9.78,7.02-17.91,16.24-20.81,22.66-7.11,33-12.63,41.86-20.52s20.55-17.93,29.61-42.13c-1.37-1.54-13.54-9.5-13.94-9.93ZM480.78,193.33c-6.22-26.5-2.58-53.99,11.72-76.7,11.82-18.77,31.01-31.21,53.55-31,23.78.22,45.38,15.01,54.44,36.56,2.22,5.29.56,11.33-4.94,14.07l-114.76,57.06Z" />
-        <path 
+        <path
           d="M319.23,276.73l-38.81.19,4.94-5.81c1.98-4.65,2.92-10.54,2.92-16.21v-105.81c0-21.64-7.11-43.72-25.98-54.27-11.29-6.31-23.89-5.73-36.05-1.51-18.15,7.66-31.24,23.48-36.03,42.95l.07,124.19c0,6.8,2.81,11.28,7.44,16.5l-39.41-.07c3.64-4.06,6.47-6.26,7.19-10.19.85-4.65,1.45-8.95,1.45-13.84V113.14c0-5.65-.52-10.57-.93-15.99-1.46-4.55-3.28-6.61-7.69-11.13l31.76-.29.25,34.55c11.2-21.63,31.13-36.96,55.62-39.49,18.69-1.93,36.65,4.38,49.22,17.99,8.82,9.55,12.82,21.27,15.19,34.59,4.34-10.8,9.02-20.59,16.24-29.7,21.78-27.5,62.29-31.43,88.15-7.34,12.33,11.48,18,31.29,18.01,48.71l.08,109.86c0,5.92.98,12.05,3.13,16.78l4.49,5.27-38.65-.09c5.23-5.61,7.65-10.1,7.66-16.92l.08-112.24c0-11.78-2.09-22.72-7.05-33.07-7.22-15.05-21.5-25.2-38.55-24.42-14.49.66-27.26,8.24-35.76,20.15-8.99,12.61-16.42,27.87-16.48,43.91l-.33,101.66c-.03,7.94,1.21,14.8,7.84,20.82Z" />
-        <path 
+        <path
           d="M858.73,237.65c22,30.84,60.06,42.22,95.23,29.03,22.21-8.33,39.36-25.19,50.65-45.79,1.22.42,3.47,1.11,3.34,1.84s-.69,2.29-1.13,3.16c-15.31,29.96-43.47,49.98-77.08,53.84-22.75,2.61-45.27-1.14-65.27-12.12-38.49-21.14-57.81-64.52-49.25-107.31s43.4-75.35,87.95-79.39c28.9-2.62,57.55,4.46,82.54,19.27l5.68,34.91c-8.66-9.97-14.49-19-23.44-27.08-16.27-14.7-36.74-23.83-58.89-22.79-25.4,1.19-46.85,15-58.89,37-19.43,35.5-15.29,82,8.55,115.43Z" />
         <circle cx="1039.6" cy="51.22" r="14.45" />
-        <path 
+        <path
           d="M1028.13,260.32l.12-148.16-1.25-14.99c-1.81-3.54-3.78-5.41-7.89-8.98l32.14-4.91.15,177.75c0,6.6,2.77,10.41,7.71,15.83l-38.91.13c4.48-5.16,7.93-9.1,7.93-16.66Z" />
       </svg>
     </div>
-    
+
     <p class="tag">Versa. Racconta. <em>Resta.</em></p>
     <div class="hero-ctas">
       <a href="#menu" class="btn btn-filled">Scopri il Menù</a>
       <a href="#dove-siamo" class="btn btn-outline">Contatti</a>
     </div>
-    <div class="scroll-cue" onclick="window.location='#chi-siamo'">
+    <a class="scroll-cue" href="#chi-siamo">
       <img src="images/arrow-down-sign-to-navigate.png" alt="">
-    </div>
+    </a>
   </section>
 
-<section id="chi-siamo">
+  <section id="chi-siamo">
     <div class="wrap">
       <div class="about-grid">
         <div>
           <div class="section-head" style="margin-bottom:28px">
             <div class="eyebrow">Chi siamo</div>
-            <h2>L' idea di <em>Mesci</em></h2>
+            <h2>L'idea di <em>Mesci</em></h2>
           </div>
           <div class="about-text">
-           <p><i style="color: var(--wine);"><b>Mescere &nbsp</b></i>[mé-sce-re] <br> <i>versare da bere in un bicchiere o in un altro recipiente, oppure, in senso più antico e letterario, mescolare e unire più cose insieme.</i> </p>
-           <p>Due ragazzi di Pioltello aprono il locale in cui loro stessi vorrebbero passare una serata con i loro amici: autentica e informale.</p>
-            <p>Riempiamo i calici con vini di piccoli produttori indipendenti, che ci piacciono e che raccontano il lavoro di chi li fa, 
+            <p><i style="color: var(--wine);"><b>Mescere &nbsp;</b></i>[mé-sce-re] <br> <i>versare da bere in un
+                bicchiere o in un altro recipiente, oppure, in senso più antico e letterario, mescolare e unire più cose
+                insieme.</i> </p>
+            <p>Due ragazzi di Pioltello aprono il locale in cui loro stessi vorrebbero passare una serata con i loro
+              amici: autentica e informale.</p>
+            <p>Riempiamo i calici con vini di piccoli produttori indipendenti, che ci piacciono e che raccontano il
+              lavoro di chi li fa,
               accompagnandoli con una cucina essenziale, fatta di materie prime locali.</p>
             <p>Mesci è il nostro modo di farvi stare bene, un bicchiere alla volta. </p>
           </div>
-       
+
         </div>
         <div class="pour-art">
           <img src="images/about2.jpg" alt="">
@@ -110,7 +130,7 @@
       <div class="section-head">
         <div class="eyebrow">Il Menù</div>
         <h2>Scelto goccia a <em>goccia</em></h2>
-        
+
       </div>
 
       <div id="menuMain">
@@ -150,89 +170,89 @@
             <div class="cat-note">Al calice · 10cl</div>
             -->
 
-            <div class="wine-category">
+              <div class="wine-category">
 
-              <h3 style="margin-bottom: 40px;">&nbsp Bollicine</h3>
+                <h3 style="margin-bottom: 40px;">Bollicine</h3>
 
-              <div class="dish">
-                <div class="dish-top">
-                  <h4>Valdobbiadene DOCG Spumante Extra Dry</h4>
-                  <span class="price">6€</span>
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Valdobbiadene DOCG Spumante Extra Dry</h4>
+                    <span class="price">6€</span>
+                  </div>
+                  <p>Vettori</p>
+                  <span class="tag-chip">Veneto</span>
                 </div>
-                <p>Vettori</p>
-                <span class="tag-chip">Veneto</span>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Franciacorta Extra Brut Millesimato</h4>
+                    <span class="price">9€</span>
+                  </div>
+                  <p>2019 · Massussi</p>
+                  <span class="tag-chip">Lombardia</span>
+                </div>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Crémant de Limoux Blanc Brut</h4>
+                    <span class="price">8€</span>
+                  </div>
+                  <p>Altugnac · Collovray &amp; Terrier</p>
+                  <span class="tag-chip">Francia</span> <span class="tag-chip">Languedoc</span>
+                </div>
+
               </div>
 
-              <div class="dish">
-                <div class="dish-top">
-                  <h4>Franciacorta Extra Brut Millesimato</h4>
-                  <span class="price">9€</span>
+
+              <div class="wine-category">
+
+                <h3 style="margin-bottom: 40px;">Bianchi</h3>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Collio Bianco</h4>
+                    <span class="price">7€</span>
+                  </div>
+                  <p>2024 · Tenuta Stella</p>
+                  <span class="tag-chip">Friuli Venezia Giulia</span>
                 </div>
-                <p>2019 · Massussi</p>
-                <span class="tag-chip">Lombardia</span>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Les Turitelles Chardonnay</h4>
+                    <span class="price">7€</span>
+                  </div>
+                  <p>2025 · Altugnac</p>
+                  <span class="tag-chip">Francia</span> <span class="tag-chip">Languedoc</span>
+                </div>
+
               </div>
 
-              <div class="dish">
-                <div class="dish-top">
-                  <h4>Crémant de Limoux Blanc Brut</h4>
-                  <span class="price">8€</span>
+
+              <div class="wine-category">
+
+                <h3 style="margin-bottom: 40px;">Rossi</h3>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Langhe Nebbiolo DOC Simane</h4>
+                    <span class="price">6€</span>
+                  </div>
+                  <p>2023 · Reverdito</p>
+                  <span class="tag-chip">Piemonte</span>
                 </div>
-                <p>Altugnac · Collovray &amp; Terrier</p>
-                <span class="tag-chip">Francia</span> <span class="tag-chip">Languedoc</span>
+
+                <div class="dish">
+                  <div class="dish-top">
+                    <h4>Rosso Manolibera</h4>
+                    <span class="price">6€</span>
+                  </div>
+                  <p>2022 · Muralia</p>
+                  <span class="tag-chip">Toscana</span>
+                </div>
+
               </div>
 
-            </div>
-            
-
-            <div class="wine-category">
-
-              <h3 style="margin-bottom: 40px;">&nbsp Bianco</h3>
-
-              <div class="dish">
-                <div class="dish-top">
-                  <h4>Collio Bianco</h4>
-                  <span class="price">7€</span>
-                </div>
-                <p>2024 · Tenuta Stella</p>
-                <span class="tag-chip">Friuli Venezia Giulia</span>
-              </div>
-
-              <div class="dish">
-                <div class="dish-top">
-                  <h4>Les Turitelles Chardonnay</h4>
-                  <span class="price">7€</span>
-                </div>
-                <p>2025 · Altugnac</p>
-                <span class="tag-chip">Francia</span> <span class="tag-chip">Languedoc</span>
-              </div>
-
-            </div>
-              
-
-            <div class="wine-category">
-
-              <h3 style="margin-bottom: 40px;">&nbsp Rosso</h3>
-
-              <div class="dish">
-                <div class="dish-top">
-                  <h4>Langhe Nebbiolo DOC Simane</h4>
-                  <span class="price">6€</span>
-                </div>
-                <p>2023 · Reverdito</p>
-                <span class="tag-chip">Piemonte</span>
-              </div>
-
-              <div class="dish">
-                <div class="dish-top">
-                  <h4>Rosso Manolibera</h4>
-                  <span class="price">6€</span>
-                </div>
-                <p>2022 · Muralia</p>
-                <span class="tag-chip">Toscana</span>
-              </div>
-
-            </div>
-              
 
 
             </div>
@@ -244,7 +264,7 @@
         ═════════════════════════════════════ -->
 
           <div class="sub-panel" id="sub-bottiglia">
-            <h3 style="padding-bottom: 5px;" class="asporto"  >Vuoi portarla a casa? </h3>
+            <h3 style="padding-bottom: 5px;" class="asporto">Vuoi portarla a casa? </h3>
             <h3 class="asporto">Tutte le nostre bottiglie sono disponibili da asporto ad un prezzo ridotto</h3>
 
             <!-- BOLLICINE -->
@@ -252,7 +272,7 @@
 
               <div class="wine-category">
 
-                <h3>&nbsp Bollicine</h3>
+                <h3>Bollicine</h3>
                 <div class="cat-note"></div>
 
                 <div class="wine-category-dishes">
@@ -295,7 +315,7 @@
 
                   <div class="dish">
                     <div class="dish-top">
-                      <h4>Roccapietra Gruasè Rosè</h4>
+                      <h4>Roccapietra Gruasè Rosé</h4>
                       <span class="price">39,50€</span>
                     </div>
                     <p>Scuropasso</p>
@@ -340,7 +360,7 @@
 
               <div class="wine-category">
 
-                <h3>&nbsp Bianchi</h3>
+                <h3>Bianchi</h3>
                 <div class="cat-note"></div>
 
                 <div class="wine-category-dishes">
@@ -351,7 +371,7 @@
                       <span class="price">28€</span>
                     </div>
                     <p>Tenuta Stella</p>
-                     <span class="tag-chip">Friuli Venezia Giulia</span>
+                    <span class="tag-chip">Friuli Venezia Giulia</span>
                   </div>
 
                   <div class="dish">
@@ -375,7 +395,7 @@
                   <div class="dish">
                     <div class="dish-top">
                       <h4>Trentino Nosiola</h4>
-                      <span class="price">€28</span>
+                      <span class="price">28€</span>
                     </div>
                     <p>2024 · Fanti</p>
                     <span class="tag-chip">Trentino Alto Adige</span>
@@ -414,7 +434,7 @@
                       <span class="price">28€</span>
                     </div>
                     <p>2024 · Casale Marchese</p>
-                     <span class="tag-chip">Lazio</span>
+                    <span class="tag-chip">Lazio</span>
                   </div>
 
                   <div class="dish">
@@ -445,7 +465,7 @@
 
               <div class="wine-category">
 
-                <h3>&nbsp Rossi</h3>
+                <h3>Rossi</h3>
                 <div class="cat-note"></div>
 
                 <div class="wine-category-dishes">
@@ -473,7 +493,7 @@
                       <h4>Barbera d'Alba DOC</h4>
                       <span class="price">22€</span>
                     </div>
-                    <p>2024 · Beverdita</p>
+                    <p>2024 · Reverdito</p>
                     <span class="tag-chip">Piemonte</span>
                   </div>
 
@@ -482,7 +502,7 @@
                       <h4>Barolo</h4>
                       <span class="price">38€</span>
                     </div>
-                    <p>2020 · Beverdita</p>
+                    <p>2020 · Reverdito</p>
                     <span class="tag-chip">Piemonte</span>
                   </div>
 
@@ -533,7 +553,7 @@
 
               <div class="wine-category">
 
-                <h3>&nbsp Dolci</h3>
+                <h3>Dolci</h3>
                 <div class="cat-note"></div>
 
                 <div class="wine-category-dishes">
@@ -574,7 +594,7 @@
                   <span class="price">7€</span>
                 </div>
                 <p>Prosecco · Aperol · Soda</p>
-                
+
               </div>
 
               <div class="dish">
@@ -583,7 +603,7 @@
                   <span class="price">7€</span>
                 </div>
                 <p>Prosecco · Bitter · Soda</p>
-                
+
               </div>
 
               <div class="dish">
@@ -592,7 +612,7 @@
                   <span class="price">7€</span>
                 </div>
                 <p>Gin · Campari · Vermouth rosso</p>
-                
+
               </div>
 
               <div class="dish">
@@ -601,7 +621,7 @@
                   <span class="price">7€</span>
                 </div>
                 <p>Campari · Vermouth rosso · Prosecco</p>
-                
+
               </div>
 
               <div class="dish">
@@ -610,7 +630,7 @@
                   <span class="price">7€</span>
                 </div>
                 <p>Campari · Vermouth rosso · Soda </p>
-               
+
               </div>
 
               <div class="dish">
@@ -619,7 +639,7 @@
                   <span class="price">7€</span>
                 </div>
                 <p>Gin · Fever Tree Tonica</p>
-                
+
               </div>
 
               <div class="dish">
@@ -628,7 +648,7 @@
                   <span class="price">10€</span>
                 </div>
                 <p>Esse Gin · Fever Tree Tonica</p>
-                
+
               </div>
 
               <div class="dish">
@@ -637,7 +657,7 @@
                   <span class="price">8€</span>
                 </div>
                 <p>Cetriolo pestato · Vodka · Lime · Triple Sec</p>
-                
+
               </div>
 
             </div>
@@ -724,17 +744,17 @@
                 <p>Con salsa brava e aioli</p>
 
                 <div class="allergen-list">
-                  <span class="allergen-icon" title="Uova" aria-label="Uova" data-allergen="Uova">
+                  <span class="allergen-icon" aria-label="Uova" data-allergen="Uova">
                     <img src="images/allergens/eggs.png" alt="">
                   </span>
-                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                  <span class="allergen-icon" aria-label="Glutine" data-allergen="Glutine">
                     <img src="images/allergens/gluten.png" alt="">
                   </span>
-                  <span class="allergen-icon" title="Vegetariano" aria-label="Vegetariano" data-allergen="Vegetariano">
+                  <span class="allergen-icon" aria-label="Vegetariano" data-allergen="Vegetariano">
                     <img src="images/allergens/plant-based.png" alt="">
                   </span>
 
-                
+
                 </div>
 
               </div>
@@ -749,11 +769,11 @@
 
                 <p>Panino con lonza di maiale, jamón e friggitelli</p>
                 <div class="allergen-list">
-                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                  <span class="allergen-icon" aria-label="Glutine" data-allergen="Glutine">
                     <img src="images/allergens/gluten.png" alt="">
                   </span>
 
-              
+
                 </div>
               </div>
 
@@ -767,11 +787,11 @@
 
                 <p>Polpo, patate, cristalli di sale e paprika affumicata</p>
                 <div class="allergen-list">
-                  <span class="allergen-icon" title="Molluschi" aria-label="Molluschi" data-allergen="Molluschi">
+                  <span class="allergen-icon" aria-label="Molluschi" data-allergen="Molluschi">
                     <img src="images/allergens/molluscs.png" alt="">
                   </span>
 
-                
+
                 </div>
               </div>
 
@@ -785,11 +805,11 @@
 
                 <p>Accompagnate da pane rustico</p>
                 <div class="allergen-list">
-                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                  <span class="allergen-icon" aria-label="Glutine" data-allergen="Glutine">
                     <img src="images/allergens/gluten.png" alt="">
                   </span>
 
-                  <span class="allergen-icon" title="Latte" aria-label="Latte" data-allergen="Latte">
+                  <span class="allergen-icon" aria-label="Latte" data-allergen="Latte">
                     <img src="images/allergens/milk.png" alt="">
                   </span>
                 </div>
@@ -806,10 +826,10 @@
                 <p>Polenta fritta con stracciatella</p>
                 <div class="allergen-list">
 
-                  <span class="allergen-icon" title="Latte" aria-label="Latte" data-allergen="Latte">
+                  <span class="allergen-icon" aria-label="Latte" data-allergen="Latte">
                     <img src="images/allergens/milk.png" alt="">
                   </span>
-                  <span class="allergen-icon" title="Vegetariano" aria-label="Vegetariano" data-allergen="Vegetariano">
+                  <span class="allergen-icon" aria-label="Vegetariano" data-allergen="Vegetariano">
                     <img src="images/allergens/plant-based.png" alt="">
                   </span>
                 </div>
@@ -826,14 +846,14 @@
 
                 <p>Dall'orto di Corbari, con cotture e preparazioni variabili in base alla disponibilità</p>
                 <div class="allergen-list">
-                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                  <span class="allergen-icon" aria-label="Glutine" data-allergen="Glutine">
                     <img src="images/allergens/gluten.png" alt="">
                   </span>
-                  <span class="allergen-icon" title="Vegetariano" aria-label="Vegetariano" data-allergen="Vegetariano">
+                  <span class="allergen-icon" aria-label="Vegetariano" data-allergen="Vegetariano">
                     <img src="images/allergens/plant-based.png" alt="">
                   </span>
 
-                
+
                 </div>
               </div>
 
@@ -846,14 +866,14 @@
 
                 <p>Prosciutto cotto, formaggio, maionese</p>
                 <div class="allergen-list">
-                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                  <span class="allergen-icon" aria-label="Glutine" data-allergen="Glutine">
                     <img src="images/allergens/gluten.png" alt="">
                   </span>
 
-                  <span class="allergen-icon" title="Latte" aria-label="Latte" data-allergen="Latte">
+                  <span class="allergen-icon" aria-label="Latte" data-allergen="Latte">
                     <img src="images/allergens/milk.png" alt="">
                   </span>
-                  <span class="allergen-icon" title="Uova" aria-label="Uova" data-allergen="Uova">
+                  <span class="allergen-icon" aria-label="Uova" data-allergen="Uova">
                     <img src="images/allergens/eggs.png" alt="">
                   </span>
                 </div>
@@ -886,14 +906,14 @@
 
                 <p>Pane e pomodoro</p>
                 <div class="allergen-list">
-                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                  <span class="allergen-icon" aria-label="Glutine" data-allergen="Glutine">
                     <img src="images/allergens/gluten.png" alt="">
                   </span>
-                  <span class="allergen-icon" title="Vegetariano" aria-label="Vegetariano" data-allergen="Vegetariano">
+                  <span class="allergen-icon" aria-label="Vegetariano" data-allergen="Vegetariano">
                     <img src="images/allergens/plant-based.png" alt="">
                   </span>
 
-                  
+
                 </div>
               </div>
               <div class="dish">
@@ -905,15 +925,15 @@
 
                 <p>Pane tostato, burro e acciughe del Cantabrico, zest di limone</p>
                 <div class="allergen-list">
-                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                  <span class="allergen-icon" aria-label="Glutine" data-allergen="Glutine">
                     <img src="images/allergens/gluten.png" alt="">
                   </span>
 
-                  <span class="allergen-icon" title="Latte" aria-label="Latte" data-allergen="Latte">
+                  <span class="allergen-icon" aria-label="Latte" data-allergen="Latte">
                     <img src="images/allergens/milk.png" alt="">
                   </span>
 
-                  <span class="allergen-icon" title="Pesce" aria-label="Pesce" data-allergen="Pesce">
+                  <span class="allergen-icon" aria-label="Pesce" data-allergen="Pesce">
                     <img src="images/allergens/fish.png" alt="">
                   </span>
                 </div>
@@ -929,7 +949,7 @@
 
                 <p>Ingredienti variabili secondo stagionalità</p>
                 <div class="allergen-list">
-                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                  <span class="allergen-icon" aria-label="Glutine" data-allergen="Glutine">
                     <img src="images/allergens/gluten.png" alt="">
                   </span>
 
@@ -946,11 +966,14 @@
 
                 <p>Con nocciole tostate, senape in grani e timo</p>
                 <div class="allergen-list">
-                  <span class="allergen-icon" title="Guscio" aria-label="Guscio" data-allergen="Frutta a guscio">
-                    <img src="images/allergens/peanut.png" alt="">
+                  <span class="allergen-icon" aria-label="Senape" data-allergen="Senape">
+                    <img src="images/allergens/mustard.png" alt="">
+                  </span>
+                  <span class="allergen-icon" aria-label="Frutta a guscio" data-allergen="Frutta a guscio">
+                    <img src="images/allergens/nut.png" alt="">
                   </span>
 
-                  
+
                 </div>
               </div>
 
@@ -964,7 +987,7 @@
 
                 <p>Selezione di prodotti locali</p>
                 <div class="allergen-list">
-                  <span class="allergen-icon" title="Latte" aria-label="Latte" data-allergen="Latte">
+                  <span class="allergen-icon" aria-label="Latte" data-allergen="Latte">
                     <img src="images/allergens/milk.png" alt="">
                   </span>
                 </div>
@@ -980,35 +1003,35 @@
 
                 <p>Con burrata e olive taggiasche</p>
                 <div class="allergen-list">
-                  <span class="allergen-icon" title="Latte" aria-label="Latte" data-allergen="Latte">
+                  <span class="allergen-icon" aria-label="Latte" data-allergen="Latte">
                     <img src="images/allergens/milk.png" alt="">
                   </span>
-                  <span class="allergen-icon" title="Vegetariano" aria-label="Vegetariano" data-allergen="Vegetariano">
+                  <span class="allergen-icon" aria-label="Vegetariano" data-allergen="Vegetariano">
                     <img src="images/allergens/plant-based.png" alt="">
                   </span>
-                
+
                 </div>
               </div>
 
 
               <div class="dish">
 
-               
 
-                  <div class="dish-top">
-                    <h4>Cestino di Pane</h4>
-                    <span class="price">2€</span>
-                  </div>
 
-                  <p>Pane rustico</p>
-                  <div class="allergen-list">
-                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
+                <div class="dish-top">
+                  <h4>Cestino di Pane</h4>
+                  <span class="price">2€</span>
+                </div>
+
+                <p>Pane rustico</p>
+                <div class="allergen-list">
+                  <span class="allergen-icon" aria-label="Glutine" data-allergen="Glutine">
                     <img src="images/allergens/gluten.png" alt="">
                   </span>
                 </div>
-                </div>
+              </div>
 
-             
+
 
             </div>
 
@@ -1017,7 +1040,7 @@
              DOLCI — CIBO
         ═════════════════════════════════════ -->
 
-            <div class="sub-panel" id="sub-dolci-cibo">
+            <!-- <div class="sub-panel" id="sub-dolci-cibo">
 
               <div class="menu-cat">
 
@@ -1031,29 +1054,29 @@
                   </div>
                   <p>Descrizione da inserire.</p>
                   <div class="allergen-list">
-                  <span class="allergen-icon" title="Glutine" aria-label="Glutine" data-allergen="Glutine">
-                    <img src="images/allergens/gluten.png" alt="">
-                  </span>
-                </div>
+                    <span class="allergen-icon" aria-label="Glutine" data-allergen="Glutine">
+                      <img src="images/allergens/gluten.png" alt="">
+                    </span>
+                  </div>
                 </div>
 
-                
+
 
               </div>
 
-            </div>
+            </div> -->
 
           </div>
 
         </div>
       </div>
-     
+
   </section>
 
 
-      <!-- PROVA -->
+  <!-- PROVA -->
 
-<!-- <section class="ribbon" id="ribbon">
+  <!-- <section class="ribbon" id="ribbon">
 
 
   <div class="ribbon-rows">
@@ -1072,46 +1095,49 @@
       <div class="contact-grid">
         <div class="info-stack">
           <div class="contact-row-split">
-    <div class="info-card">
+            <div class="info-card">
 
-  <div class="contact-links">
-    
-    <!-- Link Email con Icona -->
-    <a href="mailto:mescienoteca@gmail.com" class="contact-item">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-        <polyline points="22,6 12,13 2,6"></polyline>
-      </svg>
-      mescienoteca@gmail.com
-    </a>
-    
-    <!-- Link Telefono con Icona -->
-    <!-- <a href="tel:+390000000000" class="contact-item">
+              <div class="contact-links">
+
+                <!-- Link Email con Icona -->
+                <a href="mailto:mescienoteca@gmail.com" class="contact-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                  mescienoteca@gmail.com
+                </a>
+
+                <!-- Link Telefono con Icona -->
+                <!-- <a href="tel:+390000000000" class="contact-item">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
       </svg>
       0000000000
     </a> -->
-    
-  </div>
-  
-</div>
-<div class="info-card contact-links">
-    
-      <a href="https://www.instagram.com/mesciwinebar/" target="_blank" rel="noopener noreferrer" class="social-link-clean">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-        </svg>
-        
-          mesciwinebar
-      </a>
-    </div>
 
-    
+              </div>
 
-  </div>
+            </div>
+            <div class="info-card contact-links">
+
+              <a href="https://www.instagram.com/mesciwinebar/" target="_blank" rel="noopener noreferrer"
+                class="social-link-clean">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.8">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+
+                mesciwinebar
+              </a>
+            </div>
+
+
+
+          </div>
 
 
 
@@ -1134,7 +1160,7 @@
         </div>
       </div>
 
-    
+
     </div>
 
   </section>
@@ -1151,7 +1177,7 @@
 
   </footer>
 
-   <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
