@@ -83,10 +83,14 @@ document.getElementById('backToCategories').addEventListener('click', () => {
 
 /* ---- MENU: livello 2 (sottocategorie), una per ogni categoria principale ---- */
 
-/* porta in vista l'inizio della lista, ma solo se l'utente è già sceso oltre */
-function revealStart(el) {
-  if (el.getBoundingClientRect().top < header.offsetHeight) {
-    el.scrollIntoView({ block: 'start', behavior: 'instant' });
+/* se i pulsanti in alto sono usciti dallo schermo (sopra), ci riporta lì.
+   Desktop: "Da bere / Da mangiare". Mobile: "← Torna alle categorie". */
+function revealStart() {
+  const target = mqMobile.matches
+    ? document.getElementById('backToCategories')
+    : document.querySelector('#menuMain .tabs');
+  if (target.getBoundingClientRect().top < header.offsetHeight) {
+    target.scrollIntoView({ block: 'start', behavior: 'instant' });
   }
 }
 
@@ -96,7 +100,7 @@ mainPanels.forEach(panel => {
   subBtns.forEach(btn => btn.addEventListener('click', () => {
     subBtns.forEach(b => { b.classList.toggle('active', b === btn); b.setAttribute('aria-selected', b === btn); });
     subPanels.forEach(p => p.classList.toggle('active', p.id === 'sub-' + btn.dataset.sub));
-    revealStart(panel);
+    revealStart();
   }));
 });
 
