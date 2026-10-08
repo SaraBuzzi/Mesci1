@@ -948,11 +948,12 @@ footer {
   }
 }
 
-@media (prefers-reduced-motion:reduce) {
+@media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;
-    transition: none !important
+    transition: none !important;
   }
+  .logo-mark { opacity: 1; }
 }
 
 .drawer,
