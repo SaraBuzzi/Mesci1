@@ -603,7 +603,20 @@ section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+  align-items: stretch;
 }
+
+.contact-row-split > .info-card.social-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-row-split .info-card {
+  height: 100%;
+  box-sizing: border-box;
+}
+
 
 /* Stile per i link dei contatti cliccabili */
 .contact-links {
@@ -622,10 +635,10 @@ section {
   color: var(--wine);
 }
 
-
 .social-link-clean {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   color: var(--cream);
   font-weight: 500;
@@ -648,6 +661,9 @@ section {
 @media (max-width: 600px) {
   .contact-row-split {
     grid-template-columns: 1fr;
+  }
+   .contact-row-split > .info-card.social-box {
+    justify-content: flex-start;
   }
 }
 
@@ -695,17 +711,6 @@ section {
   border: 0;
   margin: 0;
   padding: 30px;
-}
-
-
-
-footer {
-  /** background-color: var(--bg-soft);**/
-  border-top: 1px solid var(--line);
-  padding: 36px 0;
-  text-align: center;
-  color: var(--cream-faint);
-  font-size: 0.85rem
 }
 
 
@@ -1127,4 +1132,41 @@ body.no-scroll {
     overflow-x: auto;
     scrollbar-width: none;
   }
+}
+
+
+footer {
+  /** background-color: var(--bg-soft);**/
+  border-top: 1px solid var(--line);
+  padding: 36px 0 18px;
+  text-align: center;
+  color: var(--cream-faint);
+  font-size: 0.85rem
+}
+
+
+.footer-legal {
+  margin-top: 15px;
+  padding-top: 15px;
+  
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  font-size: 0.8rem;
+}
+
+.footer-legal a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: 0.8;
+  transition: opacity .2s;
+}
+
+.footer-legal a:hover {
+  opacity: 1;
 }
