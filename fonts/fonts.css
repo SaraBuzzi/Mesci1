@@ -1,0 +1,27 @@
+/* Font ospitati sul sito (nessun collegamento a Google).
+   Vanno copiati in questa stessa cartella con questi nomi esatti:
+   Fraunces.ttf · Fraunces-Italic.ttf · Manrope.ttf */
+
+@font-face {
+  font-family: 'Fraunces';
+  src: url('Fraunces.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fraunces';
+  src: url('Fraunces-Italic.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('Manrope.ttf') format('truetype');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
