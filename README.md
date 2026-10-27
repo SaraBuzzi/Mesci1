@@ -34,7 +34,3 @@ The project involved translating the needs and identity of a real business into 
 
 Particular attention was given to making the menu easy to navigate, keeping the design consistent, and ensuring that essential information remains accessible on mobile.
 
-
-
-**Project type:** Business website  
-**Developed by:** Sara Buzzi
