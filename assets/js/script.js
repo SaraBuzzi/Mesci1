@@ -137,26 +137,26 @@ window.addEventListener('scroll', closeAllergens, { passive: true });
 // const ribbonRows = [
 //   /* riga 1 (scorre verso sinistra) */
 //   [
-//     { src: 'images/gallery/s01.jpg',  type: 's' },
-//     { src: 'images/gallery/v01.jpg',  type: 'v' },
-//     { src: 'images/gallery/h01.jpg',  type: 'h' },
-//     { src: 'images/gallery/v02.jpg',  type: 'v' },
-//     { src: 'images/gallery/h02.jpg',  type: 'h' },
-//     { src: 'images/gallery/v03.jpg',  type: 'v' },
-//     { src: 'images/gallery/h03.jpeg', type: 'h' },
-//     { src: 'images/gallery/v06.jpeg', type: 'v' },
-//     { src: 'images/gallery/h04.jpg',  type: 'h' },
+//     { src: 'assets/images/gallery/s01.jpg',  type: 's' },
+//     { src: 'assets/images/gallery/v01.jpg',  type: 'v' },
+//     { src: 'assets/images/gallery/h01.jpg',  type: 'h' },
+//     { src: 'assets/images/gallery/v02.jpg',  type: 'v' },
+//     { src: 'assets/images/gallery/h02.jpg',  type: 'h' },
+//     { src: 'assets/images/gallery/v03.jpg',  type: 'v' },
+//     { src: 'assets/images/gallery/h03.jpeg', type: 'h' },
+//     { src: 'assets/images/gallery/v06.jpeg', type: 'v' },
+//     { src: 'assets/images/gallery/h04.jpg',  type: 'h' },
 //   ],
 //   /* riga 2 (scorre verso destra) */
 //   [
-//     { src: 'images/gallery/h05.jpg',  type: 'h' },
-//     { src: 'images/gallery/v05.jpg',  type: 'v' },
-//     { src: 'images/gallery/s02.JPG',  type: 's' },
-//     { src: 'images/gallery/v04.jpeg', type: 'v' },
-//     { src: 'images/gallery/h06.jpeg', type: 'h' },
-//     { src: 'images/gallery/v07.jpeg', type: 'v' },
-//     { src: 'images/gallery/h07.jpeg', type: 'h' },
-//     { src: 'images/gallery/v08.JPG',  type: 'v' },
+//     { src: 'assets/images/gallery/h05.jpg',  type: 'h' },
+//     { src: 'assets/images/gallery/v05.jpg',  type: 'v' },
+//     { src: 'assets/images/gallery/s02.JPG',  type: 's' },
+//     { src: 'assets/images/gallery/v04.jpeg', type: 'v' },
+//     { src: 'assets/images/gallery/h06.jpeg', type: 'h' },
+//     { src: 'assets/images/gallery/v07.jpeg', type: 'v' },
+//     { src: 'assets/images/gallery/h07.jpeg', type: 'h' },
+//     { src: 'assets/images/gallery/v08.JPG',  type: 'v' },
 //   ],
 // ];
 
